@@ -1,68 +1,147 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:crypto/crypto.dart';
-import 'package:isar/isar.dart';
+import 'package:flutter_casino_platform/core/errors/failures.dart';
+import 'package:flutter_casino_platform/core/types/either.dart';
+import 'package:flutter_casino_platform/features/auth/domain/entities/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uuid/uuid.dart';
 
-import 'package:flutter_casino_platform/features/auth/data/models/user_model.dart';
-
-/// Contract for the local Isar data source.
 abstract interface class AuthLocalDatasource {
-  Future<UserModel?> findByEmail(String email);
-  Future<UserModel> save(UserModel model);
-  Future<UserModel?> getFirst();
-  Future<void> deleteAll();
+  Future<Either<Failure, User>> findByEmail(String email);
+  Future<Either<Failure, User>> saveUser({
+    required User user,
+    required String passwordHash,
+    required String salt,
+  });
+  Future<Either<Failure, User?>> getCurrentUser();
+  Future<Either<Failure, User>> verifyCredentials({
+    required String email,
+    required String password,
+  });
+  Future<Either<Failure, void>> deleteAll();
 }
 
-/// Isar implementation of [AuthLocalDatasource].
 class AuthLocalDatasourceImpl implements AuthLocalDatasource {
-  final Isar _isar;
+  static const _keyUsers = 'auth_users';
+  static const _keyCurrentUid = 'auth_current_uid';
 
-  const AuthLocalDatasourceImpl(this._isar);
+  static String _generateSalt() {
+    final bytes = List<int>.generate(16, (i) => DateTime.now().microsecondsSinceEpoch + i);
+    return base64Encode(bytes);
+  }
 
-  @override
-  Future<UserModel?> findByEmail(String email) {
-    return _isar.userModels.filter().emailEqualTo(email).findFirst();
+  static String hashPassword(String password, String salt) {
+    final bytes = utf8.encode(password + salt);
+    return sha256.convert(bytes).toString();
+  }
+
+  Future<SharedPreferences> get _prefs => SharedPreferences.getInstance();
+
+  Future<List<Map<String, dynamic>>> _loadUsers() async {
+    final prefs = await _prefs;
+    final raw = prefs.getString(_keyUsers);
+    if (raw == null) return [];
+    final list = jsonDecode(raw) as List<dynamic>;
+    return list.cast<Map<String, dynamic>>();
+  }
+
+  Future<void> _saveUsers(List<Map<String, dynamic>> users) async {
+    final prefs = await _prefs;
+    await prefs.setString(_keyUsers, jsonEncode(users));
   }
 
   @override
-  Future<UserModel> save(UserModel model) async {
-    await _isar.writeTxn(() => _isar.userModels.put(model));
-    return model;
+  Future<Either<Failure, User>> findByEmail(String email) async {
+    try {
+      final users = await _loadUsers();
+      final match = users.where((u) => u['email'] == email.toLowerCase()).firstOrNull;
+      if (match == null) return left(const NotFoundFailure('No account found with that email.'));
+      return right(_mapToUser(match));
+    } catch (e) {
+      return left(StorageFailure(e.toString()));
+    }
   }
 
   @override
-  Future<UserModel?> getFirst() => _isar.userModels.where().findFirst();
+  Future<Either<Failure, User>> saveUser({
+    required User user,
+    required String passwordHash,
+    required String salt,
+  }) async {
+    try {
+      final users = await _loadUsers();
+      users.add({
+        'uid': user.id,
+        'name': user.name,
+        'email': user.email.toLowerCase(),
+        'passwordHash': passwordHash,
+        'salt': salt,
+        'memberSince': user.memberSince.toIso8601String(),
+        'accountId': user.accountId,
+      });
+      await _saveUsers(users);
+      final prefs = await _prefs;
+      await prefs.setString(_keyCurrentUid, user.id);
+      return right(user);
+    } catch (e) {
+      return left(StorageFailure(e.toString()));
+    }
+  }
 
   @override
-  Future<void> deleteAll() async {
-    await _isar.writeTxn(() => _isar.userModels.clear());
+  Future<Either<Failure, User?>> getCurrentUser() async {
+    try {
+      final prefs = await _prefs;
+      final uid = prefs.getString(_keyCurrentUid);
+      if (uid == null) return right(null);
+      final users = await _loadUsers();
+      final match = users.where((u) => u['uid'] == uid).firstOrNull;
+      if (match == null) return right(null);
+      return right(_mapToUser(match));
+    } catch (e) {
+      return left(StorageFailure(e.toString()));
+    }
   }
-}
 
-// ── Password utilities ──────────────────────────────────────────────────────
-
-/// Generates a cryptographically random 16-byte hex salt.
-String generateSalt() {
-  final rng = Random.secure();
-  final bytes = List<int>.generate(16, (_) => rng.nextInt(256));
-  return bytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
-}
-
-/// Hashes [password] with [salt] using SHA-256.
-/// Returns a lowercase hex digest string.
-String hashPassword(String password, String salt) {
-  final input = utf8.encode(password + salt);
-  return sha256.convert(input).toString();
-}
-
-/// Constant-time comparison to prevent timing attacks.
-bool verifyHash(String password, String salt, String storedHash) {
-  final computed = hashPassword(password, salt);
-  if (computed.length != storedHash.length) return false;
-  var result = 0;
-  for (var i = 0; i < computed.length; i++) {
-    result |= computed.codeUnitAt(i) ^ storedHash.codeUnitAt(i);
+  @override
+  Future<Either<Failure, User>> verifyCredentials({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final users = await _loadUsers();
+      final match = users.where((u) => u['email'] == email.toLowerCase()).firstOrNull;
+      if (match == null) return left(const AuthFailure('Invalid email or password.'));
+      final stored = match['passwordHash'] as String;
+      final salt = match['salt'] as String;
+      final hash = hashPassword(password, salt);
+      if (hash != stored) return left(const AuthFailure('Invalid email or password.'));
+      final prefs = await _prefs;
+      await prefs.setString(_keyCurrentUid, match['uid'] as String);
+      return right(_mapToUser(match));
+    } catch (e) {
+      return left(StorageFailure(e.toString()));
+    }
   }
-  return result == 0;
+
+  @override
+  Future<Either<Failure, void>> deleteAll() async {
+    try {
+      final prefs = await _prefs;
+      await prefs.remove(_keyUsers);
+      await prefs.remove(_keyCurrentUid);
+      return right(null);
+    } catch (e) {
+      return left(StorageFailure(e.toString()));
+    }
+  }
+
+  User _mapToUser(Map<String, dynamic> map) => User(
+        id: map['uid'] as String,
+        name: map['name'] as String,
+        email: map['email'] as String,
+        memberSince: DateTime.parse(map['memberSince'] as String),
+        accountId: map['accountId'] as String,
+      );
 }
