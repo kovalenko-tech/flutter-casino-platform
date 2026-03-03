@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../domain/entities/user.dart';
-import '../../domain/repositories/auth_repository.dart';
-import '../../domain/usecases/login_usecase.dart';
-import '../../domain/usecases/register_usecase.dart';
+import 'package:flutter_casino_platform/features/auth/domain/entities/user.dart';
+import 'package:flutter_casino_platform/features/auth/domain/repositories/auth_repository.dart';
+import 'package:flutter_casino_platform/features/auth/domain/usecases/login_usecase.dart';
+import 'package:flutter_casino_platform/features/auth/domain/usecases/register_usecase.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';

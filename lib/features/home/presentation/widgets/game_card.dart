@@ -2,12 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../core/constants/app_constants.dart';
-import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_radius.dart';
-import '../../../../core/theme/app_spacing.dart';
-import '../../../../core/theme/app_typography.dart';
-import '../../domain/entities/game_summary.dart';
+import 'package:flutter_casino_platform/core/constants/app_constants.dart';
+import 'package:flutter_casino_platform/core/theme/app_colors.dart';
+import 'package:flutter_casino_platform/core/theme/app_radius.dart';
+import 'package:flutter_casino_platform/core/theme/app_spacing.dart';
+import 'package:flutter_casino_platform/core/theme/app_typography.dart';
+import 'package:flutter_casino_platform/features/home/domain/entities/game_summary.dart';
 
 /// Individual game tile rendered inside the home game grid.
 ///

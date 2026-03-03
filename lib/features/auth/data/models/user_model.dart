@@ -1,6 +1,6 @@
 import 'package:isar/isar.dart';
 
-import '../../domain/entities/user.dart';
+import 'package:flutter_casino_platform/features/auth/domain/entities/user.dart';
 
 part 'user_model.g.dart';
 

@@ -2,16 +2,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/di/injection_container.dart';
-import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_radius.dart';
-import '../../../../core/theme/app_spacing.dart';
-import '../../../../core/theme/app_typography.dart';
-import '../../../../shared/widgets/app_button.dart';
-import '../../../../shared/widgets/category_badge.dart';
-import '../../../../shared/widgets/shimmer_loader.dart';
-import '../../domain/entities/game_detail.dart';
-import '../bloc/game_detail_bloc.dart';
+import 'package:flutter_casino_platform/core/di/injection_container.dart';
+import 'package:flutter_casino_platform/core/theme/app_colors.dart';
+import 'package:flutter_casino_platform/core/theme/app_radius.dart';
+import 'package:flutter_casino_platform/core/theme/app_spacing.dart';
+import 'package:flutter_casino_platform/core/theme/app_typography.dart';
+import 'package:flutter_casino_platform/shared/widgets/app_button.dart';
+import 'package:flutter_casino_platform/shared/widgets/category_badge.dart';
+import 'package:flutter_casino_platform/shared/widgets/shimmer_loader.dart';
+import 'package:flutter_casino_platform/features/games/domain/entities/game_detail.dart';
+import 'package:flutter_casino_platform/features/games/presentation/bloc/game_detail_bloc.dart';
 
 class GameDetailScreen extends StatelessWidget {
   final String gameId;

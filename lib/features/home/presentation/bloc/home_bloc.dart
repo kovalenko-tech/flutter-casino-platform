@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/mock/mock_banners.dart';
-import '../../../../core/mock/mock_games.dart';
-import '../../domain/entities/game_category.dart';
-import '../../domain/entities/game_summary.dart';
+import 'package:flutter_casino_platform/core/mock/mock_banners.dart';
+import 'package:flutter_casino_platform/core/mock/mock_games.dart';
+import 'package:flutter_casino_platform/features/home/domain/entities/game_category.dart';
+import 'package:flutter_casino_platform/features/home/domain/entities/game_summary.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';

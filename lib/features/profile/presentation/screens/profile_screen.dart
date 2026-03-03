@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../core/constants/app_constants.dart';
-import '../../../../core/di/injection_container.dart';
-import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_radius.dart';
-import '../../../../core/theme/app_spacing.dart';
-import '../../../../core/theme/app_typography.dart';
-import '../../../../shared/widgets/app_button.dart';
-import '../../../../shared/widgets/shimmer_loader.dart';
-import '../../domain/entities/profile.dart';
-import '../bloc/profile_bloc.dart';
+import 'package:flutter_casino_platform/core/constants/app_constants.dart';
+import 'package:flutter_casino_platform/core/di/injection_container.dart';
+import 'package:flutter_casino_platform/core/theme/app_colors.dart';
+import 'package:flutter_casino_platform/core/theme/app_radius.dart';
+import 'package:flutter_casino_platform/core/theme/app_spacing.dart';
+import 'package:flutter_casino_platform/core/theme/app_typography.dart';
+import 'package:flutter_casino_platform/shared/widgets/app_button.dart';
+import 'package:flutter_casino_platform/shared/widgets/shimmer_loader.dart';
+import 'package:flutter_casino_platform/features/profile/domain/entities/profile.dart';
+import 'package:flutter_casino_platform/features/profile/presentation/bloc/profile_bloc.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

@@ -1,5 +1,5 @@
-import '../entities/user.dart';
-import '../../../core/errors/failures.dart';
+import 'package:flutter_casino_platform/features/auth/domain/entities/user.dart';
+import 'package:flutter_casino_platform/features/core/errors/failures.dart';
 
 // Simple Either-like wrapper — avoids pulling in dartz for this project.
 typedef Either<L, R> = ({L? left, R? right});

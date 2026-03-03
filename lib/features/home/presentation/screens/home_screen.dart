@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/di/injection_container.dart';
-import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_spacing.dart';
-import '../../../../core/theme/app_typography.dart';
-import '../../../../shared/widgets/shimmer_loader.dart';
-import '../bloc/home_bloc.dart';
-import '../widgets/category_filter_chips.dart';
-import '../widgets/game_grid.dart';
-import '../widgets/hero_carousel.dart';
+import 'package:flutter_casino_platform/core/di/injection_container.dart';
+import 'package:flutter_casino_platform/core/theme/app_colors.dart';
+import 'package:flutter_casino_platform/core/theme/app_spacing.dart';
+import 'package:flutter_casino_platform/core/theme/app_typography.dart';
+import 'package:flutter_casino_platform/shared/widgets/shimmer_loader.dart';
+import 'package:flutter_casino_platform/features/home/presentation/bloc/home_bloc.dart';
+import 'package:flutter_casino_platform/features/home/presentation/widgets/category_filter_chips.dart';
+import 'package:flutter_casino_platform/features/home/presentation/widgets/game_grid.dart';
+import 'package:flutter_casino_platform/features/home/presentation/widgets/hero_carousel.dart';
 
 /// Home tab — entry screen for the authenticated experience.
 ///

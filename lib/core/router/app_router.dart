@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:isar/isar.dart';
 
-import '../constants/app_constants.dart';
-import '../di/injection_container.dart';
-import '../../features/auth/data/models/user_model.dart';
-import '../../features/auth/presentation/screens/login_screen.dart';
-import '../../features/auth/presentation/screens/register_screen.dart';
-import '../../features/games/presentation/screens/game_detail_screen.dart';
-import '../../features/shell/main_shell.dart';
+import 'package:flutter_casino_platform/core/constants/app_constants.dart';
+import 'package:flutter_casino_platform/core/di/injection_container.dart';
+import 'package:flutter_casino_platform/features/auth/data/models/user_model.dart';
+import 'package:flutter_casino_platform/features/auth/presentation/screens/login_screen.dart';
+import 'package:flutter_casino_platform/features/auth/presentation/screens/register_screen.dart';
+import 'package:flutter_casino_platform/features/games/presentation/screens/game_detail_screen.dart';
+import 'package:flutter_casino_platform/features/shell/main_shell.dart';
 
 /// Builds the app's [GoRouter] with an auth-guard redirect.
 ///

@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/mock/mock_games.dart';
-import '../../domain/entities/game_detail.dart';
+import 'package:flutter_casino_platform/core/mock/mock_games.dart';
+import 'package:flutter_casino_platform/features/games/domain/entities/game_detail.dart';
 
 part 'game_detail_event.dart';
 part 'game_detail_state.dart';

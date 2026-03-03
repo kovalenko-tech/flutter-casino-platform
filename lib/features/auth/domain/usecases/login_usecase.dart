@@ -1,6 +1,6 @@
-import '../entities/user.dart';
-import '../repositories/auth_repository.dart';
-import '../../../core/errors/failures.dart';
+import 'package:flutter_casino_platform/features/auth/domain/entities/user.dart';
+import 'package:flutter_casino_platform/features/auth/domain/repositories/auth_repository.dart';
+import 'package:flutter_casino_platform/features/core/errors/failures.dart';
 
 /// Validates email/password credentials against the local Isar store.
 ///

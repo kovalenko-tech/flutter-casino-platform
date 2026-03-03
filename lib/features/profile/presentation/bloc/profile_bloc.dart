@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../features/auth/domain/repositories/auth_repository.dart';
-import '../../domain/entities/profile.dart';
+import 'package:flutter_casino_platform/features/auth/domain/repositories/auth_repository.dart';
+import 'package:flutter_casino_platform/features/profile/domain/entities/profile.dart';
 
 part 'profile_event.dart';
 part 'profile_state.dart';

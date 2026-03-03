@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../home/domain/entities/game_category.dart';
-import '../../../home/domain/entities/game_summary.dart';
+import 'package:flutter_casino_platform/features/home/domain/entities/game_category.dart';
+import 'package:flutter_casino_platform/features/home/domain/entities/game_summary.dart';
 
 /// Volatility level of a slot or game.
 enum Volatility {

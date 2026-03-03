@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/theme/app_spacing.dart';
-import '../../../../core/theme/app_typography.dart';
-import '../../domain/entities/game_category.dart';
-import '../bloc/home_bloc.dart';
+import 'package:flutter_casino_platform/core/theme/app_spacing.dart';
+import 'package:flutter_casino_platform/core/theme/app_typography.dart';
+import 'package:flutter_casino_platform/features/home/domain/entities/game_category.dart';
+import 'package:flutter_casino_platform/features/home/presentation/bloc/home_bloc.dart';
 
 /// Horizontal scrollable row of category filter chips.
 ///

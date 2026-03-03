@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../auth/domain/entities/user.dart';
+import 'package:flutter_casino_platform/features/auth/domain/entities/user.dart';
 
 /// Read-only view entity projected from [User] for the profile screen.
 ///

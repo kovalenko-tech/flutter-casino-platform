@@ -1,5 +1,5 @@
-import '../../features/home/domain/entities/game_summary.dart';
-import '../../features/games/domain/entities/game_detail.dart';
+import 'package:flutter_casino_platform/features/home/domain/entities/game_summary.dart';
+import 'package:flutter_casino_platform/features/games/domain/entities/game_detail.dart';
 
 /// Static mock catalogue — 16 games across 5 categories.
 ///

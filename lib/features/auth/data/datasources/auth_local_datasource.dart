@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:crypto/crypto.dart';
 import 'package:isar/isar.dart';
 
-import '../models/user_model.dart';
+import 'package:flutter_casino_platform/features/auth/data/models/user_model.dart';
 
 /// Contract for the local Isar data source.
 abstract interface class AuthLocalDatasource {
