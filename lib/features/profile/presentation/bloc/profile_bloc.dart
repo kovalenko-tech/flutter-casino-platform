@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_casino_platform/features/auth/domain/repositories/auth_repository.dart';
 import 'package:flutter_casino_platform/features/profile/domain/entities/profile.dart';
 
+import 'package:flutter_casino_platform/core/types/either.dart';
 part 'profile_event.dart';
 part 'profile_state.dart';
 

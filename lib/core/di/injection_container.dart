@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:isar/isar.dart';
 
 import 'package:flutter_casino_platform/core/constants/app_constants.dart';
@@ -29,9 +30,11 @@ final GetIt sl = GetIt.instance;
 /// for [HomeRepository] or [GamesRepository] — BLoCs require zero changes.
 Future<void> initDependencies() async {
   // ── Isar ──────────────────────────────────────────────────────────────────
+  final dir = await getApplicationDocumentsDirectory();
   final isar = await Isar.open(
     [UserModelSchema],
     name: AppConstants.isarDbName,
+    directory: dir.path,
   );
   sl.registerSingleton<Isar>(isar);
 

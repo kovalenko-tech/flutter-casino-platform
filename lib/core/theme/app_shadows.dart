@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'app_colors.dart';
+import 'package:flutter_casino_platform/core/theme/app_colors.dart';
 
 /// Elevation / shadow presets for the "Velvet & Gold" design system.
 abstract final class AppShadows {

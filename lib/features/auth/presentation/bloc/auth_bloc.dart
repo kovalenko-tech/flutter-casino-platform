@@ -6,6 +6,7 @@ import 'package:flutter_casino_platform/features/auth/domain/repositories/auth_r
 import 'package:flutter_casino_platform/features/auth/domain/usecases/login_usecase.dart';
 import 'package:flutter_casino_platform/features/auth/domain/usecases/register_usecase.dart';
 
+import 'package:flutter_casino_platform/core/types/either.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
 

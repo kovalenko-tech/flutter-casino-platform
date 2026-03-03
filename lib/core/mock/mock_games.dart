@@ -1,5 +1,6 @@
 import 'package:flutter_casino_platform/features/home/domain/entities/game_summary.dart';
 import 'package:flutter_casino_platform/features/games/domain/entities/game_detail.dart';
+import 'package:flutter_casino_platform/features/home/domain/entities/game_category.dart';
 
 /// Static mock catalogue — 16 games across 5 categories.
 ///
@@ -7,7 +8,7 @@ import 'package:flutter_casino_platform/features/games/domain/entities/game_deta
 /// picsum.photos IDs are fixed so the same image is always returned for
 /// a given game, making screenshots deterministic.
 abstract final class MockGames {
-  static const List<GameDetail> all = [
+  static final List<GameDetail> all = [
     // ── Slots ────────────────────────────────────────────────────────────────
     GameDetail(
       id: 'book-of-dead',

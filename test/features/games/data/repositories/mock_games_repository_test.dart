@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:flutter_casino_platform/core/errors/failures.dart';
 import 'package:flutter_casino_platform/features/games/data/repositories/mock_games_repository.dart';
+import 'package:flutter_casino_platform/core/types/either.dart';
 
 void main() {
   late MockGamesRepository repo;

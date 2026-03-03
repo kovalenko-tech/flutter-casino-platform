@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:flutter_casino_platform/features/home/data/repositories/mock_home_repository.dart';
 import 'package:flutter_casino_platform/features/home/domain/entities/game_category.dart';
+import 'package:flutter_casino_platform/core/types/either.dart';
 
 void main() {
   late MockHomeRepository repo;

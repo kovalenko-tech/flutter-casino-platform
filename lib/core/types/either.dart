@@ -1,24 +1,38 @@
 /// Lightweight Either monad — avoids pulling in dartz for this project.
-///
-/// Use [right] to wrap a success value and [left] to wrap a failure.
-/// Pattern-match via the [EitherX] extension helpers.
 library;
 
-typedef Either<L, R> = ({L? left, R? right});
+/// Internal class — use the [Either] typedef and [left]/[right] constructors.
+class _Either<L, R> {
+  final L? _l;
+  final R? _r;
+  final bool _isRight;
 
-extension EitherX<L, R> on Either<L, R> {
-  bool get isLeft => left != null;
-  bool get isRight => right != null;
-  L get leftValue => left!;
-  R get rightValue => right!;
+  const _Either._left(L value)
+      : _l = value,
+        _r = null,
+        _isRight = false;
 
-  /// Folds the Either into a single value.
+  const _Either._right(R value)
+      : _l = null,
+        _r = value,
+        _isRight = true;
+}
+
+/// Public alias — use `Either<Failure, T>` throughout the codebase.
+typedef Either<L, R> = _Either<L, R>;
+
+extension EitherX<L, R> on _Either<L, R> {
+  bool get isLeft => !_isRight;
+  bool get isRight => _isRight;
+  L get leftValue => _l as L;
+  R get rightValue => _r as R;
+
   T fold<T>(T Function(L) onLeft, T Function(R) onRight) =>
       isLeft ? onLeft(leftValue) : onRight(rightValue);
 }
 
-/// Creates a success (right) Either.
-Either<L, R> right<L, R>(R value) => (left: null, right: value);
+/// Wraps a success value.
+Either<L, R> right<L, R>(R value) => _Either._right(value);
 
-/// Creates a failure (left) Either.
-Either<L, R> left<L, R>(L value) => (left: value, right: null);
+/// Wraps a failure value.
+Either<L, R> left<L, R>(L value) => _Either._left(value);

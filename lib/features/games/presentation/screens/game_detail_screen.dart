@@ -1,3 +1,4 @@
+import 'package:flutter_casino_platform/core/l10n/app_localizations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -65,6 +66,7 @@ class _GameDetailView extends StatelessWidget {
   }
 
   Widget _buildContent(BuildContext context, GameDetail game) {
+    final l10n = context.l10n;
     final colors = Theme.of(context).colorScheme;
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final textSecondary =
@@ -165,7 +167,7 @@ class _GameDetailView extends StatelessWidget {
                 const SizedBox(height: AppSpacing.lg),
 
                 // Stats row
-                _buildStatsRow(game, colors, textSecondary),
+                _buildStatsRow(game, colors, textSecondary, l10n),
                 const SizedBox(height: AppSpacing.lg),
 
                 // Divider
@@ -208,12 +210,13 @@ class _GameDetailView extends StatelessWidget {
     GameDetail game,
     ColorScheme colors,
     Color textSecondary,
+    AppLocalizations l10n,
   ) {
     return Row(
       children: [
         _StatChip(
           icon: Icons.percent,
-          label: context.l10n.gamesRtp,
+          label: l10n.gamesRtp,
           value: '${game.rtp}%',
           colors: colors,
           textSecondary: textSecondary,
@@ -260,6 +263,7 @@ class _GameDetailView extends StatelessWidget {
   }
 
   Widget _buildError(BuildContext context, String message) {
+    final l10n = context.l10n;
     final colors = Theme.of(context).colorScheme;
     return Center(
       child: Padding(
@@ -347,6 +351,7 @@ class _VolatilityChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: AppSpacing.md,

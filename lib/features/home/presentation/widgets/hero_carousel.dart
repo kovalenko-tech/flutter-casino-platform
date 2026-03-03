@@ -10,6 +10,7 @@ import 'package:flutter_casino_platform/core/theme/app_radius.dart';
 import 'package:flutter_casino_platform/core/theme/app_spacing.dart';
 import 'package:flutter_casino_platform/core/theme/app_typography.dart';
 import 'package:flutter_casino_platform/shared/widgets/app_button.dart';
+import 'package:flutter_casino_platform/features/home/domain/entities/promo_banner.dart';
 
 /// Auto-scrolling promotional banner carousel.
 ///

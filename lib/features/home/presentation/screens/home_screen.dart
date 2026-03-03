@@ -1,3 +1,4 @@
+import 'package:flutter_casino_platform/core/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -46,7 +47,7 @@ class _HomeView extends StatelessWidget {
         builder: (context, state) {
           return CustomScrollView(
             slivers: [
-              _buildAppBar(colors, isDark),
+              _buildAppBar(colors, isDark, l10n),
               if (state is HomeLoading) ...[
                 SliverToBoxAdapter(child: _shimmerCarousel()),
                 SliverToBoxAdapter(
@@ -119,7 +120,7 @@ class _HomeView extends StatelessWidget {
     );
   }
 
-  SliverAppBar _buildAppBar(ColorScheme colors, bool isDark) {
+  SliverAppBar _buildAppBar(ColorScheme colors, bool isDark, AppLocalizations l10n) {
     return SliverAppBar(
       floating: true,
       snap: true,

@@ -7,6 +7,7 @@ import 'package:flutter_casino_platform/features/home/domain/entities/promo_bann
 import 'package:flutter_casino_platform/features/home/domain/usecases/get_banners_usecase.dart';
 import 'package:flutter_casino_platform/features/home/domain/usecases/get_games_usecase.dart';
 
+import 'package:flutter_casino_platform/core/types/either.dart';
 part 'home_event.dart';
 part 'home_state.dart';
 

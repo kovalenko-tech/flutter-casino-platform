@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_casino_platform/features/games/domain/entities/game_detail.dart';
+import 'package:flutter_casino_platform/core/types/either.dart';
 import 'package:flutter_casino_platform/features/games/domain/usecases/get_game_detail_usecase.dart';
 
 part 'game_detail_event.dart';

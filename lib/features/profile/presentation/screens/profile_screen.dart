@@ -1,3 +1,4 @@
+import 'package:flutter_casino_platform/core/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -32,6 +33,7 @@ class _ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return BlocConsumer<ProfileBloc, ProfileState>(
       listener: (context, state) {
         if (state is ProfileLoggedOut) {
@@ -89,6 +91,7 @@ class _LoadedView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final colors = Theme.of(context).colorScheme;
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final textSecondary =
@@ -157,7 +160,7 @@ class _LoadedView extends StatelessWidget {
             style: AppTypography.titleLarge(colors.onSurface),
           ),
           const SizedBox(height: AppSpacing.sm),
-          _buildSettingsList(colors, textSecondary),
+          _buildSettingsList(colors, textSecondary, l10n),
           const SizedBox(height: AppSpacing.xl),
 
           // ── Logout ───────────────────────────────────────────────────────
@@ -178,7 +181,7 @@ class _LoadedView extends StatelessWidget {
       '${date.month.toString().padLeft(2, '0')}/'
       '${date.year}';
 
-  Widget _buildSettingsList(ColorScheme colors, Color textSecondary) {
+  Widget _buildSettingsList(ColorScheme colors, Color textSecondary, AppLocalizations l10n) {
     final items = [
       (Icons.notifications_outlined, l10n.profileNotifications),
       (Icons.language_outlined, l10n.profileLanguage),
@@ -300,6 +303,7 @@ class _ErrorView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final colors = Theme.of(context).colorScheme;
     return Center(
       child: Column(

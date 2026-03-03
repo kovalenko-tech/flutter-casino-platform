@@ -43,16 +43,15 @@ class MainShell extends StatelessWidget {
 
   const MainShell({super.key, required this.shell});
 
-  static const _tabs = [
-    _TabItem(icon: Icons.home_outlined, activeIcon: Icons.home_rounded, label: l10n.navHome),
-    _TabItem(icon: Icons.casino_outlined, activeIcon: Icons.casino_rounded, label: l10n.navCasino),
-    _TabItem(icon: Icons.person_outline_rounded, activeIcon: Icons.person_rounded, label: l10n.navProfile),
-  ];
-
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     final l10n = context.l10n;
+    final tabs = [
+      _TabItem(icon: Icons.home_outlined, activeIcon: Icons.home_rounded, label: l10n.navHome),
+      _TabItem(icon: Icons.casino_outlined, activeIcon: Icons.casino_rounded, label: l10n.navCasino),
+      _TabItem(icon: Icons.person_outline_rounded, activeIcon: Icons.person_rounded, label: l10n.navProfile),
+    ];
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final bgColor =
         isDark ? AppColors.darkBackground : AppColors.lightBackground;
@@ -69,8 +68,8 @@ class MainShell extends StatelessWidget {
           child: SizedBox(
             height: 64,
             child: Row(
-              children: List.generate(_tabs.length, (i) {
-                final tab = _tabs[i];
+              children: List.generate(tabs.length, (i) {
+                final tab = tabs[i];
                 final isActive = shell.currentIndex == i;
 
                 return Expanded(

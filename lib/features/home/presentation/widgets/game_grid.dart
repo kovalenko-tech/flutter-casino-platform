@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_casino_platform/core/constants/app_constants.dart';
 import 'package:flutter_casino_platform/core/theme/app_spacing.dart';
 import 'package:flutter_casino_platform/features/home/domain/entities/game_summary.dart';
-import 'game_card.dart';
+import 'package:flutter_casino_platform/features/home/presentation/widgets/game_card.dart';
 
 /// 4-column game grid rendered inside a [CustomScrollView] sliver.
 class GameGrid extends StatelessWidget {

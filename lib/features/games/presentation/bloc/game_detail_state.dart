@@ -7,7 +7,9 @@ sealed class GameDetailState extends Equatable {
   List<Object?> get props => [];
 }
 
-class GameDetailLoading extends GameDetailState {}
+class GameDetailLoading extends GameDetailState {
+  const GameDetailLoading();
+}
 
 class GameDetailLoaded extends GameDetailState {
   final GameDetail game;

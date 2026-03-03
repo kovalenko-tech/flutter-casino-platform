@@ -70,6 +70,7 @@ void main() {
 
       await useCase('book-of-dead');
 
+      verify(() => mockRepo.getGameById('book-of-dead')).called(1);
       verifyNoMoreInteractions(mockRepo);
     });
   });

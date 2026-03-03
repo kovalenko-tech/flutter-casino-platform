@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import 'game_category.dart';
+import 'package:flutter_casino_platform/features/home/domain/entities/game_category.dart';
 
 /// Lightweight game entity for grid and list views.
 ///

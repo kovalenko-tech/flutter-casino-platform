@@ -3,6 +3,7 @@ import 'package:flutter_casino_platform/features/auth/domain/repositories/auth_r
 import 'package:flutter_casino_platform/core/errors/failures.dart';
 import 'package:flutter_casino_platform/features/auth/data/datasources/auth_local_datasource.dart';
 import 'package:flutter_casino_platform/features/auth/data/models/user_model.dart';
+import 'package:flutter_casino_platform/core/types/either.dart';
 
 /// Concrete [AuthRepository] backed by Isar through [AuthLocalDatasource].
 ///

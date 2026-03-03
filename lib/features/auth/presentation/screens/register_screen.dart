@@ -100,6 +100,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   Widget _buildBackButton(BuildContext context, ColorScheme colors) {
+    final l10n = context.l10n;
     return GestureDetector(
       onTap: () => context.pop(),
       child: Row(
@@ -119,6 +120,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     ColorScheme colors,
     bool isDark,
   ) {
+    final l10n = context.l10n;
     return Form(
       key: _formKey,
       child: Column(
@@ -133,7 +135,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             textCapitalization: TextCapitalization.words,
             textInputAction: TextInputAction.next,
             style: AppTypography.bodyMedium(colors.onSurface),
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               labelText: l10n.fieldFullName,
               prefixIcon: Icon(Icons.person_outline),
             ),
@@ -149,7 +151,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             style: AppTypography.bodyMedium(colors.onSurface),
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               labelText: l10n.fieldEmail,
               prefixIcon: Icon(Icons.email_outlined),
             ),
@@ -253,6 +255,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     ColorScheme colors,
     bool isDark,
   ) {
+    final l10n = context.l10n;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
