@@ -4,7 +4,7 @@
 /// asset paths — so they're easy to find and update in one place.
 abstract final class AppConstants {
   // ── Storage ─────────────────────────────────────────────────────────────
-  static const String isarDbName = 'casino_platform';
+  static const String dbFileName = 'casino_platform.db';
   static const String sessionUserIdKey = 'session_uid';
 
   // ── Routes ───────────────────────────────────────────────────────────────

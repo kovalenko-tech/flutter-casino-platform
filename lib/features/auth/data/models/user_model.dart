@@ -1,38 +1,64 @@
-import 'package:isar/isar.dart';
-
 import 'package:flutter_casino_platform/features/auth/domain/entities/user.dart';
 
-part 'user_model.g.dart';
-
-/// Isar-persisted representation of a player account.
+/// SQLite row representation of a player account.
 ///
-/// Separated from the domain [User] entity to keep Isar annotations
-/// out of the domain layer.
-@collection
+/// Separated from the domain [User] entity so persistence details
+/// (column names, serialization) stay out of the domain layer.
 class UserModel {
-  Id id = Isar.autoIncrement;
+  final int? id; // SQLite auto-increment PK (null before first insert)
+  final String uid;
+  final String name;
+  final String email;
 
-  /// Logical unique identifier (UUID v4).
-  @Index(unique: true)
-  late String uid;
-
-  late String name;
-
-  @Index(unique: true)
-  late String email;
-
-  /// SHA-256(password + salt), stored as hex string.
-  late String passwordHash;
+  /// SHA-256(password + salt), stored as lowercase hex.
+  final String passwordHash;
 
   /// Random 16-byte hex salt generated at registration time.
-  late String salt;
+  final String salt;
 
-  late DateTime memberSince;
+  final DateTime memberSince;
 
   /// Human-readable account reference, e.g. "ACC-7A3F9".
-  late String accountId;
+  final String accountId;
 
-  // ── Mappers ───────────────────────────────────────────────────────────────
+  const UserModel({
+    this.id,
+    required this.uid,
+    required this.name,
+    required this.email,
+    required this.passwordHash,
+    required this.salt,
+    required this.memberSince,
+    required this.accountId,
+  });
+
+  // ── SQLite serialization ──────────────────────────────────────────────────
+
+  Map<String, Object?> toMap() => {
+        if (id != null) 'id': id,
+        'uid': uid,
+        'name': name,
+        'email': email,
+        'password_hash': passwordHash,
+        'salt': salt,
+        'member_since': memberSince.millisecondsSinceEpoch,
+        'account_id': accountId,
+      };
+
+  factory UserModel.fromMap(Map<String, Object?> map) => UserModel(
+        id: map['id'] as int?,
+        uid: map['uid'] as String,
+        name: map['name'] as String,
+        email: map['email'] as String,
+        passwordHash: map['password_hash'] as String,
+        salt: map['salt'] as String,
+        memberSince: DateTime.fromMillisecondsSinceEpoch(
+          map['member_since'] as int,
+        ),
+        accountId: map['account_id'] as String,
+      );
+
+  // ── Domain mappers ────────────────────────────────────────────────────────
 
   User toDomain() => User(
         uid: uid,
@@ -42,15 +68,14 @@ class UserModel {
         accountId: accountId,
       );
 
-  static UserModel fromDomain(User user, String passwordHash, String salt) {
-    final model = UserModel()
-      ..uid = user.uid
-      ..name = user.name
-      ..email = user.email
-      ..passwordHash = passwordHash
-      ..salt = salt
-      ..memberSince = user.memberSince
-      ..accountId = user.accountId;
-    return model;
-  }
+  static UserModel fromDomain(User user, String passwordHash, String salt) =>
+      UserModel(
+        uid: user.uid,
+        name: user.name,
+        email: user.email,
+        passwordHash: passwordHash,
+        salt: salt,
+        memberSince: user.memberSince,
+        accountId: user.accountId,
+      );
 }

@@ -1,4 +1,8 @@
-import 'package:flutter_casino_platform/core/l10n/app_localizations.dart';
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
 
 /// The translations for Ukrainian (`uk`).
 class AppLocalizationsUk extends AppLocalizations {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:isar/isar.dart';
 
 import 'package:flutter_casino_platform/core/constants/app_constants.dart';
 import 'package:flutter_casino_platform/core/di/injection_container.dart';
@@ -9,6 +8,8 @@ import 'package:flutter_casino_platform/features/auth/presentation/screens/login
 import 'package:flutter_casino_platform/features/auth/presentation/screens/register_screen.dart';
 import 'package:flutter_casino_platform/features/games/presentation/screens/game_detail_screen.dart';
 import 'package:flutter_casino_platform/features/shell/main_shell.dart';
+import 'package:flutter_casino_platform/features/auth/domain/repositories/auth_repository.dart';
+import 'package:flutter_casino_platform/core/types/either.dart';
 
 /// Builds the app's [GoRouter] with an auth-guard redirect.
 ///
@@ -68,8 +69,9 @@ GoRouter buildRouter() {
 
 /// Redirect logic — returns the login path when no user session is found.
 Future<String?> _authGuard(BuildContext context, GoRouterState state) async {
-  final isar = sl<Isar>();
-  final hasSession = await isar.userModels.count() > 0;
+  final authRepo = sl<AuthRepository>();
+  final result = await authRepo.getCurrentUser();
+  final hasSession = result.isRight && result.rightValue != null;
 
   final isAuthRoute = state.matchedLocation == AppConstants.routeLogin ||
       state.matchedLocation == AppConstants.routeRegister;

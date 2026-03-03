@@ -2,11 +2,13 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:crypto/crypto.dart';
-import 'package:isar/isar.dart';
+import 'package:sqflite/sqflite.dart';
 
 import 'package:flutter_casino_platform/features/auth/data/models/user_model.dart';
 
-/// Contract for the local Isar data source.
+// ── Contract ─────────────────────────────────────────────────────────────────
+
+/// Local data-source contract for player account persistence.
 abstract interface class AuthLocalDatasource {
   Future<UserModel?> findByEmail(String email);
   Future<UserModel> save(UserModel model);
@@ -14,33 +16,79 @@ abstract interface class AuthLocalDatasource {
   Future<void> deleteAll();
 }
 
-/// Isar implementation of [AuthLocalDatasource].
-class AuthLocalDatasourceImpl implements AuthLocalDatasource {
-  final Isar _isar;
+// ── SQLite implementation ─────────────────────────────────────────────────────
 
-  const AuthLocalDatasourceImpl(this._isar);
+/// SQLite-backed [AuthLocalDatasource] via the sqflite package.
+///
+/// A single `users` table holds all player rows. Passwords are never stored
+/// in plain text — only the SHA-256 hash and its random salt are persisted.
+class AuthLocalDatasourceImpl implements AuthLocalDatasource {
+  final Database _db;
+
+  const AuthLocalDatasourceImpl(this._db);
+
+  static const _table = 'users';
+
+  /// Called once when [Database] is first opened.
+  static Future<void> onCreate(Database db, int version) async {
+    await db.execute('''
+      CREATE TABLE $_table (
+        id           INTEGER PRIMARY KEY AUTOINCREMENT,
+        uid          TEXT    NOT NULL UNIQUE,
+        name         TEXT    NOT NULL,
+        email        TEXT    NOT NULL UNIQUE,
+        password_hash TEXT   NOT NULL,
+        salt         TEXT    NOT NULL,
+        member_since INTEGER NOT NULL,
+        account_id   TEXT    NOT NULL
+      )
+    ''');
+  }
 
   @override
-  Future<UserModel?> findByEmail(String email) {
-    return _isar.userModels.filter().emailEqualTo(email).findFirst();
+  Future<UserModel?> findByEmail(String email) async {
+    final rows = await _db.query(
+      _table,
+      where: 'LOWER(email) = LOWER(?)',
+      whereArgs: [email],
+      limit: 1,
+    );
+    if (rows.isEmpty) return null;
+    return UserModel.fromMap(rows.first);
   }
 
   @override
   Future<UserModel> save(UserModel model) async {
-    await _isar.writeTxn(() => _isar.userModels.put(model));
-    return model;
+    final id = await _db.insert(
+      _table,
+      model.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+    // Return model with the assigned rowid
+    return UserModel(
+      id: id,
+      uid: model.uid,
+      name: model.name,
+      email: model.email,
+      passwordHash: model.passwordHash,
+      salt: model.salt,
+      memberSince: model.memberSince,
+      accountId: model.accountId,
+    );
   }
 
   @override
-  Future<UserModel?> getFirst() => _isar.userModels.where().findFirst();
+  Future<UserModel?> getFirst() async {
+    final rows = await _db.query(_table, limit: 1, orderBy: 'id ASC');
+    if (rows.isEmpty) return null;
+    return UserModel.fromMap(rows.first);
+  }
 
   @override
-  Future<void> deleteAll() async {
-    await _isar.writeTxn(() => _isar.userModels.clear());
-  }
+  Future<void> deleteAll() => _db.delete(_table);
 }
 
-// ── Password utilities ──────────────────────────────────────────────────────
+// ── Password utilities ────────────────────────────────────────────────────────
 
 /// Generates a cryptographically random 16-byte hex salt.
 String generateSalt() {

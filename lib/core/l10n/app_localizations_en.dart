@@ -1,4 +1,8 @@
-import 'package:flutter_casino_platform/core/l10n/app_localizations.dart';
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
 
 /// The translations for English (`en`).
 class AppLocalizationsEn extends AppLocalizations {
@@ -85,13 +89,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get validationNameTooShort => 'Name is too short';
 
   @override
-  String get validationConfirmPasswordRequired => 'Please confirm your password';
+  String get validationConfirmPasswordRequired =>
+      'Please confirm your password';
 
   @override
   String get validationPasswordsDoNotMatch => 'Passwords do not match';
 
   @override
-  String get errorEmailAlreadyExists => 'An account with that email already exists.';
+  String get errorEmailAlreadyExists =>
+      'An account with that email already exists.';
 
   @override
   String get errorInvalidCredentials => 'Invalid email or password.';
