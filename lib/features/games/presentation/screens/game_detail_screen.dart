@@ -23,7 +23,6 @@ class GameDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
     return BlocProvider(
       create: (_) => sl<GameDetailBloc>()..add(LoadGameDetail(gameId)),
       child: const _GameDetailView(),
@@ -66,11 +65,11 @@ class _GameDetailView extends StatelessWidget {
   }
 
   Widget _buildContent(BuildContext context, GameDetail game) {
-    final l10n = context.l10n;
     final colors = Theme.of(context).colorScheme;
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final textSecondary =
         isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary;
+    final l10n = context.l10n;
 
     return CustomScrollView(
       slivers: [

@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_casino_platform/core/mock/mock_banners.dart';
 import 'package:flutter_casino_platform/core/constants/app_constants.dart';
 import 'package:flutter_casino_platform/core/theme/app_colors.dart';
 import 'package:flutter_casino_platform/core/theme/app_radius.dart';

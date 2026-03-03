@@ -20,7 +20,6 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
     return BlocProvider(
       create: (_) => sl<ProfileBloc>()..add(const LoadProfile()),
       child: const _ProfileView(),

@@ -1,5 +1,4 @@
 /// Sealed failure hierarchy used across the data/domain boundary.
-import 'package:flutter_casino_platform/core/types/either.dart';
 
 ///
 /// Every repository method that can fail returns `Either<Failure, T>`.
