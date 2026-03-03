@@ -48,9 +48,21 @@ class MainShell extends StatelessWidget {
     final colors = Theme.of(context).colorScheme;
     final l10n = context.l10n;
     final tabs = [
-      _TabItem(icon: Icons.home_outlined, activeIcon: Icons.home_rounded, label: l10n.navHome),
-      _TabItem(icon: Icons.casino_outlined, activeIcon: Icons.casino_rounded, label: l10n.navCasino),
-      _TabItem(icon: Icons.person_outline_rounded, activeIcon: Icons.person_rounded, label: l10n.navProfile),
+      _TabItem(
+        icon: Icons.home_outlined,
+        activeIcon: Icons.home_rounded,
+        label: l10n.navHome,
+      ),
+      _TabItem(
+        icon: Icons.casino_outlined,
+        activeIcon: Icons.casino_rounded,
+        label: l10n.navCasino,
+      ),
+      _TabItem(
+        icon: Icons.person_outline_rounded,
+        activeIcon: Icons.person_rounded,
+        label: l10n.navProfile,
+      ),
     ];
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final bgColor =
@@ -108,9 +120,12 @@ class _NavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = isActive
-        ? colors.primary
-        : (isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary);
+    final color =
+        isActive
+            ? colors.primary
+            : (isDark
+                ? AppColors.darkTextSecondary
+                : AppColors.lightTextSecondary);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -128,16 +143,9 @@ class _NavItem extends StatelessWidget {
           )
         else
           const SizedBox(height: 2 + AppSpacing.xs),
-        Icon(
-          isActive ? tab.activeIcon : tab.icon,
-          color: color,
-          size: 24,
-        ),
+        Icon(isActive ? tab.activeIcon : tab.icon, color: color, size: 24),
         const SizedBox(height: 2),
-        Text(
-          tab.label,
-          style: AppTypography.labelSmall(color),
-        ),
+        Text(tab.label, style: AppTypography.labelSmall(color)),
       ],
     );
   }

@@ -23,10 +23,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required LoginUseCase loginUseCase,
     required RegisterUseCase registerUseCase,
     required AuthRepository authRepository,
-  })  : _loginUseCase = loginUseCase,
-        _registerUseCase = registerUseCase,
-        _authRepository = authRepository,
-        super(AuthInitial()) {
+  }) : _loginUseCase = loginUseCase,
+       _registerUseCase = registerUseCase,
+       _authRepository = authRepository,
+       super(AuthInitial()) {
     on<CheckAuthRequested>(_onCheckAuth);
     on<LoginRequested>(_onLogin);
     on<RegisterRequested>(_onRegister);
@@ -46,10 +46,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  Future<void> _onLogin(
-    LoginRequested event,
-    Emitter<AuthState> emit,
-  ) async {
+  Future<void> _onLogin(LoginRequested event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
     final result = await _loginUseCase(
       email: event.email,
@@ -79,10 +76,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  Future<void> _onLogout(
-    LogoutRequested event,
-    Emitter<AuthState> emit,
-  ) async {
+  Future<void> _onLogout(LogoutRequested event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
     await _authRepository.deleteAll();
     emit(Unauthenticated());

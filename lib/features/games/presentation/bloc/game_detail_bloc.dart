@@ -16,8 +16,8 @@ class GameDetailBloc extends Bloc<GameDetailEvent, GameDetailState> {
   final GetGameDetailUseCase _getGameDetail;
 
   GameDetailBloc({required GetGameDetailUseCase getGameDetail})
-      : _getGameDetail = getGameDetail,
-        super(const GameDetailLoading()) {
+    : _getGameDetail = getGameDetail,
+      super(const GameDetailLoading()) {
     on<LoadGameDetail>(_onLoad);
   }
 

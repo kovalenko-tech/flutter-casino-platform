@@ -2,10 +2,4 @@
 ///
 /// Display labels are handled in the presentation layer via
 /// [GameCategoryL10n] extension to support localization.
-enum GameCategory {
-  all,
-  slots,
-  live,
-  table,
-  jackpot;
-}
+enum GameCategory { all, slots, live, table, jackpot }

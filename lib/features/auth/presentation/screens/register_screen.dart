@@ -39,11 +39,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   void _submit(BuildContext context) {
     if (_formKey.currentState?.validate() ?? false) {
-      context.read<AuthBloc>().add(RegisterRequested(
-            name: _nameController.text.trim(),
-            email: _emailController.text.trim(),
-            password: _passwordController.text,
-          ));
+      context.read<AuthBloc>().add(
+        RegisterRequested(
+          name: _nameController.text.trim(),
+          email: _emailController.text.trim(),
+          password: _passwordController.text,
+        ),
+      );
     }
   }
 
@@ -140,7 +142,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               prefixIcon: Icon(Icons.person_outline),
             ),
             validator: (v) {
-              if (v == null || v.trim().isEmpty) return l10n.validationNameRequired;
+              if (v == null || v.trim().isEmpty)
+                return l10n.validationNameRequired;
               if (v.trim().length < 2) return l10n.validationNameTooShort;
               return null;
             },
@@ -178,12 +181,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ? Icons.visibility_outlined
                       : Icons.visibility_off_outlined,
                 ),
-                onPressed: () =>
-                    setState(() => _obscurePassword = !_obscurePassword),
+                onPressed:
+                    () => setState(() => _obscurePassword = !_obscurePassword),
               ),
             ),
             validator: (v) {
-              if (v == null || v.isEmpty) return l10n.validationPasswordRequired;
+              if (v == null || v.isEmpty)
+                return l10n.validationPasswordRequired;
               if (v.length < 8) return l10n.validationPasswordMinLength(8);
               return null;
             },
@@ -204,12 +208,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ? Icons.visibility_outlined
                       : Icons.visibility_off_outlined,
                 ),
-                onPressed: () =>
-                    setState(() => _obscureConfirm = !_obscureConfirm),
+                onPressed:
+                    () => setState(() => _obscureConfirm = !_obscureConfirm),
               ),
             ),
             validator: (v) {
-              if (v == null || v.isEmpty) return l10n.validationConfirmPasswordRequired;
+              if (v == null || v.isEmpty)
+                return l10n.validationConfirmPasswordRequired;
               if (v != _passwordController.text) {
                 return l10n.validationPasswordsDoNotMatch;
               }
@@ -240,10 +245,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           Icon(Icons.error_outline, color: colors.error, size: 20),
           const SizedBox(width: AppSpacing.sm),
           Expanded(
-            child: Text(
-              message,
-              style: AppTypography.bodySmall(colors.error),
-            ),
+            child: Text(message, style: AppTypography.bodySmall(colors.error)),
           ),
         ],
       ),
@@ -262,9 +264,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         Text(
           l10n.authAlreadyHaveAccount,
           style: AppTypography.bodyMedium(
-            isDark
-                ? AppColors.darkTextSecondary
-                : AppColors.lightTextSecondary,
+            isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
           ),
         ),
         GestureDetector(

@@ -26,6 +26,13 @@ class GameSummary extends Equatable {
   });
 
   @override
-  List<Object?> get props =>
-      [id, name, category, provider, imageUrl, isNew, isHot];
+  List<Object?> get props => [
+    id,
+    name,
+    category,
+    provider,
+    imageUrl,
+    isNew,
+    isHot,
+  ];
 }

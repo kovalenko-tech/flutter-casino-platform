@@ -26,6 +26,7 @@ abstract final class AppSizes {
   // ── Game cards (grid) ─────────────────────────────────────────────────────
   /// Thumbnail image height inside a game card.
   static const double gameThumbnailHeight = 72;
+
   /// Total card height in the 4-column grid.
   static const double gameCardHeight = 108;
 
@@ -38,6 +39,7 @@ abstract final class AppSizes {
 
   // ── Bottom navigation ─────────────────────────────────────────────────────
   static const double bottomNavHeight = 64;
+
   /// Thickness of the active-tab gold top border.
   static const double bottomNavIndicatorHeight = 3;
 

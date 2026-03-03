@@ -26,10 +26,7 @@ class CategoryBadge extends StatelessWidget {
         horizontal: AppSpacing.sm,
         vertical: AppSpacing.xs,
       ),
-      decoration: BoxDecoration(
-        color: bg,
-        borderRadius: AppRadius.smAll,
-      ),
+      decoration: BoxDecoration(color: bg, borderRadius: AppRadius.smAll),
       child: Text(
         category.label(context.l10n),
         style: AppTypography.labelSmall(fg),
@@ -38,25 +35,13 @@ class CategoryBadge extends StatelessWidget {
   }
 
   (Color bg, Color fg) _colors(bool isDark) => switch (category) {
-        GameCategory.all => (
-            isDark ? AppColors.darkCard : AppColors.lightCard,
-            isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
-          ),
-        GameCategory.slots => (
-            const Color(0x33F0B429),
-            AppColors.darkPrimary,
-          ),
-        GameCategory.live => (
-            const Color(0x33EF4444),
-            AppColors.darkError,
-          ),
-        GameCategory.table => (
-            const Color(0x3310B981),
-            AppColors.darkSuccess,
-          ),
-        GameCategory.jackpot => (
-            const Color(0x338B5CF6),
-            AppColors.darkAccent,
-          ),
-      };
+    GameCategory.all => (
+      isDark ? AppColors.darkCard : AppColors.lightCard,
+      isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+    ),
+    GameCategory.slots => (const Color(0x33F0B429), AppColors.darkPrimary),
+    GameCategory.live => (const Color(0x33EF4444), AppColors.darkError),
+    GameCategory.table => (const Color(0x3310B981), AppColors.darkSuccess),
+    GameCategory.jackpot => (const Color(0x338B5CF6), AppColors.darkAccent),
+  };
 }

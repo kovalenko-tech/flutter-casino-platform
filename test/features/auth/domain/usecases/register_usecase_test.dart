@@ -41,8 +41,9 @@ void main() {
   group('RegisterUseCase', () {
     test('returns newly created User on success', () async {
       // No existing account found for this email.
-      when(() => mockRepo.findByEmail('bob@example.com'))
-          .thenAnswer((_) async => left(const NotFoundFailure('not found')));
+      when(
+        () => mockRepo.findByEmail('bob@example.com'),
+      ).thenAnswer((_) async => left(const NotFoundFailure('not found')));
 
       when(
         () => mockRepo.save(
@@ -65,8 +66,9 @@ void main() {
 
     test('propagates AuthFailure when email already exists', () async {
       // Email already taken.
-      when(() => mockRepo.findByEmail('alice@example.com'))
-          .thenAnswer((_) async => right(testUser));
+      when(
+        () => mockRepo.findByEmail('alice@example.com'),
+      ).thenAnswer((_) async => right(testUser));
 
       final result = await useCase(
         name: 'Alice2',
@@ -76,21 +78,15 @@ void main() {
 
       expect(result.isLeft, isTrue);
       expect(result.leftValue, isA<AuthFailure>());
-      expect(
-        result.leftValue.message,
-        contains('already exists'),
-      );
+      expect(result.leftValue.message, contains('already exists'));
     });
 
     test('does not call save when email is already taken', () async {
-      when(() => mockRepo.findByEmail(any()))
-          .thenAnswer((_) async => right(testUser));
+      when(
+        () => mockRepo.findByEmail(any()),
+      ).thenAnswer((_) async => right(testUser));
 
-      await useCase(
-        name: 'Dup',
-        email: 'dup@example.com',
-        password: 'pass',
-      );
+      await useCase(name: 'Dup', email: 'dup@example.com', password: 'pass');
 
       verifyNever(
         () => mockRepo.save(
@@ -102,8 +98,9 @@ void main() {
     });
 
     test('calls findByEmail once with the provided email', () async {
-      when(() => mockRepo.findByEmail(any()))
-          .thenAnswer((_) async => left(const NotFoundFailure('not found')));
+      when(
+        () => mockRepo.findByEmail(any()),
+      ).thenAnswer((_) async => left(const NotFoundFailure('not found')));
       when(
         () => mockRepo.save(
           user: any(named: 'user'),

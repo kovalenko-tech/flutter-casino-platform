@@ -48,10 +48,10 @@ void main() {
   });
 
   AuthBloc buildBloc() => AuthBloc(
-        loginUseCase: mockLoginUseCase,
-        registerUseCase: mockRegisterUseCase,
-        authRepository: mockAuthRepository,
-      );
+    loginUseCase: mockLoginUseCase,
+    registerUseCase: mockRegisterUseCase,
+    authRepository: mockAuthRepository,
+  );
 
   group('AuthBloc', () {
     test('initial state is AuthInitial', () {
@@ -62,29 +62,25 @@ void main() {
       blocTest<AuthBloc, AuthState>(
         'emits [AuthLoading, Authenticated] when user session exists',
         build: () {
-          when(() => mockAuthRepository.getCurrentUser())
-              .thenAnswer((_) async => right(testUser));
+          when(
+            () => mockAuthRepository.getCurrentUser(),
+          ).thenAnswer((_) async => right(testUser));
           return buildBloc();
         },
         act: (bloc) => bloc.add(const CheckAuthRequested()),
-        expect: () => [
-          isA<AuthLoading>(),
-          Authenticated(testUser),
-        ],
+        expect: () => [isA<AuthLoading>(), Authenticated(testUser)],
       );
 
       blocTest<AuthBloc, AuthState>(
         'emits [AuthLoading, Unauthenticated] when no session exists',
         build: () {
-          when(() => mockAuthRepository.getCurrentUser())
-              .thenAnswer((_) async => right(null));
+          when(
+            () => mockAuthRepository.getCurrentUser(),
+          ).thenAnswer((_) async => right(null));
           return buildBloc();
         },
         act: (bloc) => bloc.add(const CheckAuthRequested()),
-        expect: () => [
-          isA<AuthLoading>(),
-          isA<Unauthenticated>(),
-        ],
+        expect: () => [isA<AuthLoading>(), isA<Unauthenticated>()],
       );
     });
 
@@ -100,13 +96,14 @@ void main() {
           ).thenAnswer((_) async => right(testUser));
           return buildBloc();
         },
-        act: (bloc) => bloc.add(
-          const LoginRequested(email: 'alice@example.com', password: 'secret'),
-        ),
-        expect: () => [
-          isA<AuthLoading>(),
-          Authenticated(testUser),
-        ],
+        act:
+            (bloc) => bloc.add(
+              const LoginRequested(
+                email: 'alice@example.com',
+                password: 'secret',
+              ),
+            ),
+        expect: () => [isA<AuthLoading>(), Authenticated(testUser)],
       );
 
       blocTest<AuthBloc, AuthState>(
@@ -122,20 +119,22 @@ void main() {
           );
           return buildBloc();
         },
-        act: (bloc) => bloc.add(
-          const LoginRequested(
-            email: 'wrong@example.com',
-            password: 'badpass',
-          ),
-        ),
-        expect: () => [
-          isA<AuthLoading>(),
-          isA<AuthError>().having(
-            (s) => s.message,
-            'message',
-            equals('Invalid email or password.'),
-          ),
-        ],
+        act:
+            (bloc) => bloc.add(
+              const LoginRequested(
+                email: 'wrong@example.com',
+                password: 'badpass',
+              ),
+            ),
+        expect:
+            () => [
+              isA<AuthLoading>(),
+              isA<AuthError>().having(
+                (s) => s.message,
+                'message',
+                equals('Invalid email or password.'),
+              ),
+            ],
       );
     });
 
@@ -152,17 +151,15 @@ void main() {
           ).thenAnswer((_) async => right(testUser));
           return buildBloc();
         },
-        act: (bloc) => bloc.add(
-          const RegisterRequested(
-            name: 'Alice',
-            email: 'alice@example.com',
-            password: 'securePass1',
-          ),
-        ),
-        expect: () => [
-          isA<AuthLoading>(),
-          Authenticated(testUser),
-        ],
+        act:
+            (bloc) => bloc.add(
+              const RegisterRequested(
+                name: 'Alice',
+                email: 'alice@example.com',
+                password: 'securePass1',
+              ),
+            ),
+        expect: () => [isA<AuthLoading>(), Authenticated(testUser)],
       );
 
       blocTest<AuthBloc, AuthState>(
@@ -175,26 +172,29 @@ void main() {
               password: any(named: 'password'),
             ),
           ).thenAnswer(
-            (_) async =>
-                left(const AuthFailure('An account with that email already exists.')),
+            (_) async => left(
+              const AuthFailure('An account with that email already exists.'),
+            ),
           );
           return buildBloc();
         },
-        act: (bloc) => bloc.add(
-          const RegisterRequested(
-            name: 'Dup',
-            email: 'dup@example.com',
-            password: 'pass123',
-          ),
-        ),
-        expect: () => [
-          isA<AuthLoading>(),
-          isA<AuthError>().having(
-            (s) => s.message,
-            'message',
-            contains('already exists'),
-          ),
-        ],
+        act:
+            (bloc) => bloc.add(
+              const RegisterRequested(
+                name: 'Dup',
+                email: 'dup@example.com',
+                password: 'pass123',
+              ),
+            ),
+        expect:
+            () => [
+              isA<AuthLoading>(),
+              isA<AuthError>().having(
+                (s) => s.message,
+                'message',
+                contains('already exists'),
+              ),
+            ],
       );
     });
 
@@ -202,22 +202,21 @@ void main() {
       blocTest<AuthBloc, AuthState>(
         'emits [AuthLoading, Unauthenticated] after logout',
         build: () {
-          when(() => mockAuthRepository.deleteAll())
-              .thenAnswer((_) async => right(null));
+          when(
+            () => mockAuthRepository.deleteAll(),
+          ).thenAnswer((_) async => right(null));
           return buildBloc();
         },
         act: (bloc) => bloc.add(const LogoutRequested()),
-        expect: () => [
-          isA<AuthLoading>(),
-          isA<Unauthenticated>(),
-        ],
+        expect: () => [isA<AuthLoading>(), isA<Unauthenticated>()],
       );
 
       blocTest<AuthBloc, AuthState>(
         'calls repository.deleteAll() on logout',
         build: () {
-          when(() => mockAuthRepository.deleteAll())
-              .thenAnswer((_) async => right(null));
+          when(
+            () => mockAuthRepository.deleteAll(),
+          ).thenAnswer((_) async => right(null));
           return buildBloc();
         },
         act: (bloc) => bloc.add(const LogoutRequested()),

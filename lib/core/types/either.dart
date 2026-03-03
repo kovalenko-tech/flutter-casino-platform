@@ -7,15 +7,9 @@ class _Either<L, R> {
   final R? _r;
   final bool _isRight;
 
-  const _Either._left(L value)
-      : _l = value,
-        _r = null,
-        _isRight = false;
+  const _Either._left(L value) : _l = value, _r = null, _isRight = false;
 
-  const _Either._right(R value)
-      : _l = null,
-        _r = value,
-        _isRight = true;
+  const _Either._right(R value) : _l = null, _r = value, _isRight = true;
 }
 
 /// Public alias — use `Either<Failure, T>` throughout the codebase.

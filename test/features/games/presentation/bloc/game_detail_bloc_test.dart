@@ -41,15 +41,13 @@ void main() {
     blocTest<GameDetailBloc, GameDetailState>(
       'emits [GameDetailLoading, GameDetailLoaded] on LoadGameDetail success',
       build: () {
-        when(() => mockUseCase('book-of-dead'))
-            .thenAnswer((_) async => right(testGame));
+        when(
+          () => mockUseCase('book-of-dead'),
+        ).thenAnswer((_) async => right(testGame));
         return GameDetailBloc(getGameDetail: mockUseCase);
       },
       act: (bloc) => bloc.add(const LoadGameDetail('book-of-dead')),
-      expect: () => [
-        isA<GameDetailLoading>(),
-        GameDetailLoaded(testGame),
-      ],
+      expect: () => [isA<GameDetailLoading>(), GameDetailLoaded(testGame)],
     );
 
     blocTest<GameDetailBloc, GameDetailState>(
@@ -61,10 +59,7 @@ void main() {
         return GameDetailBloc(getGameDetail: mockUseCase);
       },
       act: (bloc) => bloc.add(const LoadGameDetail('bad-id')),
-      expect: () => [
-        isA<GameDetailLoading>(),
-        isA<GameDetailError>(),
-      ],
+      expect: () => [isA<GameDetailLoading>(), isA<GameDetailError>()],
     );
 
     blocTest<GameDetailBloc, GameDetailState>(
@@ -76,39 +71,41 @@ void main() {
         return GameDetailBloc(getGameDetail: mockUseCase);
       },
       act: (bloc) => bloc.add(const LoadGameDetail('xyz')),
-      expect: () => [
-        isA<GameDetailLoading>(),
-        isA<GameDetailError>().having(
-          (s) => s.message,
-          'message',
-          equals('Game not found: xyz'),
-        ),
-      ],
+      expect:
+          () => [
+            isA<GameDetailLoading>(),
+            isA<GameDetailError>().having(
+              (s) => s.message,
+              'message',
+              equals('Game not found: xyz'),
+            ),
+          ],
     );
 
     blocTest<GameDetailBloc, GameDetailState>(
       'GameDetailLoaded contains correct game',
       build: () {
-        when(() => mockUseCase(any()))
-            .thenAnswer((_) async => right(testGame));
+        when(() => mockUseCase(any())).thenAnswer((_) async => right(testGame));
         return GameDetailBloc(getGameDetail: mockUseCase);
       },
       act: (bloc) => bloc.add(const LoadGameDetail('book-of-dead')),
-      expect: () => [
-        isA<GameDetailLoading>(),
-        isA<GameDetailLoaded>().having(
-          (s) => s.game,
-          'game',
-          equals(testGame),
-        ),
-      ],
+      expect:
+          () => [
+            isA<GameDetailLoading>(),
+            isA<GameDetailLoaded>().having(
+              (s) => s.game,
+              'game',
+              equals(testGame),
+            ),
+          ],
     );
 
     blocTest<GameDetailBloc, GameDetailState>(
       'calls use case with the id from LoadGameDetail event',
       build: () {
-        when(() => mockUseCase('specific-id'))
-            .thenAnswer((_) async => right(testGame));
+        when(
+          () => mockUseCase('specific-id'),
+        ).thenAnswer((_) async => right(testGame));
         return GameDetailBloc(getGameDetail: mockUseCase);
       },
       act: (bloc) => bloc.add(const LoadGameDetail('specific-id')),

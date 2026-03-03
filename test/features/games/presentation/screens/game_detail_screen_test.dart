@@ -33,8 +33,9 @@ Widget _buildTestApp({required String gameId}) {
     routes: [
       GoRoute(
         path: '/games/:id',
-        builder: (context, state) =>
-            GameDetailScreen(gameId: state.pathParameters['id'] ?? gameId),
+        builder:
+            (context, state) =>
+                GameDetailScreen(gameId: state.pathParameters['id'] ?? gameId),
       ),
     ],
   );
@@ -118,11 +119,7 @@ void main() {
     testWidgets('shows error message in error state', (tester) async {
       const errorState = GameDetailError('Game not found: bad-id');
       when(() => mockBloc.state).thenReturn(errorState);
-      whenListen(
-        mockBloc,
-        Stream.value(errorState),
-        initialState: errorState,
-      );
+      whenListen(mockBloc, Stream.value(errorState), initialState: errorState);
 
       await tester.pumpWidget(_buildTestApp(gameId: 'bad-id'));
       await tester.pump();

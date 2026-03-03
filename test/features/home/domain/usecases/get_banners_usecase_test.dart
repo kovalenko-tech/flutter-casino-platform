@@ -37,8 +37,9 @@ void main() {
     ];
 
     test('returns banners from repository on success', () async {
-      when(() => mockRepo.getBanners())
-          .thenAnswer((_) async => right(testBanners));
+      when(
+        () => mockRepo.getBanners(),
+      ).thenAnswer((_) async => right(testBanners));
 
       final result = await useCase();
 
@@ -48,8 +49,9 @@ void main() {
     });
 
     test('propagates StorageFailure from repository', () async {
-      when(() => mockRepo.getBanners())
-          .thenAnswer((_) async => left(const StorageFailure('db error')));
+      when(
+        () => mockRepo.getBanners(),
+      ).thenAnswer((_) async => left(const StorageFailure('db error')));
 
       final result = await useCase();
 
@@ -59,8 +61,9 @@ void main() {
     });
 
     test('delegates exactly one call to repository', () async {
-      when(() => mockRepo.getBanners())
-          .thenAnswer((_) async => right(testBanners));
+      when(
+        () => mockRepo.getBanners(),
+      ).thenAnswer((_) async => right(testBanners));
 
       await useCase();
 

@@ -61,8 +61,9 @@ void main() {
       expect(find.byType(TextFormField), findsWidgets);
     });
 
-    testWidgets('shows email validation error when email is empty',
-        (tester) async {
+    testWidgets('shows email validation error when email is empty', (
+      tester,
+    ) async {
       await tester.pumpWidget(_buildTestApp(home: const LoginScreen()));
       await tester.pump();
 
@@ -74,8 +75,9 @@ void main() {
       expect(find.text('Email is required'), findsOneWidget);
     });
 
-    testWidgets('shows password validation error when password is empty',
-        (tester) async {
+    testWidgets('shows password validation error when password is empty', (
+      tester,
+    ) async {
       await tester.pumpWidget(_buildTestApp(home: const LoginScreen()));
       await tester.pump();
 
@@ -114,8 +116,9 @@ void main() {
       expect(find.text(errorMessage), findsOneWidget);
     });
 
-    testWidgets('shows loading indicator when state is AuthLoading',
-        (tester) async {
+    testWidgets('shows loading indicator when state is AuthLoading', (
+      tester,
+    ) async {
       when(() => mockAuthBloc.state).thenReturn(AuthLoading());
       whenListen(
         mockAuthBloc,

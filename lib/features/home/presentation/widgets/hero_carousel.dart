@@ -73,10 +73,7 @@ class _HeroCarouselState extends State<HeroCarousel> {
           ),
         ),
         const SizedBox(height: AppSpacing.sm),
-        _DotsIndicator(
-          count: widget.banners.length,
-          current: _currentPage,
-        ),
+        _DotsIndicator(count: widget.banners.length, current: _currentPage),
       ],
     );
   }
@@ -102,13 +99,12 @@ class _BannerSlide extends StatelessWidget {
             CachedNetworkImage(
               imageUrl: banner.imageUrl,
               fit: BoxFit.cover,
-              placeholder: (_, __) => Container(
-                color: AppColors.darkCard,
-              ),
-              errorWidget: (_, __, ___) => Container(
-                color: AppColors.darkCard,
-                child: const Icon(Icons.image_not_supported_outlined),
-              ),
+              placeholder: (_, __) => Container(color: AppColors.darkCard),
+              errorWidget:
+                  (_, __, ___) => Container(
+                    color: AppColors.darkCard,
+                    child: const Icon(Icons.image_not_supported_outlined),
+                  ),
             ),
 
             // Gradient overlay
@@ -117,10 +113,7 @@ class _BannerSlide extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.centerRight,
                   end: Alignment.centerLeft,
-                  colors: [
-                    Colors.transparent,
-                    Colors.black.withOpacity(0.85),
-                  ],
+                  colors: [Colors.transparent, Colors.black.withOpacity(0.85)],
                 ),
               ),
             ),
@@ -196,9 +189,8 @@ class _DotsIndicator extends StatelessWidget {
           width: isActive ? 20 : 6,
           height: 6,
           decoration: BoxDecoration(
-            color: isActive
-                ? colors.primary
-                : colors.onSurface.withOpacity(0.25),
+            color:
+                isActive ? colors.primary : colors.onSurface.withOpacity(0.25),
             borderRadius: AppRadius.fullAll,
           ),
         );

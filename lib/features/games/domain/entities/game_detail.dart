@@ -8,7 +8,7 @@ import 'package:flutter_casino_platform/features/home/domain/entities/game_summa
 ///
 /// Display labels are handled in the presentation layer via
 /// [VolatilityL10n] extension to support localization.
-enum Volatility { low, medium, high; }
+enum Volatility { low, medium, high }
 
 /// Full game entity — loaded when the user opens a game detail screen.
 class GameDetail extends Equatable {
@@ -38,16 +38,26 @@ class GameDetail extends Equatable {
 
   /// Downcasts to a [GameSummary] for use in list/grid widgets.
   GameSummary toSummary() => GameSummary(
-        id: id,
-        name: name,
-        category: category,
-        provider: provider,
-        imageUrl: imageUrl,
-        isNew: isNew,
-        isHot: isHot,
-      );
+    id: id,
+    name: name,
+    category: category,
+    provider: provider,
+    imageUrl: imageUrl,
+    isNew: isNew,
+    isHot: isHot,
+  );
 
   @override
-  List<Object?> get props =>
-      [id, name, category, provider, description, rtp, volatility, imageUrl, isNew, isHot];
+  List<Object?> get props => [
+    id,
+    name,
+    category,
+    provider,
+    description,
+    rtp,
+    volatility,
+    imageUrl,
+    isNew,
+    isHot,
+  ];
 }

@@ -40,10 +40,7 @@ Widget _buildTestApp() {
   final router = GoRouter(
     initialLocation: '/home',
     routes: [
-      GoRoute(
-        path: '/home',
-        builder: (_, __) => const HomeScreen(),
-      ),
+      GoRoute(path: '/home', builder: (_, __) => const HomeScreen()),
       GoRoute(
         path: '/games/:id',
         builder: (_, __) => const Scaffold(body: Text('Game Detail')),
@@ -88,8 +85,9 @@ void main() {
   });
 
   group('HomeScreen', () {
-    testWidgets('shows shimmer loading when state is HomeLoading',
-        (tester) async {
+    testWidgets('shows shimmer loading when state is HomeLoading', (
+      tester,
+    ) async {
       when(() => mockHomeBloc.state).thenReturn(const HomeLoading());
       whenListen(
         mockHomeBloc,
@@ -105,11 +103,11 @@ void main() {
       expect(find.byType(CustomScrollView), findsOneWidget);
     });
 
-    testWidgets('shows error message and retry button on HomeError',
-        (tester) async {
+    testWidgets('shows error message and retry button on HomeError', (
+      tester,
+    ) async {
       const errorMessage = 'Network unavailable';
-      when(() => mockHomeBloc.state)
-          .thenReturn(const HomeError(errorMessage));
+      when(() => mockHomeBloc.state).thenReturn(const HomeError(errorMessage));
       whenListen(
         mockHomeBloc,
         Stream.value(const HomeError(errorMessage)),

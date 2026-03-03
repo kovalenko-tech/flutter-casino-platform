@@ -55,23 +55,17 @@ Future<void> initDependencies() async {
   sl.registerLazySingleton(() => RegisterUseCase(sl<AuthRepository>()));
 
   // ── Home: repository (mock → swap to RealHomeRepository when ready) ────────
-  sl.registerLazySingleton<HomeRepository>(
-    () => const MockHomeRepository(),
-  );
+  sl.registerLazySingleton<HomeRepository>(() => const MockHomeRepository());
 
   // ── Home: use cases ────────────────────────────────────────────────────────
   sl.registerLazySingleton(() => GetBannersUseCase(sl<HomeRepository>()));
   sl.registerLazySingleton(() => GetGamesUseCase(sl<HomeRepository>()));
 
   // ── Games: repository (mock → swap to RealGamesRepository when ready) ──────
-  sl.registerLazySingleton<GamesRepository>(
-    () => const MockGamesRepository(),
-  );
+  sl.registerLazySingleton<GamesRepository>(() => const MockGamesRepository());
 
   // ── Games: use cases ───────────────────────────────────────────────────────
-  sl.registerLazySingleton(
-    () => GetGameDetailUseCase(sl<GamesRepository>()),
-  );
+  sl.registerLazySingleton(() => GetGameDetailUseCase(sl<GamesRepository>()));
 
   // ── BLoCs (factories — fresh instance per page push) ──────────────────────
   sl.registerFactory(
@@ -93,7 +87,5 @@ Future<void> initDependencies() async {
     () => GameDetailBloc(getGameDetail: sl<GetGameDetailUseCase>()),
   );
 
-  sl.registerFactory(
-    () => ProfileBloc(authRepository: sl<AuthRepository>()),
-  );
+  sl.registerFactory(() => ProfileBloc(authRepository: sl<AuthRepository>()));
 }

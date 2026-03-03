@@ -17,8 +17,9 @@ void main() {
       expect(find.text('Tap me'), findsOneWidget);
     });
 
-    testWidgets('shows CircularProgressIndicator when isLoading=true',
-        (tester) async {
+    testWidgets('shows CircularProgressIndicator when isLoading=true', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(

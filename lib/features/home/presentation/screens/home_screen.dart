@@ -95,17 +95,22 @@ class _HomeView extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.error_outline,
-                            color: colors.error, size: 48),
+                        Icon(
+                          Icons.error_outline,
+                          color: colors.error,
+                          size: 48,
+                        ),
                         const SizedBox(height: AppSpacing.md),
-                        Text(state.message,
-                            style:
-                                AppTypography.bodyMedium(colors.onSurface)),
+                        Text(
+                          state.message,
+                          style: AppTypography.bodyMedium(colors.onSurface),
+                        ),
                         const SizedBox(height: AppSpacing.lg),
                         TextButton(
-                          onPressed: () => context
-                              .read<HomeBloc>()
-                              .add(const LoadHomeData()),
+                          onPressed:
+                              () => context.read<HomeBloc>().add(
+                                const LoadHomeData(),
+                              ),
                           child: Text(l10n.retry),
                         ),
                       ],
@@ -120,7 +125,11 @@ class _HomeView extends StatelessWidget {
     );
   }
 
-  SliverAppBar _buildAppBar(ColorScheme colors, bool isDark, AppLocalizations l10n) {
+  SliverAppBar _buildAppBar(
+    ColorScheme colors,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     return SliverAppBar(
       floating: true,
       snap: true,
@@ -136,8 +145,11 @@ class _HomeView extends StatelessWidget {
               color: colors.primary,
               borderRadius: const BorderRadius.all(Radius.circular(8)),
             ),
-            child: Icon(Icons.casino_rounded,
-                color: colors.onPrimary, size: 18),
+            child: Icon(
+              Icons.casino_rounded,
+              color: colors.onPrimary,
+              size: 18,
+            ),
           ),
           const SizedBox(width: AppSpacing.sm),
           Text(

@@ -22,7 +22,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.x'
+          flutter-version: '3.29.x'
           channel: stable
           cache: true
 
@@ -30,7 +30,13 @@ jobs:
         run: flutter pub get
 
       - name: Generate localization files
-        run: flutter gen-l10n
+        run: |
+          flutter gen-l10n
+          # Fix relative imports that gen-l10n emits (linter requires package: imports)
+          sed -i "s|import 'app_localizations_en.dart';|import 'package:flutter_casino_platform/core/l10n/app_localizations_en.dart';|g" lib/core/l10n/app_localizations.dart
+          sed -i "s|import 'app_localizations_uk.dart';|import 'package:flutter_casino_platform/core/l10n/app_localizations_uk.dart';|g" lib/core/l10n/app_localizations.dart
+          sed -i "s|import 'app_localizations.dart';|import 'package:flutter_casino_platform/core/l10n/app_localizations.dart';|g" lib/core/l10n/app_localizations_en.dart
+          sed -i "s|import 'app_localizations.dart';|import 'package:flutter_casino_platform/core/l10n/app_localizations.dart';|g" lib/core/l10n/app_localizations_uk.dart
 
       - name: Verify formatting
         run: dart format --output=none --set-exit-if-changed lib/ test/

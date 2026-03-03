@@ -13,10 +13,7 @@ GoRouter _testRouter({required Widget home}) {
   return GoRouter(
     initialLocation: '/',
     routes: [
-      GoRoute(
-        path: '/',
-        builder: (_, __) => home,
-      ),
+      GoRoute(path: '/', builder: (_, __) => home),
       GoRoute(
         path: '/games/:id',
         builder: (_, __) => const Scaffold(body: Text('Game Detail')),
@@ -81,8 +78,9 @@ void main() {
       expect(find.text('HOT'), findsOneWidget);
     });
 
-    testWidgets('shows no badge when isNew=false and isHot=false',
-        (tester) async {
+    testWidgets('shows no badge when isNew=false and isHot=false', (
+      tester,
+    ) async {
       await tester.pumpWidget(_buildTestApp(const GameCard(game: baseGame)));
       await tester.pump();
 

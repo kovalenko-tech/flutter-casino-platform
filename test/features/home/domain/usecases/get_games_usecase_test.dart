@@ -52,8 +52,9 @@ void main() {
 
   group('GetGamesUseCase', () {
     test('returns all games when called with default category (all)', () async {
-      when(() => mockRepo.getGames(category: GameCategory.all))
-          .thenAnswer((_) async => right(allGames));
+      when(
+        () => mockRepo.getGames(category: GameCategory.all),
+      ).thenAnswer((_) async => right(allGames));
 
       final result = await useCase();
 
@@ -61,21 +62,25 @@ void main() {
       expect(result.rightValue, equals(allGames));
     });
 
-    test('passes slots category to repository and returns filtered games',
-        () async {
-      when(() => mockRepo.getGames(category: GameCategory.slots))
-          .thenAnswer((_) async => right(slotGames));
+    test(
+      'passes slots category to repository and returns filtered games',
+      () async {
+        when(
+          () => mockRepo.getGames(category: GameCategory.slots),
+        ).thenAnswer((_) async => right(slotGames));
 
-      final result = await useCase(category: GameCategory.slots);
+        final result = await useCase(category: GameCategory.slots);
 
-      expect(result.isRight, isTrue);
-      expect(result.rightValue, equals(slotGames));
-      verify(() => mockRepo.getGames(category: GameCategory.slots)).called(1);
-    });
+        expect(result.isRight, isTrue);
+        expect(result.rightValue, equals(slotGames));
+        verify(() => mockRepo.getGames(category: GameCategory.slots)).called(1);
+      },
+    );
 
     test('passes live category to repository', () async {
-      when(() => mockRepo.getGames(category: GameCategory.live))
-          .thenAnswer((_) async => right(const []));
+      when(
+        () => mockRepo.getGames(category: GameCategory.live),
+      ).thenAnswer((_) async => right(const []));
 
       await useCase(category: GameCategory.live);
 
@@ -83,8 +88,9 @@ void main() {
     });
 
     test('propagates StorageFailure from repository', () async {
-      when(() => mockRepo.getGames(category: any(named: 'category')))
-          .thenAnswer((_) async => left(const StorageFailure('read error')));
+      when(
+        () => mockRepo.getGames(category: any(named: 'category')),
+      ).thenAnswer((_) async => left(const StorageFailure('read error')));
 
       final result = await useCase();
 
@@ -93,8 +99,9 @@ void main() {
     });
 
     test('delegates exactly one call to repository', () async {
-      when(() => mockRepo.getGames(category: GameCategory.all))
-          .thenAnswer((_) async => right(allGames));
+      when(
+        () => mockRepo.getGames(category: GameCategory.all),
+      ).thenAnswer((_) async => right(allGames));
 
       await useCase();
 

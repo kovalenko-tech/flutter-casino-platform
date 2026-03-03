@@ -33,8 +33,7 @@ class CategoryFilterChips extends StatelessWidget {
           final isSelected = cat == selectedCategory;
 
           return GestureDetector(
-            onTap: () =>
-                context.read<HomeBloc>().add(FilterByCategory(cat)),
+            onTap: () => context.read<HomeBloc>().add(FilterByCategory(cat)),
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 200),
               padding: const EdgeInsets.symmetric(
@@ -42,15 +41,13 @@ class CategoryFilterChips extends StatelessWidget {
                 vertical: AppSpacing.xs,
               ),
               decoration: BoxDecoration(
-                color: isSelected
-                    ? colors.primary
-                    : colors.surfaceContainerHighest,
-                borderRadius:
-                    const BorderRadius.all(Radius.circular(999)),
+                color:
+                    isSelected
+                        ? colors.primary
+                        : colors.surfaceContainerHighest,
+                borderRadius: const BorderRadius.all(Radius.circular(999)),
                 border: Border.all(
-                  color: isSelected
-                      ? colors.primary
-                      : colors.outline,
+                  color: isSelected ? colors.primary : colors.outline,
                 ),
               ),
               child: Text(

@@ -34,10 +34,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _submit(BuildContext context) {
     if (_formKey.currentState?.validate() ?? false) {
-      context.read<AuthBloc>().add(LoginRequested(
-            email: _emailController.text.trim(),
-            password: _passwordController.text,
-          ));
+      context.read<AuthBloc>().add(
+        LoginRequested(
+          email: _emailController.text.trim(),
+          password: _passwordController.text,
+        ),
+      );
     }
   }
 
@@ -159,12 +161,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       ? Icons.visibility_outlined
                       : Icons.visibility_off_outlined,
                 ),
-                onPressed: () =>
-                    setState(() => _obscurePassword = !_obscurePassword),
+                onPressed:
+                    () => setState(() => _obscurePassword = !_obscurePassword),
               ),
             ),
             validator: (v) {
-              if (v == null || v.isEmpty) return l10n.validationPasswordRequired;
+              if (v == null || v.isEmpty)
+                return l10n.validationPasswordRequired;
               if (v.length < 6) return l10n.validationPasswordMinLength(6);
               return null;
             },
@@ -213,9 +216,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Text(
           l10n.authDontHaveAccount,
           style: AppTypography.bodyMedium(
-            isDark
-                ? AppColors.darkTextSecondary
-                : AppColors.lightTextSecondary,
+            isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
           ),
         ),
         GestureDetector(

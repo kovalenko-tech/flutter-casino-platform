@@ -34,33 +34,39 @@ GoRouter buildRouter() {
       StatefulShellRoute.indexedStack(
         builder: (context, state, shell) => MainShell(shell: shell),
         branches: [
-          StatefulShellBranch(routes: [
-            GoRoute(
-              path: AppConstants.routeHome,
-              builder: (context, state) => const HomeTab(),
-            ),
-          ]),
-          StatefulShellBranch(routes: [
-            GoRoute(
-              path: AppConstants.routeGames,
-              builder: (context, state) => const GamesTab(),
-              routes: [
-                GoRoute(
-                  path: ':id',
-                  builder: (context, state) {
-                    final id = state.pathParameters['id']!;
-                    return GameDetailScreen(gameId: id);
-                  },
-                ),
-              ],
-            ),
-          ]),
-          StatefulShellBranch(routes: [
-            GoRoute(
-              path: AppConstants.routeProfile,
-              builder: (context, state) => const ProfileTab(),
-            ),
-          ]),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppConstants.routeHome,
+                builder: (context, state) => const HomeTab(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppConstants.routeGames,
+                builder: (context, state) => const GamesTab(),
+                routes: [
+                  GoRoute(
+                    path: ':id',
+                    builder: (context, state) {
+                      final id = state.pathParameters['id']!;
+                      return GameDetailScreen(gameId: id);
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppConstants.routeProfile,
+                builder: (context, state) => const ProfileTab(),
+              ),
+            ],
+          ),
         ],
       ),
     ],
@@ -73,7 +79,8 @@ Future<String?> _authGuard(BuildContext context, GoRouterState state) async {
   final result = await authRepo.getCurrentUser();
   final hasSession = result.isRight && result.rightValue != null;
 
-  final isAuthRoute = state.matchedLocation == AppConstants.routeLogin ||
+  final isAuthRoute =
+      state.matchedLocation == AppConstants.routeLogin ||
       state.matchedLocation == AppConstants.routeRegister;
 
   if (!hasSession && !isAuthRoute) {

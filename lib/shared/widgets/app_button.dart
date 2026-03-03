@@ -39,16 +39,15 @@ class AppButton extends StatelessWidget {
     bool isLoading = false,
     bool isFullWidth = true,
     IconData? prefixIcon,
-  }) =>
-      AppButton._(
-        key: key,
-        label: label,
-        variant: _ButtonVariant.primary,
-        onPressed: onPressed,
-        isLoading: isLoading,
-        isFullWidth: isFullWidth,
-        prefixIcon: prefixIcon,
-      );
+  }) => AppButton._(
+    key: key,
+    label: label,
+    variant: _ButtonVariant.primary,
+    onPressed: onPressed,
+    isLoading: isLoading,
+    isFullWidth: isFullWidth,
+    prefixIcon: prefixIcon,
+  );
 
   factory AppButton.secondary({
     Key? key,
@@ -57,16 +56,15 @@ class AppButton extends StatelessWidget {
     bool isLoading = false,
     bool isFullWidth = true,
     IconData? prefixIcon,
-  }) =>
-      AppButton._(
-        key: key,
-        label: label,
-        variant: _ButtonVariant.secondary,
-        onPressed: onPressed,
-        isLoading: isLoading,
-        isFullWidth: isFullWidth,
-        prefixIcon: prefixIcon,
-      );
+  }) => AppButton._(
+    key: key,
+    label: label,
+    variant: _ButtonVariant.secondary,
+    onPressed: onPressed,
+    isLoading: isLoading,
+    isFullWidth: isFullWidth,
+    prefixIcon: prefixIcon,
+  );
 
   factory AppButton.ghost({
     Key? key,
@@ -74,15 +72,14 @@ class AppButton extends StatelessWidget {
     VoidCallback? onPressed,
     bool isFullWidth = false,
     IconData? prefixIcon,
-  }) =>
-      AppButton._(
-        key: key,
-        label: label,
-        variant: _ButtonVariant.ghost,
-        onPressed: onPressed,
-        isFullWidth: isFullWidth,
-        prefixIcon: prefixIcon,
-      );
+  }) => AppButton._(
+    key: key,
+    label: label,
+    variant: _ButtonVariant.ghost,
+    onPressed: onPressed,
+    isFullWidth: isFullWidth,
+    prefixIcon: prefixIcon,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -94,38 +91,34 @@ class AppButton extends StatelessWidget {
       height: 52,
       child: switch (_variant) {
         _ButtonVariant.primary => ElevatedButton(
-            onPressed: isLoading ? null : onPressed,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: colors.primary,
-              foregroundColor: colors.onPrimary,
-              shape: const RoundedRectangleBorder(
-                borderRadius: AppRadius.mdAll,
-              ),
-              elevation: 0,
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-            ),
-            child: child,
+          onPressed: isLoading ? null : onPressed,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: colors.primary,
+            foregroundColor: colors.onPrimary,
+            shape: const RoundedRectangleBorder(borderRadius: AppRadius.mdAll),
+            elevation: 0,
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
           ),
+          child: child,
+        ),
         _ButtonVariant.secondary => OutlinedButton(
-            onPressed: isLoading ? null : onPressed,
-            style: OutlinedButton.styleFrom(
-              foregroundColor: colors.primary,
-              side: BorderSide(color: colors.primary),
-              shape: const RoundedRectangleBorder(
-                borderRadius: AppRadius.mdAll,
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-            ),
-            child: child,
+          onPressed: isLoading ? null : onPressed,
+          style: OutlinedButton.styleFrom(
+            foregroundColor: colors.primary,
+            side: BorderSide(color: colors.primary),
+            shape: const RoundedRectangleBorder(borderRadius: AppRadius.mdAll),
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
           ),
+          child: child,
+        ),
         _ButtonVariant.ghost => TextButton(
-            onPressed: isLoading ? null : onPressed,
-            style: TextButton.styleFrom(
-              foregroundColor: colors.primary,
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
-            ),
-            child: child,
+          onPressed: isLoading ? null : onPressed,
+          style: TextButton.styleFrom(
+            foregroundColor: colors.primary,
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
           ),
+          child: child,
+        ),
       },
     );
   }
@@ -137,9 +130,10 @@ class AppButton extends StatelessWidget {
         height: 20,
         child: CircularProgressIndicator(
           strokeWidth: 2,
-          color: _variant == _ButtonVariant.primary
-              ? colors.onPrimary
-              : colors.primary,
+          color:
+              _variant == _ButtonVariant.primary
+                  ? colors.onPrimary
+                  : colors.primary,
         ),
       );
     }

@@ -29,6 +29,7 @@ dependencies:
 
   # Local database — SQLite via sqflite, no code generation required
   sqflite: ^2.4.2
+  path: ^1.9.1
   path_provider: ^2.1.5
 
   # Crypto — SHA-256 password hashing with random salt

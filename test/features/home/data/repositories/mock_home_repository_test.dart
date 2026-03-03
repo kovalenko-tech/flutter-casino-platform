@@ -41,8 +41,10 @@ void main() {
         final resultDefault = await repo.getGames();
         final resultAll = await repo.getGames(category: GameCategory.all);
 
-        expect(resultDefault.rightValue.length,
-            equals(resultAll.rightValue.length));
+        expect(
+          resultDefault.rightValue.length,
+          equals(resultAll.rightValue.length),
+        );
       });
 
       test('getGames(slots) returns only slot games', () async {

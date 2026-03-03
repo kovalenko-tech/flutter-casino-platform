@@ -22,9 +22,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc({
     required GetBannersUseCase getBanners,
     required GetGamesUseCase getGames,
-  })  : _getBanners = getBanners,
-        _getGames = getGames,
-        super(const HomeLoading()) {
+  }) : _getBanners = getBanners,
+       _getGames = getGames,
+       super(const HomeLoading()) {
     on<LoadHomeData>(_onLoad);
     on<FilterByCategory>(_onFilter);
   }
@@ -44,32 +44,41 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       return;
     }
 
-    emit(HomeLoaded(
-      banners: bannersResult.rightValue,
-      games: gamesResult.rightValue,
-      allGames: gamesResult.rightValue,
-      selectedCategory: GameCategory.all,
-    ));
+    emit(
+      HomeLoaded(
+        banners: bannersResult.rightValue,
+        games: gamesResult.rightValue,
+        allGames: gamesResult.rightValue,
+        selectedCategory: GameCategory.all,
+      ),
+    );
   }
 
-  Future<void> _onFilter(FilterByCategory event, Emitter<HomeState> emit) async {
+  Future<void> _onFilter(
+    FilterByCategory event,
+    Emitter<HomeState> emit,
+  ) async {
     final current = state;
     if (current is! HomeLoaded) return;
 
     if (event.category == GameCategory.all) {
-      emit(current.copyWith(
-        games: current.allGames,
-        selectedCategory: GameCategory.all,
-      ));
+      emit(
+        current.copyWith(
+          games: current.allGames,
+          selectedCategory: GameCategory.all,
+        ),
+      );
       return;
     }
 
     final result = await _getGames(category: event.category);
     if (result.isLeft) return;
 
-    emit(current.copyWith(
-      games: result.rightValue,
-      selectedCategory: event.category,
-    ));
+    emit(
+      current.copyWith(
+        games: result.rightValue,
+        selectedCategory: event.category,
+      ),
+    );
   }
 }

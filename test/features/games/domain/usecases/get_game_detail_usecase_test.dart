@@ -34,8 +34,9 @@ void main() {
 
   group('GetGameDetailUseCase', () {
     test('returns GameDetail on success', () async {
-      when(() => mockRepo.getGameById('book-of-dead'))
-          .thenAnswer((_) async => right(testGame));
+      when(
+        () => mockRepo.getGameById('book-of-dead'),
+      ).thenAnswer((_) async => right(testGame));
 
       final result = await useCase('book-of-dead');
 
@@ -45,8 +46,9 @@ void main() {
     });
 
     test('propagates NotFoundFailure for unknown id', () async {
-      when(() => mockRepo.getGameById('bad-id'))
-          .thenAnswer((_) async => left(const NotFoundFailure('not found')));
+      when(
+        () => mockRepo.getGameById('bad-id'),
+      ).thenAnswer((_) async => left(const NotFoundFailure('not found')));
 
       final result = await useCase('bad-id');
 
@@ -56,8 +58,9 @@ void main() {
     });
 
     test('delegates call to repository with correct id', () async {
-      when(() => mockRepo.getGameById(any()))
-          .thenAnswer((_) async => right(testGame));
+      when(
+        () => mockRepo.getGameById(any()),
+      ).thenAnswer((_) async => right(testGame));
 
       await useCase('book-of-dead');
 
@@ -65,8 +68,9 @@ void main() {
     });
 
     test('delegates exactly one call to repository', () async {
-      when(() => mockRepo.getGameById(any()))
-          .thenAnswer((_) async => right(testGame));
+      when(
+        () => mockRepo.getGameById(any()),
+      ).thenAnswer((_) async => right(testGame));
 
       await useCase('book-of-dead');
 

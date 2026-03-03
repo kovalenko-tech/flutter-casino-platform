@@ -33,20 +33,22 @@ class GameCard extends StatelessWidget {
             CachedNetworkImage(
               imageUrl: game.imageUrl,
               fit: BoxFit.cover,
-              placeholder: (_, __) => Container(
-                color: AppColors.darkCard,
-                child: const Center(
-                  child: SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: CircularProgressIndicator(strokeWidth: 2),
+              placeholder:
+                  (_, __) => Container(
+                    color: AppColors.darkCard,
+                    child: const Center(
+                      child: SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              errorWidget: (_, __, ___) => Container(
-                color: AppColors.darkCard,
-                child: const Icon(Icons.sports_esports_outlined, size: 28),
-              ),
+              errorWidget:
+                  (_, __, ___) => Container(
+                    color: AppColors.darkCard,
+                    child: const Icon(Icons.sports_esports_outlined, size: 28),
+                  ),
             ),
 
             // Bottom gradient + name

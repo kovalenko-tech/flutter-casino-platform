@@ -10,26 +10,26 @@ import 'package:flutter_casino_platform/core/theme/app_typography.dart';
 /// Import this class wherever MaterialApp needs its theme.
 abstract final class AppTheme {
   static ThemeData get dark => _buildTheme(
-        scheme: AppColors.darkScheme,
-        scaffoldBackground: AppColors.darkBackground,
-        textPrimary: AppColors.darkTextPrimary,
-        textSecondary: AppColors.darkTextSecondary,
-        cardColor: AppColors.darkCard,
-        dividerColor: AppColors.darkBorder,
-        brightness: Brightness.dark,
-        systemUiStyle: SystemUiOverlayStyle.light,
-      );
+    scheme: AppColors.darkScheme,
+    scaffoldBackground: AppColors.darkBackground,
+    textPrimary: AppColors.darkTextPrimary,
+    textSecondary: AppColors.darkTextSecondary,
+    cardColor: AppColors.darkCard,
+    dividerColor: AppColors.darkBorder,
+    brightness: Brightness.dark,
+    systemUiStyle: SystemUiOverlayStyle.light,
+  );
 
   static ThemeData get light => _buildTheme(
-        scheme: AppColors.lightScheme,
-        scaffoldBackground: AppColors.lightBackground,
-        textPrimary: AppColors.lightTextPrimary,
-        textSecondary: AppColors.lightTextSecondary,
-        cardColor: AppColors.lightCard,
-        dividerColor: AppColors.lightBorder,
-        brightness: Brightness.light,
-        systemUiStyle: SystemUiOverlayStyle.dark,
-      );
+    scheme: AppColors.lightScheme,
+    scaffoldBackground: AppColors.lightBackground,
+    textPrimary: AppColors.lightTextPrimary,
+    textSecondary: AppColors.lightTextSecondary,
+    cardColor: AppColors.lightCard,
+    dividerColor: AppColors.lightBorder,
+    brightness: Brightness.light,
+    systemUiStyle: SystemUiOverlayStyle.dark,
+  );
 
   // ---------------------------------------------------------------------------
 

@@ -57,16 +57,14 @@ void main() {
     mockGetGames = MockGetGamesUseCase();
 
     when(() => mockGetBanners()).thenAnswer((_) async => right(testBanners));
-    when(() => mockGetGames(category: any(named: 'category')))
-        .thenAnswer((_) async => right(testGames));
+    when(
+      () => mockGetGames(category: any(named: 'category')),
+    ).thenAnswer((_) async => right(testGames));
   });
 
   group('HomeBloc', () {
     test('initial state is HomeLoading', () {
-      final bloc = HomeBloc(
-        getBanners: mockGetBanners,
-        getGames: mockGetGames,
-      );
+      final bloc = HomeBloc(getBanners: mockGetBanners, getGames: mockGetGames);
       expect(bloc.state, equals(const HomeLoading()));
       bloc.close();
     });
@@ -75,15 +73,16 @@ void main() {
       'emits [HomeLoading, HomeLoaded] when LoadHomeData succeeds',
       build: () => HomeBloc(getBanners: mockGetBanners, getGames: mockGetGames),
       act: (bloc) => bloc.add(const LoadHomeData()),
-      expect: () => [
-        const HomeLoading(),
-        HomeLoaded(
-          banners: testBanners,
-          games: testGames,
-          allGames: testGames,
-          selectedCategory: GameCategory.all,
-        ),
-      ],
+      expect:
+          () => [
+            const HomeLoading(),
+            HomeLoaded(
+              banners: testBanners,
+              games: testGames,
+              allGames: testGames,
+              selectedCategory: GameCategory.all,
+            ),
+          ],
     );
 
     blocTest<HomeBloc, HomeState>(
@@ -95,10 +94,7 @@ void main() {
         return HomeBloc(getBanners: mockGetBanners, getGames: mockGetGames);
       },
       act: (bloc) => bloc.add(const LoadHomeData()),
-      expect: () => [
-        const HomeLoading(),
-        isA<HomeError>(),
-      ],
+      expect: () => [const HomeLoading(), isA<HomeError>()],
     );
 
     blocTest<HomeBloc, HomeState>(
@@ -110,77 +106,80 @@ void main() {
         return HomeBloc(getBanners: mockGetBanners, getGames: mockGetGames);
       },
       act: (bloc) => bloc.add(const LoadHomeData()),
-      expect: () => [
-        const HomeLoading(),
-        isA<HomeError>(),
-      ],
+      expect: () => [const HomeLoading(), isA<HomeError>()],
     );
 
     blocTest<HomeBloc, HomeState>(
       'HomeError contains message from failure',
       build: () {
-        when(() => mockGetBanners()).thenAnswer(
-          (_) async => left(const StorageFailure('db unavailable')),
-        );
+        when(
+          () => mockGetBanners(),
+        ).thenAnswer((_) async => left(const StorageFailure('db unavailable')));
         return HomeBloc(getBanners: mockGetBanners, getGames: mockGetGames);
       },
       act: (bloc) => bloc.add(const LoadHomeData()),
-      expect: () => [
-        const HomeLoading(),
-        isA<HomeError>().having(
-          (s) => s.message,
-          'message',
-          equals('db unavailable'),
-        ),
-      ],
+      expect:
+          () => [
+            const HomeLoading(),
+            isA<HomeError>().having(
+              (s) => s.message,
+              'message',
+              equals('db unavailable'),
+            ),
+          ],
     );
 
     blocTest<HomeBloc, HomeState>(
       'FilterByCategory calls getGames with new category and updates state',
       build: () {
-        when(() => mockGetGames(category: GameCategory.slots))
-            .thenAnswer((_) async => right(slotGames));
+        when(
+          () => mockGetGames(category: GameCategory.slots),
+        ).thenAnswer((_) async => right(slotGames));
         return HomeBloc(getBanners: mockGetBanners, getGames: mockGetGames);
       },
-      seed: () => HomeLoaded(
-        banners: testBanners,
-        games: testGames,
-        allGames: testGames,
-        selectedCategory: GameCategory.all,
-      ),
+      seed:
+          () => HomeLoaded(
+            banners: testBanners,
+            games: testGames,
+            allGames: testGames,
+            selectedCategory: GameCategory.all,
+          ),
       act: (bloc) => bloc.add(const FilterByCategory(GameCategory.slots)),
-      expect: () => [
-        isA<HomeLoaded>().having(
-          (s) => s.selectedCategory,
-          'selectedCategory',
-          GameCategory.slots,
-        ),
-      ],
+      expect:
+          () => [
+            isA<HomeLoaded>().having(
+              (s) => s.selectedCategory,
+              'selectedCategory',
+              GameCategory.slots,
+            ),
+          ],
     );
 
     blocTest<HomeBloc, HomeState>(
       'FilterByCategory(all) restores full game list without re-fetching',
       build: () => HomeBloc(getBanners: mockGetBanners, getGames: mockGetGames),
-      seed: () => HomeLoaded(
-        banners: testBanners,
-        games: slotGames,
-        allGames: testGames,
-        selectedCategory: GameCategory.slots,
-      ),
+      seed:
+          () => HomeLoaded(
+            banners: testBanners,
+            games: slotGames,
+            allGames: testGames,
+            selectedCategory: GameCategory.slots,
+          ),
       act: (bloc) => bloc.add(const FilterByCategory(GameCategory.all)),
-      expect: () => [
-        isA<HomeLoaded>()
-            .having(
-              (s) => s.selectedCategory,
-              'selectedCategory',
-              GameCategory.all,
-            )
-            .having(
-              (s) => s.games.length,
-              'games count',
-              equals(testGames.length),
-            ),
-      ],
+      expect:
+          () => [
+            isA<HomeLoaded>()
+                .having(
+                  (s) => s.selectedCategory,
+                  'selectedCategory',
+                  GameCategory.all,
+                )
+                .having(
+                  (s) => s.games.length,
+                  'games count',
+                  equals(testGames.length),
+                ),
+          ],
     );
 
     blocTest<HomeBloc, HomeState>(

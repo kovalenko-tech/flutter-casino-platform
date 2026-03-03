@@ -33,11 +33,14 @@ class _GamesScreenState extends State<GamesScreen> {
         _filtered = MockGames.summaries;
       } else {
         final q = query.toLowerCase();
-        _filtered = MockGames.summaries
-            .where((g) =>
-                g.name.toLowerCase().contains(q) ||
-                g.provider.toLowerCase().contains(q))
-            .toList();
+        _filtered =
+            MockGames.summaries
+                .where(
+                  (g) =>
+                      g.name.toLowerCase().contains(q) ||
+                      g.provider.toLowerCase().contains(q),
+                )
+                .toList();
       }
     });
   }
@@ -77,15 +80,16 @@ class _GamesScreenState extends State<GamesScreen> {
                   decoration: InputDecoration(
                     hintText: l10n.gamesSearchHint,
                     prefixIcon: const Icon(Icons.search),
-                    suffixIcon: _searchController.text.isNotEmpty
-                        ? IconButton(
-                            icon: const Icon(Icons.clear),
-                            onPressed: () {
-                              _searchController.clear();
-                              _onSearch('');
-                            },
-                          )
-                        : null,
+                    suffixIcon:
+                        _searchController.text.isNotEmpty
+                            ? IconButton(
+                              icon: const Icon(Icons.clear),
+                              onPressed: () {
+                                _searchController.clear();
+                                _onSearch('');
+                              },
+                            )
+                            : null,
                   ),
                 ),
               ),

@@ -30,8 +30,7 @@ void main() {
     mockAuthRepository = MockAuthRepository();
   });
 
-  ProfileBloc buildBloc() =>
-      ProfileBloc(authRepository: mockAuthRepository);
+  ProfileBloc buildBloc() => ProfileBloc(authRepository: mockAuthRepository);
 
   group('ProfileBloc', () {
     test('initial state is ProfileLoading', () {
@@ -44,62 +43,57 @@ void main() {
       blocTest<ProfileBloc, ProfileState>(
         'emits [ProfileLoading, ProfileLoaded] when user is found',
         build: () {
-          when(() => mockAuthRepository.getCurrentUser())
-              .thenAnswer((_) async => right(testUser));
+          when(
+            () => mockAuthRepository.getCurrentUser(),
+          ).thenAnswer((_) async => right(testUser));
           return buildBloc();
         },
         act: (bloc) => bloc.add(const LoadProfile()),
-        expect: () => [
-          isA<ProfileLoading>(),
-          ProfileLoaded(testProfile),
-        ],
+        expect: () => [isA<ProfileLoading>(), ProfileLoaded(testProfile)],
       );
 
       blocTest<ProfileBloc, ProfileState>(
         'ProfileLoaded contains profile with correct name',
         build: () {
-          when(() => mockAuthRepository.getCurrentUser())
-              .thenAnswer((_) async => right(testUser));
+          when(
+            () => mockAuthRepository.getCurrentUser(),
+          ).thenAnswer((_) async => right(testUser));
           return buildBloc();
         },
         act: (bloc) => bloc.add(const LoadProfile()),
-        expect: () => [
-          isA<ProfileLoading>(),
-          isA<ProfileLoaded>().having(
-            (s) => s.profile.name,
-            'profile.name',
-            equals('Alice Smith'),
-          ),
-        ],
+        expect:
+            () => [
+              isA<ProfileLoading>(),
+              isA<ProfileLoaded>().having(
+                (s) => s.profile.name,
+                'profile.name',
+                equals('Alice Smith'),
+              ),
+            ],
       );
 
       blocTest<ProfileBloc, ProfileState>(
         'emits [ProfileLoading, ProfileError] when user is null',
         build: () {
-          when(() => mockAuthRepository.getCurrentUser())
-              .thenAnswer((_) async => right(null));
+          when(
+            () => mockAuthRepository.getCurrentUser(),
+          ).thenAnswer((_) async => right(null));
           return buildBloc();
         },
         act: (bloc) => bloc.add(const LoadProfile()),
-        expect: () => [
-          isA<ProfileLoading>(),
-          isA<ProfileError>(),
-        ],
+        expect: () => [isA<ProfileLoading>(), isA<ProfileError>()],
       );
 
       blocTest<ProfileBloc, ProfileState>(
         'emits [ProfileLoading, ProfileError] on StorageFailure',
         build: () {
-          when(() => mockAuthRepository.getCurrentUser()).thenAnswer(
-            (_) async => left(const StorageFailure('db error')),
-          );
+          when(
+            () => mockAuthRepository.getCurrentUser(),
+          ).thenAnswer((_) async => left(const StorageFailure('db error')));
           return buildBloc();
         },
         act: (bloc) => bloc.add(const LoadProfile()),
-        expect: () => [
-          isA<ProfileLoading>(),
-          isA<ProfileError>(),
-        ],
+        expect: () => [isA<ProfileLoading>(), isA<ProfileError>()],
       );
     });
 
@@ -107,22 +101,21 @@ void main() {
       blocTest<ProfileBloc, ProfileState>(
         'emits [ProfileLoading, ProfileLoggedOut] after logout',
         build: () {
-          when(() => mockAuthRepository.deleteAll())
-              .thenAnswer((_) async => right(null));
+          when(
+            () => mockAuthRepository.deleteAll(),
+          ).thenAnswer((_) async => right(null));
           return buildBloc();
         },
         act: (bloc) => bloc.add(const LogoutRequested()),
-        expect: () => [
-          isA<ProfileLoading>(),
-          isA<ProfileLoggedOut>(),
-        ],
+        expect: () => [isA<ProfileLoading>(), isA<ProfileLoggedOut>()],
       );
 
       blocTest<ProfileBloc, ProfileState>(
         'calls repository.deleteAll() on logout',
         build: () {
-          when(() => mockAuthRepository.deleteAll())
-              .thenAnswer((_) async => right(null));
+          when(
+            () => mockAuthRepository.deleteAll(),
+          ).thenAnswer((_) async => right(null));
           return buildBloc();
         },
         act: (bloc) => bloc.add(const LogoutRequested()),

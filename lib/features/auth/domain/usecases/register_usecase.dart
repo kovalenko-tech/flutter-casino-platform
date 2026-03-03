@@ -27,7 +27,9 @@ class RegisterUseCase {
     // Ensure the email is not already taken.
     final existing = await _repository.findByEmail(email);
     if (existing.isRight) {
-      return left(const AuthFailure('An account with that email already exists.'));
+      return left(
+        const AuthFailure('An account with that email already exists.'),
+      );
     }
 
     final salt = generateSalt();
