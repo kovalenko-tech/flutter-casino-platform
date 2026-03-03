@@ -20,11 +20,11 @@ class Profile extends Equatable {
   });
 
   factory Profile.fromUser(User user) => Profile(
-    name: user.name,
-    email: user.email,
-    memberSince: user.memberSince,
-    accountId: user.accountId,
-  );
+        name: user.name,
+        email: user.email,
+        memberSince: user.memberSince,
+        accountId: user.accountId,
+      );
 
   /// Returns the user's initials (up to two characters) for the avatar.
   String get initials {

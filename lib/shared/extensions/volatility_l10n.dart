@@ -5,8 +5,8 @@ import 'package:flutter_casino_platform/features/games/domain/entities/game_deta
 /// to localized display labels.
 extension VolatilityL10n on Volatility {
   String label(AppLocalizations l10n) => switch (this) {
-    Volatility.low => l10n.volatilityLow,
-    Volatility.medium => l10n.volatilityMedium,
-    Volatility.high => l10n.volatilityHigh,
-  };
+        Volatility.low => l10n.volatilityLow,
+        Volatility.medium => l10n.volatilityMedium,
+        Volatility.high => l10n.volatilityHigh,
+      };
 }

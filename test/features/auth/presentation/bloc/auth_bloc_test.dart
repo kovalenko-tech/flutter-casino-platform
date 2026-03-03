@@ -48,10 +48,10 @@ void main() {
   });
 
   AuthBloc buildBloc() => AuthBloc(
-    loginUseCase: mockLoginUseCase,
-    registerUseCase: mockRegisterUseCase,
-    authRepository: mockAuthRepository,
-  );
+        loginUseCase: mockLoginUseCase,
+        registerUseCase: mockRegisterUseCase,
+        authRepository: mockAuthRepository,
+      );
 
   group('AuthBloc', () {
     test('initial state is AuthInitial', () {
@@ -96,13 +96,12 @@ void main() {
           ).thenAnswer((_) async => right(testUser));
           return buildBloc();
         },
-        act:
-            (bloc) => bloc.add(
-              const LoginRequested(
-                email: 'alice@example.com',
-                password: 'secret',
-              ),
-            ),
+        act: (bloc) => bloc.add(
+          const LoginRequested(
+            email: 'alice@example.com',
+            password: 'secret',
+          ),
+        ),
         expect: () => [isA<AuthLoading>(), Authenticated(testUser)],
       );
 
@@ -119,22 +118,20 @@ void main() {
           );
           return buildBloc();
         },
-        act:
-            (bloc) => bloc.add(
-              const LoginRequested(
-                email: 'wrong@example.com',
-                password: 'badpass',
-              ),
-            ),
-        expect:
-            () => [
-              isA<AuthLoading>(),
-              isA<AuthError>().having(
-                (s) => s.message,
-                'message',
-                equals('Invalid email or password.'),
-              ),
-            ],
+        act: (bloc) => bloc.add(
+          const LoginRequested(
+            email: 'wrong@example.com',
+            password: 'badpass',
+          ),
+        ),
+        expect: () => [
+          isA<AuthLoading>(),
+          isA<AuthError>().having(
+            (s) => s.message,
+            'message',
+            equals('Invalid email or password.'),
+          ),
+        ],
       );
     });
 
@@ -151,14 +148,13 @@ void main() {
           ).thenAnswer((_) async => right(testUser));
           return buildBloc();
         },
-        act:
-            (bloc) => bloc.add(
-              const RegisterRequested(
-                name: 'Alice',
-                email: 'alice@example.com',
-                password: 'securePass1',
-              ),
-            ),
+        act: (bloc) => bloc.add(
+          const RegisterRequested(
+            name: 'Alice',
+            email: 'alice@example.com',
+            password: 'securePass1',
+          ),
+        ),
         expect: () => [isA<AuthLoading>(), Authenticated(testUser)],
       );
 
@@ -178,23 +174,21 @@ void main() {
           );
           return buildBloc();
         },
-        act:
-            (bloc) => bloc.add(
-              const RegisterRequested(
-                name: 'Dup',
-                email: 'dup@example.com',
-                password: 'pass123',
-              ),
-            ),
-        expect:
-            () => [
-              isA<AuthLoading>(),
-              isA<AuthError>().having(
-                (s) => s.message,
-                'message',
-                contains('already exists'),
-              ),
-            ],
+        act: (bloc) => bloc.add(
+          const RegisterRequested(
+            name: 'Dup',
+            email: 'dup@example.com',
+            password: 'pass123',
+          ),
+        ),
+        expect: () => [
+          isA<AuthLoading>(),
+          isA<AuthError>().having(
+            (s) => s.message,
+            'message',
+            contains('already exists'),
+          ),
+        ],
       );
     });
 

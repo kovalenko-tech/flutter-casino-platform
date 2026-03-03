@@ -71,15 +71,14 @@ void main() {
         return GameDetailBloc(getGameDetail: mockUseCase);
       },
       act: (bloc) => bloc.add(const LoadGameDetail('xyz')),
-      expect:
-          () => [
-            isA<GameDetailLoading>(),
-            isA<GameDetailError>().having(
-              (s) => s.message,
-              'message',
-              equals('Game not found: xyz'),
-            ),
-          ],
+      expect: () => [
+        isA<GameDetailLoading>(),
+        isA<GameDetailError>().having(
+          (s) => s.message,
+          'message',
+          equals('Game not found: xyz'),
+        ),
+      ],
     );
 
     blocTest<GameDetailBloc, GameDetailState>(
@@ -89,15 +88,14 @@ void main() {
         return GameDetailBloc(getGameDetail: mockUseCase);
       },
       act: (bloc) => bloc.add(const LoadGameDetail('book-of-dead')),
-      expect:
-          () => [
-            isA<GameDetailLoading>(),
-            isA<GameDetailLoaded>().having(
-              (s) => s.game,
-              'game',
-              equals(testGame),
-            ),
-          ],
+      expect: () => [
+        isA<GameDetailLoading>(),
+        isA<GameDetailLoaded>().having(
+          (s) => s.game,
+          'game',
+          equals(testGame),
+        ),
+      ],
     );
 
     blocTest<GameDetailBloc, GameDetailState>(

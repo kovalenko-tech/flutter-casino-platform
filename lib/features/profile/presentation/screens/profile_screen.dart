@@ -167,8 +167,8 @@ class _LoadedView extends StatelessWidget {
           AppButton.secondary(
             label: l10n.profileSignOut,
             prefixIcon: Icons.logout,
-            onPressed:
-                () => context.read<ProfileBloc>().add(const LogoutRequested()),
+            onPressed: () =>
+                context.read<ProfileBloc>().add(const LogoutRequested()),
           ),
           const SizedBox(height: AppSpacing.xxl),
         ],
@@ -176,8 +176,7 @@ class _LoadedView extends StatelessWidget {
     );
   }
 
-  String _formatDate(DateTime date) =>
-      '${date.day.toString().padLeft(2, '0')}/'
+  String _formatDate(DateTime date) => '${date.day.toString().padLeft(2, '0')}/'
       '${date.month.toString().padLeft(2, '0')}/'
       '${date.year}';
 
@@ -198,34 +197,33 @@ class _LoadedView extends StatelessWidget {
         borderRadius: AppRadius.lgAll,
       ),
       child: Column(
-        children:
-            items.asMap().entries.map((entry) {
-              final i = entry.key;
-              final (icon, label) = entry.value;
-              return Column(
-                children: [
-                  ListTile(
-                    leading: Icon(icon, color: colors.onSurface, size: 22),
-                    title: Text(
-                      label,
-                      style: AppTypography.bodyMedium(colors.onSurface),
-                    ),
-                    trailing: Icon(
-                      Icons.chevron_right,
-                      color: textSecondary,
-                      size: 20,
-                    ),
-                    onTap: () {},
-                  ),
-                  if (i < items.length - 1)
-                    Divider(
-                      height: 1,
-                      indent: AppSpacing.lg + 22 + AppSpacing.md,
-                      color: colors.outline.withOpacity(0.5),
-                    ),
-                ],
-              );
-            }).toList(),
+        children: items.asMap().entries.map((entry) {
+          final i = entry.key;
+          final (icon, label) = entry.value;
+          return Column(
+            children: [
+              ListTile(
+                leading: Icon(icon, color: colors.onSurface, size: 22),
+                title: Text(
+                  label,
+                  style: AppTypography.bodyMedium(colors.onSurface),
+                ),
+                trailing: Icon(
+                  Icons.chevron_right,
+                  color: textSecondary,
+                  size: 20,
+                ),
+                onTap: () {},
+              ),
+              if (i < items.length - 1)
+                Divider(
+                  height: 1,
+                  indent: AppSpacing.lg + 22 + AppSpacing.md,
+                  color: colors.outline.withOpacity(0.5),
+                ),
+            ],
+          );
+        }).toList(),
       ),
     );
   }
@@ -318,8 +316,8 @@ class _ErrorView extends StatelessWidget {
           AppButton.secondary(
             label: l10n.retry,
             isFullWidth: false,
-            onPressed:
-                () => context.read<ProfileBloc>().add(const LoadProfile()),
+            onPressed: () =>
+                context.read<ProfileBloc>().add(const LoadProfile()),
           ),
         ],
       ),

@@ -61,15 +61,14 @@ void main() {
           return buildBloc();
         },
         act: (bloc) => bloc.add(const LoadProfile()),
-        expect:
-            () => [
-              isA<ProfileLoading>(),
-              isA<ProfileLoaded>().having(
-                (s) => s.profile.name,
-                'profile.name',
-                equals('Alice Smith'),
-              ),
-            ],
+        expect: () => [
+          isA<ProfileLoading>(),
+          isA<ProfileLoaded>().having(
+            (s) => s.profile.name,
+            'profile.name',
+            equals('Alice Smith'),
+          ),
+        ],
       );
 
       blocTest<ProfileBloc, ProfileState>(

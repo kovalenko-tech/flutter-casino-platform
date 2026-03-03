@@ -38,26 +38,26 @@ class GameDetail extends Equatable {
 
   /// Downcasts to a [GameSummary] for use in list/grid widgets.
   GameSummary toSummary() => GameSummary(
-    id: id,
-    name: name,
-    category: category,
-    provider: provider,
-    imageUrl: imageUrl,
-    isNew: isNew,
-    isHot: isHot,
-  );
+        id: id,
+        name: name,
+        category: category,
+        provider: provider,
+        imageUrl: imageUrl,
+        isNew: isNew,
+        isHot: isHot,
+      );
 
   @override
   List<Object?> get props => [
-    id,
-    name,
-    category,
-    provider,
-    description,
-    rtp,
-    volatility,
-    imageUrl,
-    isNew,
-    isHot,
-  ];
+        id,
+        name,
+        category,
+        provider,
+        description,
+        rtp,
+        volatility,
+        imageUrl,
+        isNew,
+        isHot,
+      ];
 }

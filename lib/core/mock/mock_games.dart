@@ -248,7 +248,7 @@ abstract final class MockGames {
 
   /// Finds a game by ID. Throws [StateError] if not found (dev-time safety).
   static GameDetail findById(String id) => all.firstWhere(
-    (g) => g.id == id,
-    orElse: () => throw StateError('Game not found: $id'),
-  );
+        (g) => g.id == id,
+        orElse: () => throw StateError('Game not found: $id'),
+      );
 }

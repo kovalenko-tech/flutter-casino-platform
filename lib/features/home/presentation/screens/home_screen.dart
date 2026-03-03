@@ -107,8 +107,7 @@ class _HomeView extends StatelessWidget {
                         ),
                         const SizedBox(height: AppSpacing.lg),
                         TextButton(
-                          onPressed:
-                              () => context.read<HomeBloc>().add(
+                          onPressed: () => context.read<HomeBloc>().add(
                                 const LoadHomeData(),
                               ),
                           child: Text(l10n.retry),

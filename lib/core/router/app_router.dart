@@ -79,8 +79,7 @@ Future<String?> _authGuard(BuildContext context, GoRouterState state) async {
   final result = await authRepo.getCurrentUser();
   final hasSession = result.isRight && result.rightValue != null;
 
-  final isAuthRoute =
-      state.matchedLocation == AppConstants.routeLogin ||
+  final isAuthRoute = state.matchedLocation == AppConstants.routeLogin ||
       state.matchedLocation == AppConstants.routeRegister;
 
   if (!hasSession && !isAuthRoute) {

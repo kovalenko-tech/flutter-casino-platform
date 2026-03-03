@@ -56,10 +56,9 @@ class _GameDetailView extends StatelessWidget {
         SliverToBoxAdapter(
           child: Padding(
             padding: EdgeInsets.all(AppSpacing.lg),
-            child:
-                ShimmerLoader.card == ShimmerLoader.card
-                    ? SizedBox(height: 200)
-                    : SizedBox(),
+            child: ShimmerLoader.card == ShimmerLoader.card
+                ? SizedBox(height: 200)
+                : SizedBox(),
           ),
         ),
       ],
@@ -90,14 +89,13 @@ class _GameDetailView extends StatelessWidget {
                   imageUrl: game.imageUrl,
                   fit: BoxFit.cover,
                   placeholder: (_, __) => Container(color: AppColors.darkCard),
-                  errorWidget:
-                      (_, __, ___) => Container(
-                        color: AppColors.darkCard,
-                        child: const Icon(
-                          Icons.sports_esports_outlined,
-                          size: 48,
-                        ),
-                      ),
+                  errorWidget: (_, __, ___) => Container(
+                    color: AppColors.darkCard,
+                    child: const Icon(
+                      Icons.sports_esports_outlined,
+                      size: 48,
+                    ),
+                  ),
                 ),
                 // Bottom gradient
                 const DecoratedBox(
@@ -234,10 +232,9 @@ class _GameDetailView extends StatelessWidget {
               vertical: AppSpacing.xs,
             ),
             decoration: BoxDecoration(
-              color:
-                  game.isHot
-                      ? colors.primary.withOpacity(0.15)
-                      : colors.secondary.withOpacity(0.15),
+              color: game.isHot
+                  ? colors.primary.withOpacity(0.15)
+                  : colors.secondary.withOpacity(0.15),
               borderRadius: AppRadius.smAll,
             ),
             child: Row(
@@ -345,10 +342,10 @@ class _VolatilityChip extends StatelessWidget {
   });
 
   Color get _color => switch (volatility) {
-    Volatility.low => AppColors.darkSuccess,
-    Volatility.medium => const Color(0xFFF59E0B),
-    Volatility.high => AppColors.darkError,
-  };
+        Volatility.low => AppColors.darkSuccess,
+        Volatility.medium => const Color(0xFFF59E0B),
+        Volatility.high => AppColors.darkError,
+      };
 
   @override
   Widget build(BuildContext context) {

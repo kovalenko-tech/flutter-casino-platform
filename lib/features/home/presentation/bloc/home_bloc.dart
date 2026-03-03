@@ -22,9 +22,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc({
     required GetBannersUseCase getBanners,
     required GetGamesUseCase getGames,
-  }) : _getBanners = getBanners,
-       _getGames = getGames,
-       super(const HomeLoading()) {
+  })  : _getBanners = getBanners,
+        _getGames = getGames,
+        super(const HomeLoading()) {
     on<LoadHomeData>(_onLoad);
     on<FilterByCategory>(_onFilter);
   }

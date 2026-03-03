@@ -120,12 +120,9 @@ class _NavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color =
-        isActive
-            ? colors.primary
-            : (isDark
-                ? AppColors.darkTextSecondary
-                : AppColors.lightTextSecondary);
+    final color = isActive
+        ? colors.primary
+        : (isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,

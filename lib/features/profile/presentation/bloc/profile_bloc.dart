@@ -13,8 +13,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final AuthRepository _authRepository;
 
   ProfileBloc({required AuthRepository authRepository})
-    : _authRepository = authRepository,
-      super(ProfileLoading()) {
+      : _authRepository = authRepository,
+        super(ProfileLoading()) {
     on<LoadProfile>(_onLoad);
     on<LogoutRequested>(_onLogout);
   }

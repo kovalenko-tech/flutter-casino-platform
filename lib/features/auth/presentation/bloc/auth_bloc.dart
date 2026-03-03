@@ -23,10 +23,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required LoginUseCase loginUseCase,
     required RegisterUseCase registerUseCase,
     required AuthRepository authRepository,
-  }) : _loginUseCase = loginUseCase,
-       _registerUseCase = registerUseCase,
-       _authRepository = authRepository,
-       super(AuthInitial()) {
+  })  : _loginUseCase = loginUseCase,
+        _registerUseCase = registerUseCase,
+        _authRepository = authRepository,
+        super(AuthInitial()) {
     on<CheckAuthRequested>(_onCheckAuth);
     on<LoginRequested>(_onLogin);
     on<RegisterRequested>(_onRegister);

@@ -19,28 +19,30 @@ class ShimmerLoader extends StatelessWidget {
   const ShimmerLoader({super.key, required this.child});
 
   factory ShimmerLoader.grid({int itemCount = 8}) => ShimmerLoader(
-    child: GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      padding: EdgeInsets.zero,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 4,
-        mainAxisSpacing: AppSpacing.sm,
-        crossAxisSpacing: AppSpacing.sm,
-        childAspectRatio: 0.75,
-      ),
-      itemCount: itemCount,
-      itemBuilder: (_, __) => const _ShimmerBox(borderRadius: AppRadius.mdAll),
-    ),
-  );
+        child: GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          padding: EdgeInsets.zero,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 4,
+            mainAxisSpacing: AppSpacing.sm,
+            crossAxisSpacing: AppSpacing.sm,
+            childAspectRatio: 0.75,
+          ),
+          itemCount: itemCount,
+          itemBuilder: (_, __) =>
+              const _ShimmerBox(borderRadius: AppRadius.mdAll),
+        ),
+      );
 
   factory ShimmerLoader.banner() => const ShimmerLoader(
-    child: _ShimmerBox(height: 200, borderRadius: AppRadius.lgAll),
-  );
+        child: _ShimmerBox(height: 200, borderRadius: AppRadius.lgAll),
+      );
 
   factory ShimmerLoader.card({double? height}) => ShimmerLoader(
-    child: _ShimmerBox(height: height ?? 100, borderRadius: AppRadius.lgAll),
-  );
+        child:
+            _ShimmerBox(height: height ?? 100, borderRadius: AppRadius.lgAll),
+      );
 
   @override
   Widget build(BuildContext context) {

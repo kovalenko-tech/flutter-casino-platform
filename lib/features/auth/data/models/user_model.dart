@@ -35,38 +35,38 @@ class UserModel {
   // ── SQLite serialization ──────────────────────────────────────────────────
 
   Map<String, Object?> toMap() => {
-    if (id != null) 'id': id,
-    'uid': uid,
-    'name': name,
-    'email': email,
-    'password_hash': passwordHash,
-    'salt': salt,
-    'member_since': memberSince.millisecondsSinceEpoch,
-    'account_id': accountId,
-  };
+        if (id != null) 'id': id,
+        'uid': uid,
+        'name': name,
+        'email': email,
+        'password_hash': passwordHash,
+        'salt': salt,
+        'member_since': memberSince.millisecondsSinceEpoch,
+        'account_id': accountId,
+      };
 
   factory UserModel.fromMap(Map<String, Object?> map) => UserModel(
-    id: map['id'] as int?,
-    uid: map['uid'] as String,
-    name: map['name'] as String,
-    email: map['email'] as String,
-    passwordHash: map['password_hash'] as String,
-    salt: map['salt'] as String,
-    memberSince: DateTime.fromMillisecondsSinceEpoch(
-      map['member_since'] as int,
-    ),
-    accountId: map['account_id'] as String,
-  );
+        id: map['id'] as int?,
+        uid: map['uid'] as String,
+        name: map['name'] as String,
+        email: map['email'] as String,
+        passwordHash: map['password_hash'] as String,
+        salt: map['salt'] as String,
+        memberSince: DateTime.fromMillisecondsSinceEpoch(
+          map['member_since'] as int,
+        ),
+        accountId: map['account_id'] as String,
+      );
 
   // ── Domain mappers ────────────────────────────────────────────────────────
 
   User toDomain() => User(
-    uid: uid,
-    name: name,
-    email: email,
-    memberSince: memberSince,
-    accountId: accountId,
-  );
+        uid: uid,
+        name: name,
+        email: email,
+        memberSince: memberSince,
+        accountId: accountId,
+      );
 
   static UserModel fromDomain(User user, String passwordHash, String salt) =>
       UserModel(

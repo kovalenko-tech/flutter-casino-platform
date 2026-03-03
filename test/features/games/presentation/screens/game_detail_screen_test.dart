@@ -33,9 +33,8 @@ Widget _buildTestApp({required String gameId}) {
     routes: [
       GoRoute(
         path: '/games/:id',
-        builder:
-            (context, state) =>
-                GameDetailScreen(gameId: state.pathParameters['id'] ?? gameId),
+        builder: (context, state) =>
+            GameDetailScreen(gameId: state.pathParameters['id'] ?? gameId),
       ),
     ],
   );

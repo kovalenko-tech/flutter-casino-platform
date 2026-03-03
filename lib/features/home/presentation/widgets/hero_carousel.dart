@@ -100,11 +100,10 @@ class _BannerSlide extends StatelessWidget {
               imageUrl: banner.imageUrl,
               fit: BoxFit.cover,
               placeholder: (_, __) => Container(color: AppColors.darkCard),
-              errorWidget:
-                  (_, __, ___) => Container(
-                    color: AppColors.darkCard,
-                    child: const Icon(Icons.image_not_supported_outlined),
-                  ),
+              errorWidget: (_, __, ___) => Container(
+                color: AppColors.darkCard,
+                child: const Icon(Icons.image_not_supported_outlined),
+              ),
             ),
 
             // Gradient overlay

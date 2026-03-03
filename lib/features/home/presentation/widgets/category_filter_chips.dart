@@ -41,10 +41,9 @@ class CategoryFilterChips extends StatelessWidget {
                 vertical: AppSpacing.xs,
               ),
               decoration: BoxDecoration(
-                color:
-                    isSelected
-                        ? colors.primary
-                        : colors.surfaceContainerHighest,
+                color: isSelected
+                    ? colors.primary
+                    : colors.surfaceContainerHighest,
                 borderRadius: const BorderRadius.all(Radius.circular(999)),
                 border: Border.all(
                   color: isSelected ? colors.primary : colors.outline,
