@@ -1,22 +1,9 @@
-/// Promotional banner data for the home screen hero carousel.
+import 'package:flutter_casino_platform/features/home/domain/entities/promo_banner.dart';
+
+/// Static promotional banner data for the home screen hero carousel.
 ///
 /// In production these would be fetched from a CMS and cached locally.
-class PromoBanner {
-  final String id;
-  final String title;
-  final String subtitle;
-  final String ctaLabel;
-  final String imageUrl;
-
-  const PromoBanner({
-    required this.id,
-    required this.title,
-    required this.subtitle,
-    required this.ctaLabel,
-    required this.imageUrl,
-  });
-}
-
+/// All fields map directly to the [PromoBanner] domain entity.
 abstract final class MockBanners {
   static const List<PromoBanner> all = [
     PromoBanner(

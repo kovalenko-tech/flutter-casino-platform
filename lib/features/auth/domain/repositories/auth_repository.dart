@@ -1,21 +1,6 @@
+import 'package:flutter_casino_platform/core/errors/failures.dart';
+import 'package:flutter_casino_platform/core/types/either.dart';
 import 'package:flutter_casino_platform/features/auth/domain/entities/user.dart';
-import 'package:flutter_casino_platform/features/core/errors/failures.dart';
-
-// Simple Either-like wrapper — avoids pulling in dartz for this project.
-typedef Either<L, R> = ({L? left, R? right});
-
-extension EitherX<L, R> on Either<L, R> {
-  bool get isLeft => left != null;
-  bool get isRight => right != null;
-  L get leftValue => left!;
-  R get rightValue => right!;
-}
-
-/// Creates a successful Either value.
-Either<L, R> right<L, R>(R value) => (left: null, right: value);
-
-/// Creates a failure Either value.
-Either<L, R> left<L, R>(L value) => (left: value, right: null);
 
 /// Abstract contract for all authentication data operations.
 ///

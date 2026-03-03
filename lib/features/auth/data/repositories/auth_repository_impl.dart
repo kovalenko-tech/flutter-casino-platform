@@ -1,6 +1,6 @@
 import 'package:flutter_casino_platform/features/auth/domain/entities/user.dart';
 import 'package:flutter_casino_platform/features/auth/domain/repositories/auth_repository.dart';
-import 'package:flutter_casino_platform/features/core/errors/failures.dart';
+import 'package:flutter_casino_platform/core/errors/failures.dart';
 import 'package:flutter_casino_platform/features/auth/data/datasources/auth_local_datasource.dart';
 import 'package:flutter_casino_platform/features/auth/data/models/user_model.dart';
 
