@@ -1,0 +1,71 @@
+# ─── Dart / Flutter ───────────────────────────────────────────────────────────
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+pubspec.lock          # keep for apps (remove this line if you want to track it)
+
+# Build output
+build/
+
+# Generated files — do NOT commit; regenerate with `dart run build_runner build`
+*.g.dart
+*.freezed.dart
+*.isar.dart
+
+# ─── IDE ──────────────────────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.iml
+
+# ─── macOS ────────────────────────────────────────────────────────────────────
+.DS_Store
+*.dSYM/
+
+# ─── Android ──────────────────────────────────────────────────────────────────
+**/android/**/gradle-wrapper.jar
+**/android/.gradle
+**/android/captures/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/local.properties
+**/android/**/GeneratedPluginRegistrant.java
+**/android/key.properties
+*.keystore
+*.jks
+
+# ─── iOS ──────────────────────────────────────────────────────────────────────
+**/ios/**/*.mode1v3
+**/ios/**/*.mode2v3
+**/ios/**/*.moved-aside
+**/ios/**/*.pbxuser
+**/ios/**/*.perspectivev3
+**/ios/**/DerivedData/
+**/ios/**/*.hmap
+**/ios/**/*.ipa
+**/ios/**/*.xcscmblueprint
+**/ios/**/*.xccheckout
+**/ios/Flutter/App.framework
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/ephemeral/
+**/ios/Flutter/app.flx
+**/ios/Flutter/app.zip
+**/ios/Flutter/flutter_assets/
+**/ios/ServiceDefinitions.json
+**/ios/Runner/GeneratedPluginRegistrant.*
+Pods/
+
+# ─── Isar ─────────────────────────────────────────────────────────────────────
+# Local database files (on-device only, never committed)
+*.isar
+*.isar.lock
+
+# ─── Secrets / environment ────────────────────────────────────────────────────
+.env
+.env.*
+secrets.dart
+
+# ─── Coverage ─────────────────────────────────────────────────────────────────
+coverage/
