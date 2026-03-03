@@ -12,12 +12,14 @@ import 'package:flutter_casino_platform/shared/widgets/app_button.dart';
 import 'package:flutter_casino_platform/shared/widgets/shimmer_loader.dart';
 import 'package:flutter_casino_platform/features/profile/domain/entities/profile.dart';
 import 'package:flutter_casino_platform/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:flutter_casino_platform/core/l10n/l10n_extension.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return BlocProvider(
       create: (_) => sl<ProfileBloc>()..add(const LoadProfile()),
       child: const _ProfileView(),
@@ -39,7 +41,7 @@ class _ProfileView extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text('Profile'),
+            title: Text(l10n.profileTitle),
             actions: [
               if (state is ProfileLoaded)
                 IconButton(
@@ -128,7 +130,7 @@ class _LoadedView extends StatelessWidget {
             children: [
               Expanded(
                 child: _StatCard(
-                  label: 'Member Since',
+                  label: l10n.profileMemberSince,
                   value: _formatDate(profile.memberSince),
                   icon: Icons.calendar_month_outlined,
                   colors: colors,
@@ -138,7 +140,7 @@ class _LoadedView extends StatelessWidget {
               const SizedBox(width: AppSpacing.md),
               Expanded(
                 child: _StatCard(
-                  label: 'Account ID',
+                  label: l10n.profileAccountId,
                   value: profile.accountId,
                   icon: Icons.badge_outlined,
                   colors: colors,
@@ -151,7 +153,7 @@ class _LoadedView extends StatelessWidget {
 
           // ── Settings ─────────────────────────────────────────────────────
           Text(
-            'Settings',
+            l10n.profileSettings,
             style: AppTypography.titleLarge(colors.onSurface),
           ),
           const SizedBox(height: AppSpacing.sm),
@@ -160,7 +162,7 @@ class _LoadedView extends StatelessWidget {
 
           // ── Logout ───────────────────────────────────────────────────────
           AppButton.secondary(
-            label: 'Sign Out',
+            label: l10n.profileSignOut,
             prefixIcon: Icons.logout,
             onPressed: () =>
                 context.read<ProfileBloc>().add(const LogoutRequested()),
@@ -178,9 +180,9 @@ class _LoadedView extends StatelessWidget {
 
   Widget _buildSettingsList(ColorScheme colors, Color textSecondary) {
     final items = [
-      (Icons.notifications_outlined, 'Notifications'),
-      (Icons.language_outlined, 'Language'),
-      (Icons.security_outlined, 'Security'),
+      (Icons.notifications_outlined, l10n.profileNotifications),
+      (Icons.language_outlined, l10n.profileLanguage),
+      (Icons.security_outlined, l10n.profileSecurity),
     ];
 
     return Container(
@@ -308,7 +310,7 @@ class _ErrorView extends StatelessWidget {
           Text(message, style: AppTypography.bodyMedium(colors.onSurface)),
           const SizedBox(height: AppSpacing.lg),
           AppButton.secondary(
-            label: 'Retry',
+            label: l10n.retry,
             isFullWidth: false,
             onPressed: () =>
                 context.read<ProfileBloc>().add(const LoadProfile()),

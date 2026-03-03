@@ -1,0 +1,205 @@
+{
+  "@@locale": "en",
+
+  "appName": "Casino Platform",
+  "@appName": { "description": "Application name" },
+
+  "retry": "Retry",
+  "@retry": { "description": "Generic retry button label" },
+
+  "back": "Back",
+  "@back": { "description": "Generic back navigation label" },
+
+  "loading": "Loading…",
+  "@loading": { "description": "Generic loading placeholder" },
+
+  "errorGeneric": "Something went wrong. Please try again.",
+  "@errorGeneric": { "description": "Generic error message" },
+
+
+  "navHome": "Home",
+  "@navHome": { "description": "Bottom nav: home tab label" },
+
+  "navCasino": "Casino",
+  "@navCasino": { "description": "Bottom nav: casino tab label" },
+
+  "navProfile": "Profile",
+  "@navProfile": { "description": "Bottom nav: profile tab label" },
+
+
+  "authWelcomeBack": "Welcome back",
+  "@authWelcomeBack": { "description": "Login screen heading" },
+
+  "authSignInSubtitle": "Sign in to your account",
+  "@authSignInSubtitle": { "description": "Login screen subheading" },
+
+  "authCreateAccount": "Create Account",
+  "@authCreateAccount": { "description": "Register screen heading and button label" },
+
+  "authJoinSubtitle": "Join thousands of players today",
+  "@authJoinSubtitle": { "description": "Register screen subheading" },
+
+  "authSignIn": "Sign In",
+  "@authSignIn": { "description": "Login button label / link to login screen" },
+
+  "authSignUp": "Sign Up",
+  "@authSignUp": { "description": "Link to register screen" },
+
+  "authAlreadyHaveAccount": "Already have an account? ",
+  "@authAlreadyHaveAccount": { "description": "Prefix before Sign In link on register screen" },
+
+  "authDontHaveAccount": "Don't have an account? ",
+  "@authDontHaveAccount": { "description": "Prefix before Sign Up link on login screen" },
+
+
+  "fieldEmail": "Email",
+  "@fieldEmail": { "description": "Email field label" },
+
+  "fieldPassword": "Password",
+  "@fieldPassword": { "description": "Password field label" },
+
+  "fieldFullName": "Full Name",
+  "@fieldFullName": { "description": "Full name field label" },
+
+  "fieldConfirmPassword": "Confirm Password",
+  "@fieldConfirmPassword": { "description": "Confirm password field label" },
+
+
+  "validationEmailRequired": "Email is required",
+  "@validationEmailRequired": { "description": "Validation: email field is empty" },
+
+  "validationEmailInvalid": "Enter a valid email address",
+  "@validationEmailInvalid": { "description": "Validation: email format is wrong" },
+
+  "validationPasswordRequired": "Password is required",
+  "@validationPasswordRequired": { "description": "Validation: password field is empty" },
+
+  "validationPasswordMinLength": "Password must be at least {min} characters",
+  "@validationPasswordMinLength": {
+    "description": "Validation: password is too short",
+    "placeholders": {
+      "min": { "type": "int", "example": "8" }
+    }
+  },
+
+  "validationNameRequired": "Name is required",
+  "@validationNameRequired": { "description": "Validation: name field is empty" },
+
+  "validationNameTooShort": "Name is too short",
+  "@validationNameTooShort": { "description": "Validation: name is below minimum length" },
+
+  "validationConfirmPasswordRequired": "Please confirm your password",
+  "@validationConfirmPasswordRequired": { "description": "Validation: confirm password field is empty" },
+
+  "validationPasswordsDoNotMatch": "Passwords do not match",
+  "@validationPasswordsDoNotMatch": { "description": "Validation: password and confirm password differ" },
+
+
+  "errorEmailAlreadyExists": "An account with that email already exists.",
+  "@errorEmailAlreadyExists": { "description": "Error: duplicate email on registration" },
+
+  "errorInvalidCredentials": "Invalid email or password.",
+  "@errorInvalidCredentials": { "description": "Error: wrong login credentials" },
+
+  "errorNoAccountFound": "No account found with that email.",
+  "@errorNoAccountFound": { "description": "Error: email not registered" },
+
+  "errorCouldNotLoadProfile": "Could not load profile.",
+  "@errorCouldNotLoadProfile": { "description": "Error: profile load failure" },
+
+  "errorGameNotFound": "Game not found.",
+  "@errorGameNotFound": { "description": "Error: game ID does not exist" },
+
+
+  "homeTitle": "Casino",
+  "@homeTitle": { "description": "Home screen app bar title" },
+
+
+  "gamesAllGames": "All Games",
+  "@gamesAllGames": { "description": "Games screen title and 'All' filter chip" },
+
+  "gamesSearchHint": "Search games or providers…",
+  "@gamesSearchHint": { "description": "Search field placeholder in games screen" },
+
+  "gamesNoResults": "No games found",
+  "@gamesNoResults": { "description": "Empty state when search/filter returns nothing" },
+
+  "gamesAbout": "About this game",
+  "@gamesAbout": { "description": "Section heading on game detail screen" },
+
+  "gamesPlayNow": "Play Now",
+  "@gamesPlayNow": { "description": "Primary CTA button on game detail screen" },
+
+  "gamesTryDemo": "Try Demo",
+  "@gamesTryDemo": { "description": "Secondary CTA button on game detail screen" },
+
+  "gamesGoBack": "Go Back",
+  "@gamesGoBack": { "description": "Error state back button on game detail screen" },
+
+  "gamesVolatility": "Volatility",
+  "@gamesVolatility": { "description": "Volatility row label on game detail screen" },
+
+  "gamesRtp": "RTP",
+  "@gamesRtp": { "description": "RTP row label on game detail screen" },
+
+  "gamesProvider": "Provider",
+  "@gamesProvider": { "description": "Provider row label on game detail screen" },
+
+
+  "volatilityLow": "Low",
+  "@volatilityLow": { "description": "Volatility level: low" },
+
+  "volatilityMedium": "Medium",
+  "@volatilityMedium": { "description": "Volatility level: medium" },
+
+  "volatilityHigh": "High",
+  "@volatilityHigh": { "description": "Volatility level: high" },
+
+
+  "categoryAll": "All",
+  "@categoryAll": { "description": "Game category filter chip: all games" },
+
+  "categorySlots": "Slots",
+  "@categorySlots": { "description": "Game category: slots" },
+
+  "categoryLive": "Live",
+  "@categoryLive": { "description": "Game category: live casino" },
+
+  "categoryTable": "Table",
+  "@categoryTable": { "description": "Game category: table games" },
+
+  "categoryJackpot": "Jackpot",
+  "@categoryJackpot": { "description": "Game category: jackpot games" },
+
+
+  "profileTitle": "Profile",
+  "@profileTitle": { "description": "Profile screen app bar title" },
+
+  "profileMemberSince": "Member Since",
+  "@profileMemberSince": { "description": "Profile stat label: account creation date" },
+
+  "profileAccountId": "Account ID",
+  "@profileAccountId": { "description": "Profile stat label: unique account ID" },
+
+  "profileSettings": "Settings",
+  "@profileSettings": { "description": "Profile settings section heading" },
+
+  "profileSignOut": "Sign Out",
+  "@profileSignOut": { "description": "Logout button label" },
+
+  "profileNotifications": "Notifications",
+  "@profileNotifications": { "description": "Settings item: notifications" },
+
+  "profileLanguage": "Language",
+  "@profileLanguage": { "description": "Settings item: language" },
+
+  "profileSecurity": "Security",
+  "@profileSecurity": { "description": "Settings item: security" },
+
+
+  "badgeNew": "NEW",
+  "@badgeNew": { "description": "Badge overlay on new game cards" },
+
+  "badgeHot": "HOT",
+  "@badgeHot": { "description": "Badge overlay on hot/popular game cards" }
+}

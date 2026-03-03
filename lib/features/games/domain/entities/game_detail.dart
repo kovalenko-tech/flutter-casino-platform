@@ -4,17 +4,11 @@ import 'package:flutter_casino_platform/features/home/domain/entities/game_categ
 import 'package:flutter_casino_platform/features/home/domain/entities/game_summary.dart';
 
 /// Volatility level of a slot or game.
-enum Volatility {
-  low,
-  medium,
-  high;
-
-  String get displayName => switch (this) {
-        Volatility.low => 'Low',
-        Volatility.medium => 'Medium',
-        Volatility.high => 'High',
-      };
-}
+/// Volatility level of a slot or game.
+///
+/// Display labels are handled in the presentation layer via
+/// [VolatilityL10n] extension to support localization.
+enum Volatility { low, medium, high; }
 
 /// Full game entity — loaded when the user opens a game detail screen.
 class GameDetail extends Equatable {

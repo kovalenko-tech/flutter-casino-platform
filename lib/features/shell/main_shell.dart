@@ -8,6 +8,7 @@ import 'package:flutter_casino_platform/core/theme/app_typography.dart';
 import 'package:flutter_casino_platform/features/home/presentation/screens/home_screen.dart';
 import 'package:flutter_casino_platform/features/games/presentation/screens/games_screen.dart';
 import 'package:flutter_casino_platform/features/profile/presentation/screens/profile_screen.dart';
+import 'package:flutter_casino_platform/core/l10n/l10n_extension.dart';
 
 // Re-export tab widgets so go_router can import them from this file.
 class HomeTab extends StatelessWidget {
@@ -43,14 +44,15 @@ class MainShell extends StatelessWidget {
   const MainShell({super.key, required this.shell});
 
   static const _tabs = [
-    _TabItem(icon: Icons.home_outlined, activeIcon: Icons.home_rounded, label: 'Home'),
-    _TabItem(icon: Icons.casino_outlined, activeIcon: Icons.casino_rounded, label: 'Casino'),
-    _TabItem(icon: Icons.person_outline_rounded, activeIcon: Icons.person_rounded, label: 'Profile'),
+    _TabItem(icon: Icons.home_outlined, activeIcon: Icons.home_rounded, label: l10n.navHome),
+    _TabItem(icon: Icons.casino_outlined, activeIcon: Icons.casino_rounded, label: l10n.navCasino),
+    _TabItem(icon: Icons.person_outline_rounded, activeIcon: Icons.person_rounded, label: l10n.navProfile),
   ];
 
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
+    final l10n = context.l10n;
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final bgColor =
         isDark ? AppColors.darkBackground : AppColors.lightBackground;

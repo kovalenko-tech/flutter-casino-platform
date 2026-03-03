@@ -6,6 +6,7 @@ import 'package:flutter_casino_platform/core/theme/app_spacing.dart';
 import 'package:flutter_casino_platform/core/theme/app_typography.dart';
 import 'package:flutter_casino_platform/features/home/presentation/widgets/game_card.dart';
 import 'package:flutter_casino_platform/features/home/domain/entities/game_summary.dart';
+import 'package:flutter_casino_platform/core/l10n/l10n_extension.dart';
 
 /// Full games catalogue tab — shows all games in a 4-column grid
 /// with a persistent search bar at the top.
@@ -44,6 +45,7 @@ class _GamesScreenState extends State<GamesScreen> {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
+    final l10n = context.l10n;
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
@@ -56,7 +58,7 @@ class _GamesScreenState extends State<GamesScreen> {
             backgroundColor:
                 isDark ? AppColors.darkBackground : AppColors.lightBackground,
             title: Text(
-              'All Games',
+              l10n.gamesAllGames,
               style: AppTypography.titleLarge(colors.onSurface),
             ),
             bottom: PreferredSize(
@@ -73,7 +75,7 @@ class _GamesScreenState extends State<GamesScreen> {
                   onChanged: _onSearch,
                   style: AppTypography.bodyMedium(colors.onSurface),
                   decoration: InputDecoration(
-                    hintText: 'Search games or providers…',
+                    hintText: l10n.gamesSearchHint,
                     prefixIcon: const Icon(Icons.search),
                     suffixIcon: _searchController.text.isNotEmpty
                         ? IconButton(
@@ -102,7 +104,7 @@ class _GamesScreenState extends State<GamesScreen> {
                     ),
                     const SizedBox(height: AppSpacing.md),
                     Text(
-                      'No games found',
+                      l10n.gamesNoResults,
                       style: AppTypography.bodyMedium(
                         colors.onSurface.withOpacity(0.6),
                       ),

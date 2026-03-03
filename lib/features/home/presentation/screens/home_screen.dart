@@ -10,6 +10,7 @@ import 'package:flutter_casino_platform/features/home/presentation/bloc/home_blo
 import 'package:flutter_casino_platform/features/home/presentation/widgets/category_filter_chips.dart';
 import 'package:flutter_casino_platform/features/home/presentation/widgets/game_grid.dart';
 import 'package:flutter_casino_platform/features/home/presentation/widgets/hero_carousel.dart';
+import 'package:flutter_casino_platform/core/l10n/l10n_extension.dart';
 
 /// Home tab — entry screen for the authenticated experience.
 ///
@@ -37,6 +38,7 @@ class _HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
+    final l10n = context.l10n;
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
@@ -69,7 +71,7 @@ class _HomeView extends StatelessWidget {
                       AppSpacing.sm,
                     ),
                     child: Text(
-                      'All Games',
+                      l10n.gamesAllGames,
                       style: AppTypography.headlineSmall(colors.onSurface),
                     ),
                   ),
@@ -103,7 +105,7 @@ class _HomeView extends StatelessWidget {
                           onPressed: () => context
                               .read<HomeBloc>()
                               .add(const LoadHomeData()),
-                          child: const Text('Retry'),
+                          child: Text(l10n.retry),
                         ),
                       ],
                     ),
@@ -138,7 +140,7 @@ class _HomeView extends StatelessWidget {
           ),
           const SizedBox(width: AppSpacing.sm),
           Text(
-            'Casino',
+            l10n.homeTitle,
             style: AppTypography.titleLarge(colors.onSurface),
           ),
         ],

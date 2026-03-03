@@ -4,12 +4,13 @@ import 'package:go_router/go_router.dart';
 
 import 'package:flutter_casino_platform/core/constants/app_constants.dart';
 import 'package:flutter_casino_platform/core/di/injection_container.dart';
+import 'package:flutter_casino_platform/core/l10n/l10n_extension.dart';
 import 'package:flutter_casino_platform/core/theme/app_colors.dart';
 import 'package:flutter_casino_platform/core/theme/app_radius.dart';
 import 'package:flutter_casino_platform/core/theme/app_spacing.dart';
 import 'package:flutter_casino_platform/core/theme/app_typography.dart';
-import 'package:flutter_casino_platform/shared/widgets/app_button.dart';
 import 'package:flutter_casino_platform/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:flutter_casino_platform/shared/widgets/app_button.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -44,14 +45,13 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = context.l10n;
 
     return BlocProvider(
       create: (_) => sl<AuthBloc>(),
       child: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
-          if (state is Authenticated) {
-            context.go(AppConstants.routeHome);
-          }
+          if (state is Authenticated) context.go(AppConstants.routeHome);
         },
         builder: (context, state) {
           return Scaffold(
@@ -65,12 +65,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     _buildLogo(colors),
                     const SizedBox(height: AppSpacing.xxl),
                     Text(
-                      'Welcome back',
+                      l10n.authWelcomeBack,
                       style: AppTypography.headlineLarge(colors.onSurface),
                     ),
                     const SizedBox(height: AppSpacing.xs),
                     Text(
-                      'Sign in to your account',
+                      l10n.authSignInSubtitle,
                       style: AppTypography.bodyMedium(
                         isDark
                             ? AppColors.darkTextSecondary
@@ -101,11 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
             color: colors.primary,
             borderRadius: AppRadius.mdAll,
           ),
-          child: Icon(
-            Icons.casino_rounded,
-            color: colors.onPrimary,
-            size: 28,
-          ),
+          child: Icon(Icons.casino_rounded, color: colors.onPrimary, size: 28),
         ),
         const SizedBox(width: AppSpacing.sm),
         Text(
@@ -122,6 +118,8 @@ class _LoginScreenState extends State<LoginScreen> {
     ColorScheme colors,
     bool isDark,
   ) {
+    final l10n = context.l10n;
+
     return Form(
       key: _formKey,
       child: Column(
@@ -135,13 +133,13 @@ class _LoginScreenState extends State<LoginScreen> {
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             style: AppTypography.bodyMedium(colors.onSurface),
-            decoration: const InputDecoration(
-              labelText: 'Email',
-              prefixIcon: Icon(Icons.email_outlined),
+            decoration: InputDecoration(
+              labelText: l10n.fieldEmail,
+              prefixIcon: const Icon(Icons.email_outlined),
             ),
             validator: (v) {
-              if (v == null || v.isEmpty) return 'Email is required';
-              if (!v.contains('@')) return 'Enter a valid email';
+              if (v == null || v.isEmpty) return l10n.validationEmailRequired;
+              if (!v.contains('@')) return l10n.validationEmailInvalid;
               return null;
             },
           ),
@@ -153,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
             onFieldSubmitted: (_) => _submit(context),
             style: AppTypography.bodyMedium(colors.onSurface),
             decoration: InputDecoration(
-              labelText: 'Password',
+              labelText: l10n.fieldPassword,
               prefixIcon: const Icon(Icons.lock_outline),
               suffixIcon: IconButton(
                 icon: Icon(
@@ -166,14 +164,14 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             validator: (v) {
-              if (v == null || v.isEmpty) return 'Password is required';
-              if (v.length < 6) return 'Password must be at least 6 characters';
+              if (v == null || v.isEmpty) return l10n.validationPasswordRequired;
+              if (v.length < 6) return l10n.validationPasswordMinLength(6);
               return null;
             },
           ),
           const SizedBox(height: AppSpacing.xl),
           AppButton.primary(
-            label: 'Sign In',
+            label: l10n.authSignIn,
             isLoading: state is AuthLoading,
             onPressed: () => _submit(context),
           ),
@@ -195,10 +193,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Icon(Icons.error_outline, color: colors.error, size: 20),
           const SizedBox(width: AppSpacing.sm),
           Expanded(
-            child: Text(
-              message,
-              style: AppTypography.bodySmall(colors.error),
-            ),
+            child: Text(message, style: AppTypography.bodySmall(colors.error)),
           ),
         ],
       ),
@@ -210,11 +205,13 @@ class _LoginScreenState extends State<LoginScreen> {
     ColorScheme colors,
     bool isDark,
   ) {
+    final l10n = context.l10n;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "Don't have an account? ",
+          l10n.authDontHaveAccount,
           style: AppTypography.bodyMedium(
             isDark
                 ? AppColors.darkTextSecondary
@@ -224,7 +221,7 @@ class _LoginScreenState extends State<LoginScreen> {
         GestureDetector(
           onTap: () => context.push(AppConstants.routeRegister),
           child: Text(
-            'Sign Up',
+            l10n.authSignUp,
             style: AppTypography.labelLarge(colors.primary),
           ),
         ),

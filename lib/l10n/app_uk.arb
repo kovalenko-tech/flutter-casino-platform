@@ -1,0 +1,78 @@
+{
+  "@@locale": "uk",
+
+  "appName": "Casino Platform",
+
+  "retry": "Повторити",
+  "back": "Назад",
+  "loading": "Завантаження…",
+  "errorGeneric": "Щось пішло не так. Спробуйте ще раз.",
+
+  "navHome": "Головна",
+  "navCasino": "Казино",
+  "navProfile": "Профіль",
+
+  "authWelcomeBack": "З поверненням",
+  "authSignInSubtitle": "Увійдіть у свій акаунт",
+  "authCreateAccount": "Створити акаунт",
+  "authJoinSubtitle": "Приєднуйтесь до тисяч гравців",
+  "authSignIn": "Увійти",
+  "authSignUp": "Зареєструватись",
+  "authAlreadyHaveAccount": "Вже є акаунт? ",
+  "authDontHaveAccount": "Немає акаунту? ",
+
+  "fieldEmail": "Електронна пошта",
+  "fieldPassword": "Пароль",
+  "fieldFullName": "Повне ім'я",
+  "fieldConfirmPassword": "Підтвердіть пароль",
+
+  "validationEmailRequired": "Введіть електронну пошту",
+  "validationEmailInvalid": "Введіть коректну адресу пошти",
+  "validationPasswordRequired": "Введіть пароль",
+  "validationPasswordMinLength": "Пароль має бути не менше {min} символів",
+  "validationNameRequired": "Введіть ім'я",
+  "validationNameTooShort": "Ім'я занадто коротке",
+  "validationConfirmPasswordRequired": "Підтвердіть пароль",
+  "validationPasswordsDoNotMatch": "Паролі не збігаються",
+
+  "errorEmailAlreadyExists": "Акаунт з такою поштою вже існує.",
+  "errorInvalidCredentials": "Невірна пошта або пароль.",
+  "errorNoAccountFound": "Акаунт з такою поштою не знайдено.",
+  "errorCouldNotLoadProfile": "Не вдалося завантажити профіль.",
+  "errorGameNotFound": "Гру не знайдено.",
+
+  "homeTitle": "Казино",
+
+  "gamesAllGames": "Всі ігри",
+  "gamesSearchHint": "Пошук ігор або провайдерів…",
+  "gamesNoResults": "Ігор не знайдено",
+  "gamesAbout": "Про цю гру",
+  "gamesPlayNow": "Грати",
+  "gamesTryDemo": "Демо",
+  "gamesGoBack": "Повернутись",
+  "gamesVolatility": "Волатильність",
+  "gamesRtp": "RTP",
+  "gamesProvider": "Провайдер",
+
+  "volatilityLow": "Низька",
+  "volatilityMedium": "Середня",
+  "volatilityHigh": "Висока",
+
+  "categoryAll": "Всі",
+  "categorySlots": "Слоти",
+  "categoryLive": "Live",
+  "categoryTable": "Столи",
+  "categoryJackpot": "Джекпот",
+
+  "profileTitle": "Профіль",
+  "profileMemberSince": "Учасник з",
+  "profileAccountId": "ID акаунту",
+  "profileSettings": "Налаштування",
+  "profileSignOut": "Вийти",
+  "profileNotifications": "Сповіщення",
+  "profileLanguage": "Мова",
+  "profileSecurity": "Безпека",
+
+  "badgeNew": "NEW",
+  "badgeHot": "HOT"
+}

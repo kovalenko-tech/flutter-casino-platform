@@ -5,6 +5,8 @@ import 'package:flutter_casino_platform/core/theme/app_spacing.dart';
 import 'package:flutter_casino_platform/core/theme/app_typography.dart';
 import 'package:flutter_casino_platform/features/home/domain/entities/game_category.dart';
 import 'package:flutter_casino_platform/features/home/presentation/bloc/home_bloc.dart';
+import 'package:flutter_casino_platform/core/l10n/l10n_extension.dart';
+import 'package:flutter_casino_platform/shared/extensions/game_category_l10n.dart';
 
 /// Horizontal scrollable row of category filter chips.
 ///
@@ -52,7 +54,7 @@ class CategoryFilterChips extends StatelessWidget {
                 ),
               ),
               child: Text(
-                cat.displayName,
+                cat.label(context.l10n),
                 style: AppTypography.labelMedium(
                   isSelected ? colors.onPrimary : colors.onSurface,
                 ),

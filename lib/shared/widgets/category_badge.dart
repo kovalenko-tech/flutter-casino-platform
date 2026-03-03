@@ -4,7 +4,9 @@ import 'package:flutter_casino_platform/core/theme/app_colors.dart';
 import 'package:flutter_casino_platform/core/theme/app_radius.dart';
 import 'package:flutter_casino_platform/core/theme/app_spacing.dart';
 import 'package:flutter_casino_platform/core/theme/app_typography.dart';
+import 'package:flutter_casino_platform/core/l10n/l10n_extension.dart';
 import 'package:flutter_casino_platform/features/home/domain/entities/game_category.dart';
+import 'package:flutter_casino_platform/shared/extensions/game_category_l10n.dart';
 
 /// Coloured label chip indicating a game's category.
 ///
@@ -29,7 +31,7 @@ class CategoryBadge extends StatelessWidget {
         borderRadius: AppRadius.smAll,
       ),
       child: Text(
-        category.displayName,
+        category.label(context.l10n),
         style: AppTypography.labelSmall(fg),
       ),
     );

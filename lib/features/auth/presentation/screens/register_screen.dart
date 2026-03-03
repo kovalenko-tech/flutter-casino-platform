@@ -10,6 +10,7 @@ import 'package:flutter_casino_platform/core/theme/app_spacing.dart';
 import 'package:flutter_casino_platform/core/theme/app_typography.dart';
 import 'package:flutter_casino_platform/shared/widgets/app_button.dart';
 import 'package:flutter_casino_platform/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:flutter_casino_platform/core/l10n/l10n_extension.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -50,6 +51,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = context.l10n;
 
     return BlocProvider(
       create: (_) => sl<AuthBloc>(),
@@ -71,12 +73,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     _buildBackButton(context, colors),
                     const SizedBox(height: AppSpacing.lg),
                     Text(
-                      'Create Account',
+                      l10n.authCreateAccount,
                       style: AppTypography.headlineLarge(colors.onSurface),
                     ),
                     const SizedBox(height: AppSpacing.xs),
                     Text(
-                      'Join thousands of players today',
+                      l10n.authJoinSubtitle,
                       style: AppTypography.bodyMedium(
                         isDark
                             ? AppColors.darkTextSecondary
@@ -105,7 +107,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         children: [
           Icon(Icons.arrow_back_ios, color: colors.onSurface, size: 18),
           const SizedBox(width: AppSpacing.xs),
-          Text('Back', style: AppTypography.bodyMedium(colors.onSurface)),
+          Text(l10n.back, style: AppTypography.bodyMedium(colors.onSurface)),
         ],
       ),
     );
@@ -132,12 +134,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
             textInputAction: TextInputAction.next,
             style: AppTypography.bodyMedium(colors.onSurface),
             decoration: const InputDecoration(
-              labelText: 'Full Name',
+              labelText: l10n.fieldFullName,
               prefixIcon: Icon(Icons.person_outline),
             ),
             validator: (v) {
-              if (v == null || v.trim().isEmpty) return 'Name is required';
-              if (v.trim().length < 2) return 'Name is too short';
+              if (v == null || v.trim().isEmpty) return l10n.validationNameRequired;
+              if (v.trim().length < 2) return l10n.validationNameTooShort;
               return null;
             },
           ),
@@ -148,13 +150,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
             textInputAction: TextInputAction.next,
             style: AppTypography.bodyMedium(colors.onSurface),
             decoration: const InputDecoration(
-              labelText: 'Email',
+              labelText: l10n.fieldEmail,
               prefixIcon: Icon(Icons.email_outlined),
             ),
             validator: (v) {
-              if (v == null || v.isEmpty) return 'Email is required';
+              if (v == null || v.isEmpty) return l10n.validationEmailRequired;
               if (!v.contains('@') || !v.contains('.')) {
-                return 'Enter a valid email';
+                return l10n.validationEmailInvalid;
               }
               return null;
             },
@@ -166,7 +168,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             textInputAction: TextInputAction.next,
             style: AppTypography.bodyMedium(colors.onSurface),
             decoration: InputDecoration(
-              labelText: 'Password',
+              labelText: l10n.fieldPassword,
               prefixIcon: const Icon(Icons.lock_outline),
               suffixIcon: IconButton(
                 icon: Icon(
@@ -179,8 +181,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ),
             validator: (v) {
-              if (v == null || v.isEmpty) return 'Password is required';
-              if (v.length < 8) return 'Password must be at least 8 characters';
+              if (v == null || v.isEmpty) return l10n.validationPasswordRequired;
+              if (v.length < 8) return l10n.validationPasswordMinLength(8);
               return null;
             },
           ),
@@ -192,7 +194,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             onFieldSubmitted: (_) => _submit(context),
             style: AppTypography.bodyMedium(colors.onSurface),
             decoration: InputDecoration(
-              labelText: 'Confirm Password',
+              labelText: l10n.fieldConfirmPassword,
               prefixIcon: const Icon(Icons.lock_outline),
               suffixIcon: IconButton(
                 icon: Icon(
@@ -205,16 +207,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ),
             validator: (v) {
-              if (v == null || v.isEmpty) return 'Please confirm your password';
+              if (v == null || v.isEmpty) return l10n.validationConfirmPasswordRequired;
               if (v != _passwordController.text) {
-                return 'Passwords do not match';
+                return l10n.validationPasswordsDoNotMatch;
               }
               return null;
             },
           ),
           const SizedBox(height: AppSpacing.xl),
           AppButton.primary(
-            label: 'Create Account',
+            label: l10n.authCreateAccount,
             isLoading: state is AuthLoading,
             onPressed: () => _submit(context),
           ),
@@ -255,7 +257,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          'Already have an account? ',
+          l10n.authAlreadyHaveAccount,
           style: AppTypography.bodyMedium(
             isDark
                 ? AppColors.darkTextSecondary
@@ -265,7 +267,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         GestureDetector(
           onTap: () => context.pop(),
           child: Text(
-            'Sign In',
+            l10n.authSignIn,
             style: AppTypography.labelLarge(colors.primary),
           ),
         ),

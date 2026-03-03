@@ -12,6 +12,8 @@ import 'package:flutter_casino_platform/shared/widgets/category_badge.dart';
 import 'package:flutter_casino_platform/shared/widgets/shimmer_loader.dart';
 import 'package:flutter_casino_platform/features/games/domain/entities/game_detail.dart';
 import 'package:flutter_casino_platform/features/games/presentation/bloc/game_detail_bloc.dart';
+import 'package:flutter_casino_platform/core/l10n/l10n_extension.dart';
+import 'package:flutter_casino_platform/shared/extensions/volatility_l10n.dart';
 
 class GameDetailScreen extends StatelessWidget {
   final String gameId;
@@ -20,6 +22,7 @@ class GameDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return BlocProvider(
       create: (_) => sl<GameDetailBloc>()..add(LoadGameDetail(gameId)),
       child: const _GameDetailView(),
@@ -171,7 +174,7 @@ class _GameDetailView extends StatelessWidget {
 
                 // Description
                 Text(
-                  'About this game',
+                  l10n.gamesAbout,
                   style: AppTypography.titleLarge(colors.onSurface),
                 ),
                 const SizedBox(height: AppSpacing.sm),
@@ -183,13 +186,13 @@ class _GameDetailView extends StatelessWidget {
 
                 // CTA
                 AppButton.primary(
-                  label: 'Play Now',
+                  label: l10n.gamesPlayNow,
                   prefixIcon: Icons.play_arrow_rounded,
                   onPressed: () {},
                 ),
                 const SizedBox(height: AppSpacing.md),
                 AppButton.secondary(
-                  label: 'Try Demo',
+                  label: l10n.gamesTryDemo,
                   onPressed: () {},
                 ),
                 const SizedBox(height: AppSpacing.xxl),
@@ -210,7 +213,7 @@ class _GameDetailView extends StatelessWidget {
       children: [
         _StatChip(
           icon: Icons.percent,
-          label: 'RTP',
+          label: context.l10n.gamesRtp,
           value: '${game.rtp}%',
           colors: colors,
           textSecondary: textSecondary,
@@ -269,7 +272,7 @@ class _GameDetailView extends StatelessWidget {
             Text(message, style: AppTypography.bodyMedium(colors.onSurface)),
             const SizedBox(height: AppSpacing.lg),
             AppButton.secondary(
-              label: 'Go Back',
+              label: l10n.gamesGoBack,
               isFullWidth: false,
               onPressed: () => Navigator.of(context).pop(),
             ),
@@ -363,11 +366,11 @@ class _VolatilityChip extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Volatility',
+                l10n.gamesVolatility,
                 style: AppTypography.labelSmall(textSecondary),
               ),
               Text(
-                volatility.displayName,
+                volatility.label(context.l10n),
                 style: AppTypography.labelMedium(_color),
               ),
             ],
