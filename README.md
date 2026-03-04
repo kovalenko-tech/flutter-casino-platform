@@ -8,7 +8,7 @@ A local-first Flutter casino platform showcasing clean architecture, a custom de
 
 ## Demo
 
-https://github.com/user-attachments/assets/demo_video.mp4
+<video src="demo_video.mp4" controls width="100%"></video>
 
 ---
 
