@@ -15,10 +15,10 @@ C4Component
 
     System_Boundary(auth, "Auth Feature") {
         Component(auth_bloc, "AuthBloc", "flutter_bloc", "Manages authentication state machine: initial → loading → authenticated / unauthenticated / error.")
-        Component(login_uc, "LoginUseCase", "Dart", "Validates credentials against hashed password stored in Isar.")
+        Component(login_uc, "LoginUseCase", "Dart", "Validates credentials against hashed password stored in SQLite.")
         Component(register_uc, "RegisterUseCase", "Dart", "Creates new User entity, hashes password with SHA-256 + salt, persists via AuthRepository.")
-        Component(auth_repo, "AuthRepository (impl)", "Isar SDK", "Reads/writes User @Collection. Implements domain IAuthRepository interface.")
-        Component(user_model, "UserModel", "Isar @Collection", "Persistent user record: id, name, email, passwordHash, salt, memberSince, accountId.")
+        Component(auth_repo, "AuthRepository (impl)", "sqflite", "Reads/writes User @Collection. Implements domain IAuthRepository interface.")
+        Component(user_model, "UserModel", "SQLite @Collection", "Persistent user record: id, name, email, passwordHash, salt, memberSince, accountId.")
     }
 
     System_Boundary(home, "Home Feature") {
@@ -37,7 +37,7 @@ C4Component
     System_Boundary(profile, "Profile Feature") {
         Component(profile_bloc, "ProfileBloc", "flutter_bloc", "Loads current user profile data.")
         Component(profile_uc, "GetProfileUseCase", "Dart", "Reads authenticated user entity from local storage.")
-        Component(local_profile, "LocalProfileDataSource", "Isar SDK", "Reads User record for the logged-in account id.")
+        Component(local_profile, "LocalProfileDataSource", "sqflite", "Reads User record for the logged-in account id.")
     }
 
     Rel(router, auth_bloc, "Redirects based on auth state")
@@ -50,7 +50,7 @@ C4Component
     Rel(auth_bloc, register_uc, "Calls on RegisterEvent")
     Rel(login_uc, auth_repo, "IAuthRepository.findByEmail()")
     Rel(register_uc, auth_repo, "IAuthRepository.save()")
-    Rel(auth_repo, user_model, "Isar CRUD")
+    Rel(auth_repo, user_model, "SQLite CRUD")
 
     Rel(home_bloc, banners_uc, "Calls on LoadHomeEvent")
     Rel(home_bloc, games_uc, "Calls on LoadHomeEvent")
@@ -71,8 +71,8 @@ C4Component
 
 | Feature | BLoC | Use Cases | Repository / Source |
 |---|---|---|---|
-| **Auth** | `AuthBloc` | `LoginUseCase`, `RegisterUseCase` | `AuthRepository` → Isar `UserModel` |
+| **Auth** | `AuthBloc` | `LoginUseCase`, `RegisterUseCase` | `AuthRepository` → SQLite `UserModel` |
 | **Home** | `HomeBloc` | `GetBannersUseCase`, `GetGamesUseCase` | `MockHomeDataSource` |
 | **Games** | `GameDetailBloc` | `GetGameDetailUseCase` | `MockGameDetailSource` |
-| **Profile** | `ProfileBloc` | `GetProfileUseCase` | `LocalProfileDataSource` → Isar |
+| **Profile** | `ProfileBloc` | `GetProfileUseCase` | `LocalProfileDataSource` → SQLite |
 | **Core** | — | — | `AppRouter`, DI (`get_it`), `AppTheme`, `Failures` |

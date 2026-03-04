@@ -118,7 +118,7 @@ classDiagram
 
 | Model | Layer | Storage | Notes |
 |---|---|---|---|
-| `User` | Domain / Data | Isar `@Collection` | Password never stored in plain text — only SHA-256 hash + random salt |
+| `User` | Domain / Data | SQLite `table` | Password never stored in plain text — only SHA-256 hash + random salt |
 | `GameDetail` | Domain | In-memory mock | Full detail shown on game detail screen |
 | `GameSummary` | Domain | In-memory mock | Lightweight card shown in home grid |
 | `Banner` | Domain | In-memory mock | Promotional banners on home screen |
@@ -135,5 +135,5 @@ plainPassword + randomSalt
   SHA-256 (crypto package)
         │
         ▼
-  passwordHash  ──► stored in Isar User record
+  passwordHash  ──► stored in SQLite User record
 ```

@@ -10,10 +10,10 @@ C4Context
 
     System(app, "Flutter Casino App", "Cross-platform mobile application (iOS / Android). Runs entirely on-device — no backend required.")
 
-    SystemDb(isar, "Local Storage (Isar DB)", "Embedded NoSQL database stored on the device. Persists user accounts, game data, banners, and session history.")
+    SystemDb(isar, "Local Storage (SQLite)", "Embedded relational database stored on the device via sqflite. Persists user accounts and session data.")
 
     Rel(player, app, "Opens app, logs in, browses games, plays, views profile")
-    Rel(app, isar, "Reads & writes", "Isar Flutter SDK (FFI)")
+    Rel(app, isar, "Reads & writes", "sqflite")
 
     UpdateElementStyle(player, $bgColor="#1168BD", $fontColor="#ffffff")
     UpdateElementStyle(app, $bgColor="#1168BD", $fontColor="#ffffff")
@@ -22,6 +22,6 @@ C4Context
 
 ## Notes
 
-- **No network dependency** — the app is fully self-contained; all data lives in Isar DB on the device.
+- **No network dependency** — the app is fully self-contained; all data lives in SQLite on the device.
 - **Single actor** — only the human Player interacts with the system.
 - Future iterations may add a remote backend (REST / WebSocket) for real-money flows, but that is out of scope for the current version.

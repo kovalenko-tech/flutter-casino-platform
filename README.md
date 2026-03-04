@@ -18,6 +18,7 @@ A local-first Flutter casino platform showcasing clean architecture, a custom de
 
 - [Demo](#demo)
 - [Overview](#overview)
+- [C4 Architecture Model](#c4-architecture-model)
 - [Architecture](#architecture)
 - [Folder Structure](#folder-structure)
 - [Design System — Velvet & Gold](#design-system--velvet--gold)
@@ -41,6 +42,21 @@ A local-first Flutter casino platform showcasing clean architecture, a custom de
 | **Settings** | Notifications (placeholder), language switch (live), theme switch (system/light/dark), change password |
 | **Theming** | Dual dark/light theme with runtime switching via `AppSettingsCubit`; persisted in SharedPreferences |
 | **L10n** | English, Ukrainian, and German localization via ARB files; live locale switching |
+
+---
+
+## C4 Architecture Model
+
+Before writing any code, the system was designed upfront using the [C4 model](https://c4model.com/) — four levels of architecture diagrams that describe the system from high-level context down to code-level detail.
+
+Full diagrams with Mermaid (rendered natively on GitHub): **[docs/c4/](docs/c4/README.md)**
+
+| Level | Diagram | What it answers |
+|-------|---------|-----------------|
+| 1 — Context | [01-context.md](docs/c4/01-context.md) | Who uses the system and what does it interact with? |
+| 2 — Container | [02-container.md](docs/c4/02-container.md) | What are the high-level technology building blocks? |
+| 3 — Component | [03-component.md](docs/c4/03-component.md) | How are features organised internally? |
+| 4 — Code | [04-code.md](docs/c4/04-code.md) | Key domain models, state types, and data flow |
 
 ---
 
