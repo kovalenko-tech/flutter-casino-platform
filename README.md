@@ -9,8 +9,12 @@ A local-first Flutter casino platform showcasing clean architecture, a custom de
 ## Demo
 
 <p align="center">
-  <img src="demo.gif" alt="Demo" width="280" />
+  <a href="demo_video.mp4">
+    <img src="demo.gif" alt="Demo — click to watch full video" width="280" />
+  </a>
 </p>
+
+> *Click the GIF above to download & watch the full demo video.*
 
 ---
 
