@@ -34,7 +34,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     Emitter<ProfileState> emit,
   ) async {
     emit(ProfileLoading());
-    await _authRepository.deleteAll();
+    await _authRepository.logout();
     emit(ProfileLoggedOut());
   }
 }

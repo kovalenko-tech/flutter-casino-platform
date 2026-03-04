@@ -14,6 +14,7 @@ import 'package:flutter_casino_platform/features/games/data/repositories/mock_ga
 import 'package:flutter_casino_platform/features/games/domain/repositories/games_repository.dart';
 import 'package:flutter_casino_platform/features/games/domain/usecases/get_game_detail_usecase.dart';
 import 'package:flutter_casino_platform/features/games/presentation/bloc/game_detail_bloc.dart';
+import 'package:flutter_casino_platform/features/games/presentation/bloc/games_cubit.dart';
 import 'package:flutter_casino_platform/features/home/data/repositories/mock_home_repository.dart';
 import 'package:flutter_casino_platform/features/home/domain/repositories/home_repository.dart';
 import 'package:flutter_casino_platform/features/home/domain/usecases/get_banners_usecase.dart';
@@ -86,6 +87,8 @@ Future<void> initDependencies() async {
   sl.registerFactory(
     () => GameDetailBloc(getGameDetail: sl<GetGameDetailUseCase>()),
   );
+
+  sl.registerFactory(() => GamesCubit());
 
   sl.registerFactory(() => ProfileBloc(authRepository: sl<AuthRepository>()));
 }

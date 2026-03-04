@@ -14,6 +14,7 @@ abstract interface class AuthLocalDatasource {
   Future<UserModel> save(UserModel model);
   Future<UserModel?> getFirst();
   Future<void> deleteAll();
+  Future<void> logout();
 }
 
 // ── SQLite implementation ─────────────────────────────────────────────────────
@@ -86,6 +87,14 @@ class AuthLocalDatasourceImpl implements AuthLocalDatasource {
 
   @override
   Future<void> deleteAll() => _db.delete(_table);
+
+  @override
+  Future<void> logout() async {
+    final first = await getFirst();
+    if (first != null) {
+      await _db.delete(_table, where: 'id = ?', whereArgs: [first.id]);
+    }
+  }
 }
 
 // ── Password utilities ────────────────────────────────────────────────────────

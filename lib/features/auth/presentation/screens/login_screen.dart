@@ -168,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
             validator: (v) {
               if (v == null || v.isEmpty)
                 return l10n.validationPasswordRequired;
-              if (v.length < 6) return l10n.validationPasswordMinLength(6);
+              if (v.length < 8) return l10n.validationPasswordMinLength(8);
               return null;
             },
           ),

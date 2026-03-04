@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:flutter_casino_platform/core/l10n/app_localizations.dart';
 import 'package:flutter_casino_platform/core/theme/app_theme.dart';
 import 'package:flutter_casino_platform/features/home/domain/entities/game_category.dart';
 import 'package:flutter_casino_platform/features/home/domain/entities/game_summary.dart';
@@ -25,6 +27,12 @@ GoRouter _testRouter({required Widget home}) {
 Widget _buildTestApp(Widget child) {
   return MaterialApp.router(
     theme: AppTheme.dark,
+    localizationsDelegates: const [
+      AppLocalizations.delegate,
+      GlobalMaterialLocalizations.delegate,
+      GlobalWidgetsLocalizations.delegate,
+    ],
+    supportedLocales: AppLocalizations.supportedLocales,
     routerConfig: _testRouter(home: Scaffold(body: child)),
   );
 }

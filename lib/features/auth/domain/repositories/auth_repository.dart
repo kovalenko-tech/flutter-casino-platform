@@ -28,4 +28,7 @@ abstract interface class AuthRepository {
 
   /// Removes all user records (logout / account wipe).
   Future<Either<Failure, void>> deleteAll();
+
+  /// Logs out the current user (deletes only the active session user).
+  Future<Either<Failure, void>> logout();
 }

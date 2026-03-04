@@ -101,7 +101,7 @@ void main() {
         'emits [ProfileLoading, ProfileLoggedOut] after logout',
         build: () {
           when(
-            () => mockAuthRepository.deleteAll(),
+            () => mockAuthRepository.logout(),
           ).thenAnswer((_) async => right(null));
           return buildBloc();
         },
@@ -113,13 +113,13 @@ void main() {
         'calls repository.deleteAll() on logout',
         build: () {
           when(
-            () => mockAuthRepository.deleteAll(),
+            () => mockAuthRepository.logout(),
           ).thenAnswer((_) async => right(null));
           return buildBloc();
         },
         act: (bloc) => bloc.add(const LogoutRequested()),
         verify: (_) {
-          verify(() => mockAuthRepository.deleteAll()).called(1);
+          verify(() => mockAuthRepository.logout()).called(1);
         },
       );
     });
