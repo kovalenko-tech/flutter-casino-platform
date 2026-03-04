@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_casino_platform/core/theme/app_icon_size.dart';
 import 'package:flutter_casino_platform/core/theme/app_radius.dart';
 import 'package:flutter_casino_platform/core/theme/app_spacing.dart';
 import 'package:flutter_casino_platform/core/theme/app_typography.dart';
@@ -146,7 +147,7 @@ class AppButton extends StatelessWidget {
       return Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(prefixIcon, size: 18),
+          Icon(prefixIcon, size: AppIconSize.md),
           const SizedBox(width: AppSpacing.xs),
           Text(
             label,

@@ -1,9 +1,9 @@
-import 'package:flutter_casino_platform/features/auth/domain/entities/user.dart';
-import 'package:flutter_casino_platform/features/auth/domain/repositories/auth_repository.dart';
 import 'package:flutter_casino_platform/core/errors/failures.dart';
+import 'package:flutter_casino_platform/core/types/either.dart';
 import 'package:flutter_casino_platform/features/auth/data/datasources/auth_local_datasource.dart';
 import 'package:flutter_casino_platform/features/auth/data/models/user_model.dart';
-import 'package:flutter_casino_platform/core/types/either.dart';
+import 'package:flutter_casino_platform/features/auth/domain/entities/user.dart';
+import 'package:flutter_casino_platform/features/auth/domain/repositories/auth_repository.dart';
 
 /// Concrete [AuthRepository] backed by Isar through [AuthLocalDatasource].
 ///
@@ -86,6 +86,40 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, void>> logout() async {
     try {
       await _datasource.logout();
+      return right(null);
+    } catch (e) {
+      return left(StorageFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> setLoggedIn(String email) async {
+    try {
+      await _datasource.setLoggedIn(email);
+      return right(null);
+    } catch (e) {
+      return left(StorageFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> changePassword({
+    required String email,
+    required String oldPassword,
+    required String newPassword,
+  }) async {
+    try {
+      final model = await _datasource.findByEmail(email);
+      if (model == null) {
+        return left(const NotFoundFailure('No account found with that email.'));
+      }
+      final valid = verifyHash(oldPassword, model.salt, model.passwordHash);
+      if (!valid) {
+        return left(const AuthFailure('Current password is incorrect.'));
+      }
+      final salt = generateSalt();
+      final hash = hashPassword(newPassword, salt);
+      await _datasource.updatePassword(email, hash, salt);
       return right(null);
     } catch (e) {
       return left(StorageFailure(e.toString()));

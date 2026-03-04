@@ -35,6 +35,9 @@ dependencies:
   # Crypto — SHA-256 password hashing with random salt
   crypto: ^3.0.7
 
+  # Key-value persistence
+  shared_preferences: ^2.3.5
+
   # Utilities
   uuid: ^4.5.3
 

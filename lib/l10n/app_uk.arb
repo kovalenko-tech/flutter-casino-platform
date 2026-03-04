@@ -35,6 +35,11 @@
   "validationConfirmPasswordRequired": "Підтвердіть пароль",
   "validationPasswordsDoNotMatch": "Паролі не збігаються",
 
+  "validationPasswordUppercase": "Пароль має містити велику літеру",
+  "validationPasswordLowercase": "Пароль має містити малу літеру",
+  "validationPasswordDigit": "Пароль має містити цифру",
+  "passwordRequirementsHint": "Мін. 8 символів: велика, мала літера та цифра",
+
   "errorEmailAlreadyExists": "Акаунт з такою поштою вже існує.",
   "errorInvalidCredentials": "Невірна пошта або пароль.",
   "errorNoAccountFound": "Акаунт з такою поштою не знайдено.",
@@ -74,5 +79,27 @@
   "profileSecurity": "Безпека",
 
   "badgeNew": "NEW",
-  "badgeHot": "HOT"
+  "badgeHot": "HOT",
+
+  "settingsTheme": "Тема",
+  "themeSystem": "Системна",
+  "themeLight": "Світла",
+  "themeDark": "Темна",
+
+  "settingsLanguage": "Мова",
+  "languageEnglish": "English",
+  "languageUkrainian": "Українська",
+  "languageGerman": "Deutsch",
+
+  "notificationsTitle": "Сповіщення",
+  "notificationsEmpty": "Сповіщень поки немає",
+
+  "securityTitle": "Безпека",
+  "changePassword": "Змінити пароль",
+  "fieldCurrentPassword": "Поточний пароль",
+  "fieldNewPassword": "Новий пароль",
+  "fieldConfirmNewPassword": "Підтвердіть новий пароль",
+  "validationCurrentPasswordRequired": "Введіть поточний пароль",
+  "errorWrongCurrentPassword": "Поточний пароль невірний",
+  "passwordChangeSuccess": "Пароль успішно змінено"
 }

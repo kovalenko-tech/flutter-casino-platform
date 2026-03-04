@@ -1,0 +1,105 @@
+{
+  "@@locale": "de",
+
+  "appName": "Casino Platform",
+
+  "retry": "Erneut versuchen",
+  "back": "Zurück",
+  "loading": "Wird geladen…",
+  "errorGeneric": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
+
+  "navHome": "Startseite",
+  "navCasino": "Casino",
+  "navProfile": "Profil",
+
+  "authWelcomeBack": "Willkommen zurück",
+  "authSignInSubtitle": "Melde dich in deinem Konto an",
+  "authCreateAccount": "Konto erstellen",
+  "authJoinSubtitle": "Schließe dich tausenden Spielern an",
+  "authSignIn": "Anmelden",
+  "authSignUp": "Registrieren",
+  "authAlreadyHaveAccount": "Bereits ein Konto? ",
+  "authDontHaveAccount": "Kein Konto? ",
+
+  "fieldEmail": "E-Mail",
+  "fieldPassword": "Passwort",
+  "fieldFullName": "Vollständiger Name",
+  "fieldConfirmPassword": "Passwort bestätigen",
+
+  "validationEmailRequired": "E-Mail ist erforderlich",
+  "validationEmailInvalid": "Gib eine gültige E-Mail-Adresse ein",
+  "validationPasswordRequired": "Passwort ist erforderlich",
+  "validationPasswordMinLength": "Passwort muss mindestens {min} Zeichen lang sein",
+  "validationNameRequired": "Name ist erforderlich",
+  "validationNameTooShort": "Name ist zu kurz",
+  "validationConfirmPasswordRequired": "Bitte bestätige dein Passwort",
+  "validationPasswordsDoNotMatch": "Passwörter stimmen nicht überein",
+
+  "validationPasswordUppercase": "Passwort muss einen Großbuchstaben enthalten",
+  "validationPasswordLowercase": "Passwort muss einen Kleinbuchstaben enthalten",
+  "validationPasswordDigit": "Passwort muss eine Ziffer enthalten",
+  "passwordRequirementsHint": "Min. 8 Zeichen: Groß-, Kleinbuchstabe und Ziffer",
+
+  "errorEmailAlreadyExists": "Ein Konto mit dieser E-Mail existiert bereits.",
+  "errorInvalidCredentials": "Ungültige E-Mail oder Passwort.",
+  "errorNoAccountFound": "Kein Konto mit dieser E-Mail gefunden.",
+  "errorCouldNotLoadProfile": "Profil konnte nicht geladen werden.",
+  "errorGameNotFound": "Spiel nicht gefunden.",
+
+  "homeTitle": "Casino",
+
+  "gamesAllGames": "Alle Spiele",
+  "gamesSearchHint": "Spiele oder Anbieter suchen…",
+  "gamesNoResults": "Keine Spiele gefunden",
+  "gamesAbout": "Über dieses Spiel",
+  "gamesPlayNow": "Jetzt spielen",
+  "gamesTryDemo": "Demo testen",
+  "gamesGoBack": "Zurück",
+  "gamesVolatility": "Volatilität",
+  "gamesRtp": "RTP",
+  "gamesProvider": "Anbieter",
+
+  "volatilityLow": "Niedrig",
+  "volatilityMedium": "Mittel",
+  "volatilityHigh": "Hoch",
+
+  "categoryAll": "Alle",
+  "categorySlots": "Slots",
+  "categoryLive": "Live",
+  "categoryTable": "Tisch",
+  "categoryJackpot": "Jackpot",
+
+  "profileTitle": "Profil",
+  "profileMemberSince": "Mitglied seit",
+  "profileAccountId": "Konto-ID",
+  "profileSettings": "Einstellungen",
+  "profileSignOut": "Abmelden",
+  "profileNotifications": "Benachrichtigungen",
+  "profileLanguage": "Sprache",
+  "profileSecurity": "Sicherheit",
+
+  "badgeNew": "NEU",
+  "badgeHot": "HOT",
+
+  "settingsTheme": "Design",
+  "themeSystem": "System",
+  "themeLight": "Hell",
+  "themeDark": "Dunkel",
+
+  "settingsLanguage": "Sprache",
+  "languageEnglish": "English",
+  "languageUkrainian": "Українська",
+  "languageGerman": "Deutsch",
+
+  "notificationsTitle": "Benachrichtigungen",
+  "notificationsEmpty": "Noch keine Benachrichtigungen",
+
+  "securityTitle": "Sicherheit",
+  "changePassword": "Passwort ändern",
+  "fieldCurrentPassword": "Aktuelles Passwort",
+  "fieldNewPassword": "Neues Passwort",
+  "fieldConfirmNewPassword": "Neues Passwort bestätigen",
+  "validationCurrentPasswordRequired": "Aktuelles Passwort ist erforderlich",
+  "errorWrongCurrentPassword": "Aktuelles Passwort ist falsch",
+  "passwordChangeSuccess": "Passwort erfolgreich geändert"
+}

@@ -1,12 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:flutter_casino_platform/core/types/either.dart';
 import 'package:flutter_casino_platform/features/auth/domain/entities/user.dart';
 import 'package:flutter_casino_platform/features/auth/domain/repositories/auth_repository.dart';
 import 'package:flutter_casino_platform/features/auth/domain/usecases/login_usecase.dart';
 import 'package:flutter_casino_platform/features/auth/domain/usecases/register_usecase.dart';
 
-import 'package:flutter_casino_platform/core/types/either.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
 
@@ -53,6 +52,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       password: event.password,
     );
     if (result.isRight) {
+      await _authRepository.setLoggedIn(event.email);
       emit(Authenticated(result.rightValue));
     } else {
       emit(AuthError(result.leftValue.message));
@@ -78,7 +78,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<void> _onLogout(LogoutRequested event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
-    await _authRepository.deleteAll();
+    await _authRepository.logout();
     emit(Unauthenticated());
   }
 }

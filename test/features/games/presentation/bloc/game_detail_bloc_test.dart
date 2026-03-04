@@ -47,7 +47,7 @@ void main() {
         return GameDetailBloc(getGameDetail: mockUseCase);
       },
       act: (bloc) => bloc.add(const LoadGameDetail('book-of-dead')),
-      expect: () => [isA<GameDetailLoading>(), GameDetailLoaded(testGame)],
+      expect: () => [isA<GameDetailLoading>(), const GameDetailLoaded(testGame)],
     );
 
     blocTest<GameDetailBloc, GameDetailState>(

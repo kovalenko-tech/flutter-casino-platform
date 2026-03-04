@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_casino_platform/core/theme/app_colors.dart';
+import 'package:flutter_casino_platform/core/theme/app_colors_extension.dart';
 import 'package:flutter_casino_platform/core/theme/app_radius.dart';
 import 'package:flutter_casino_platform/core/theme/app_spacing.dart';
 import 'package:flutter_casino_platform/core/theme/app_typography.dart';
@@ -50,6 +51,14 @@ abstract final class AppTheme {
       scaffoldBackgroundColor: scaffoldBackground,
       dividerColor: dividerColor,
       textTheme: AppTypography.buildTextTheme(textPrimary, textSecondary),
+      extensions: [
+        AppColorsExtension(
+          textSecondary: textSecondary,
+          card: cardColor,
+          background: scaffoldBackground,
+          border: dividerColor,
+        ),
+      ],
 
       // ── AppBar ──────────────────────────────────────────────────────────
       appBarTheme: AppBarTheme(

@@ -94,6 +94,9 @@ void main() {
               password: 'secret',
             ),
           ).thenAnswer((_) async => right(testUser));
+          when(
+            () => mockAuthRepository.setLoggedIn(any()),
+          ).thenAnswer((_) async => right(null));
           return buildBloc();
         },
         act: (bloc) => bloc.add(
@@ -197,7 +200,7 @@ void main() {
         'emits [AuthLoading, Unauthenticated] after logout',
         build: () {
           when(
-            () => mockAuthRepository.deleteAll(),
+            () => mockAuthRepository.logout(),
           ).thenAnswer((_) async => right(null));
           return buildBloc();
         },
@@ -206,16 +209,16 @@ void main() {
       );
 
       blocTest<AuthBloc, AuthState>(
-        'calls repository.deleteAll() on logout',
+        'calls repository.logout() on logout',
         build: () {
           when(
-            () => mockAuthRepository.deleteAll(),
+            () => mockAuthRepository.logout(),
           ).thenAnswer((_) async => right(null));
           return buildBloc();
         },
         act: (bloc) => bloc.add(const LogoutRequested()),
         verify: (_) {
-          verify(() => mockAuthRepository.deleteAll()).called(1);
+          verify(() => mockAuthRepository.logout()).called(1);
         },
       );
     });

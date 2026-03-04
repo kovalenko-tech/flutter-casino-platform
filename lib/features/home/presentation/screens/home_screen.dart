@@ -1,17 +1,22 @@
-import 'package:flutter_casino_platform/core/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
+import 'package:flutter_casino_platform/core/constants/app_constants.dart';
 import 'package:flutter_casino_platform/core/di/injection_container.dart';
-import 'package:flutter_casino_platform/core/theme/app_colors.dart';
+import 'package:flutter_casino_platform/core/theme/app_icon_size.dart';
 import 'package:flutter_casino_platform/core/theme/app_spacing.dart';
 import 'package:flutter_casino_platform/core/theme/app_typography.dart';
+import 'package:flutter_casino_platform/core/theme/theme_context_extension.dart';
 import 'package:flutter_casino_platform/shared/widgets/shimmer_loader.dart';
 import 'package:flutter_casino_platform/features/home/presentation/bloc/home_bloc.dart';
 import 'package:flutter_casino_platform/features/home/presentation/widgets/category_filter_chips.dart';
 import 'package:flutter_casino_platform/features/home/presentation/widgets/game_grid.dart';
 import 'package:flutter_casino_platform/features/home/presentation/widgets/hero_carousel.dart';
 import 'package:flutter_casino_platform/core/l10n/l10n_extension.dart';
+
+part 'widgets/home_app_bar.dart';
+part 'widgets/shimmer_carousel.dart';
 
 /// Home tab — entry screen for the authenticated experience.
 ///
@@ -40,16 +45,19 @@ class _HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     final l10n = context.l10n;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
       body: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
-          return CustomScrollView(
-            slivers: [
-              _buildAppBar(colors, isDark, l10n),
+          final bg = context.appColors.background;
+
+          return Stack(
+            children: [
+              CustomScrollView(
+                slivers: [
+                  _HomeAppBar(backgroundColor: bg),
               if (state is HomeLoading) ...[
-                SliverToBoxAdapter(child: _shimmerCarousel()),
+                const SliverToBoxAdapter(child: _ShimmerCarousel()),
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.all(AppSpacing.md),
@@ -98,7 +106,7 @@ class _HomeView extends StatelessWidget {
                         Icon(
                           Icons.error_outline,
                           color: colors.error,
-                          size: 48,
+                          size: AppIconSize.xxl,
                         ),
                         const SizedBox(height: AppSpacing.md),
                         Text(
@@ -118,61 +126,29 @@ class _HomeView extends StatelessWidget {
                 ),
               ],
             ],
+          ),
+          // Gradient overlay so status bar doesn't clash with content
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: IgnorePointer(
+              child: Container(
+                height: MediaQuery.of(context).padding.top + AppSpacing.md,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [bg, bg.withValues(alpha: 0)],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
           );
         },
       ),
-    );
-  }
-
-  SliverAppBar _buildAppBar(
-    ColorScheme colors,
-    bool isDark,
-    AppLocalizations l10n,
-  ) {
-    return SliverAppBar(
-      floating: true,
-      snap: true,
-      elevation: 0,
-      backgroundColor:
-          isDark ? AppColors.darkBackground : AppColors.lightBackground,
-      title: Row(
-        children: [
-          Container(
-            width: 32,
-            height: 32,
-            decoration: BoxDecoration(
-              color: colors.primary,
-              borderRadius: const BorderRadius.all(Radius.circular(8)),
-            ),
-            child: Icon(
-              Icons.casino_rounded,
-              color: colors.onPrimary,
-              size: 18,
-            ),
-          ),
-          const SizedBox(width: AppSpacing.sm),
-          Text(
-            l10n.homeTitle,
-            style: AppTypography.titleLarge(colors.onSurface),
-          ),
-        ],
-      ),
-      actions: [
-        IconButton(
-          icon: Icon(Icons.notifications_outlined, color: colors.onSurface),
-          onPressed: () {},
-        ),
-      ],
-    );
-  }
-
-  Widget _shimmerCarousel() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.md,
-        vertical: AppSpacing.md,
-      ),
-      child: ShimmerLoader.banner(),
     );
   }
 }

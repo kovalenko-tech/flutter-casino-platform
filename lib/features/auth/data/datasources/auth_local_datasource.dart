@@ -2,9 +2,8 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:crypto/crypto.dart';
-import 'package:sqflite/sqflite.dart';
-
 import 'package:flutter_casino_platform/features/auth/data/models/user_model.dart';
+import 'package:sqflite/sqflite.dart';
 
 // ── Contract ─────────────────────────────────────────────────────────────────
 
@@ -15,6 +14,8 @@ abstract interface class AuthLocalDatasource {
   Future<UserModel?> getFirst();
   Future<void> deleteAll();
   Future<void> logout();
+  Future<void> setLoggedIn(String email);
+  Future<void> updatePassword(String email, String hash, String salt);
 }
 
 // ── SQLite implementation ─────────────────────────────────────────────────────
@@ -41,7 +42,8 @@ class AuthLocalDatasourceImpl implements AuthLocalDatasource {
         password_hash TEXT   NOT NULL,
         salt         TEXT    NOT NULL,
         member_since INTEGER NOT NULL,
-        account_id   TEXT    NOT NULL
+        account_id   TEXT    NOT NULL,
+        logged_in    INTEGER NOT NULL DEFAULT 1
       )
     ''');
   }
@@ -80,7 +82,12 @@ class AuthLocalDatasourceImpl implements AuthLocalDatasource {
 
   @override
   Future<UserModel?> getFirst() async {
-    final rows = await _db.query(_table, limit: 1, orderBy: 'id ASC');
+    final rows = await _db.query(
+      _table,
+      where: 'logged_in = 1',
+      limit: 1,
+      orderBy: 'id ASC',
+    );
     if (rows.isEmpty) return null;
     return UserModel.fromMap(rows.first);
   }
@@ -90,10 +97,27 @@ class AuthLocalDatasourceImpl implements AuthLocalDatasource {
 
   @override
   Future<void> logout() async {
-    final first = await getFirst();
-    if (first != null) {
-      await _db.delete(_table, where: 'id = ?', whereArgs: [first.id]);
-    }
+    await _db.update(_table, {'logged_in': 0}, where: 'logged_in = 1');
+  }
+
+  @override
+  Future<void> setLoggedIn(String email) async {
+    await _db.update(
+      _table,
+      {'logged_in': 1},
+      where: 'LOWER(email) = LOWER(?)',
+      whereArgs: [email],
+    );
+  }
+
+  @override
+  Future<void> updatePassword(String email, String hash, String salt) async {
+    await _db.update(
+      _table,
+      {'password_hash': hash, 'salt': salt},
+      where: 'LOWER(email) = LOWER(?)',
+      whereArgs: [email],
+    );
   }
 }
 

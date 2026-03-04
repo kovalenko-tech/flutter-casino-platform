@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:flutter_casino_platform/core/di/injection_container.dart';
-import 'package:flutter_casino_platform/core/theme/app_colors.dart';
+import 'package:flutter_casino_platform/core/l10n/l10n_extension.dart';
+import 'package:flutter_casino_platform/core/theme/app_icon_size.dart';
 import 'package:flutter_casino_platform/core/theme/app_spacing.dart';
 import 'package:flutter_casino_platform/core/theme/app_typography.dart';
+import 'package:flutter_casino_platform/core/theme/theme_context_extension.dart';
 import 'package:flutter_casino_platform/features/games/presentation/bloc/games_cubit.dart';
 import 'package:flutter_casino_platform/features/home/presentation/widgets/game_card.dart';
-import 'package:flutter_casino_platform/core/l10n/l10n_extension.dart';
 
 /// Full games catalogue tab — shows all games in a 4-column grid
 /// with a persistent search bar at the top.
@@ -31,7 +31,6 @@ class _GamesScreenState extends State<GamesScreen> {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     final l10n = context.l10n;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return BlocProvider(
       create: (_) => sl<GamesCubit>(),
@@ -44,9 +43,7 @@ class _GamesScreenState extends State<GamesScreen> {
                   floating: true,
                   snap: true,
                   elevation: 0,
-                  backgroundColor: isDark
-                      ? AppColors.darkBackground
-                      : AppColors.lightBackground,
+                  backgroundColor: context.appColors.background,
                   title: Text(
                     l10n.gamesAllGames,
                     style: AppTypography.titleLarge(colors.onSurface),
@@ -62,8 +59,7 @@ class _GamesScreenState extends State<GamesScreen> {
                       ),
                       child: TextField(
                         controller: _searchController,
-                        onChanged: (q) =>
-                            context.read<GamesCubit>().search(q),
+                        onChanged: (q) => context.read<GamesCubit>().search(q),
                         style: AppTypography.bodyMedium(colors.onSurface),
                         decoration: InputDecoration(
                           hintText: l10n.gamesSearchHint,
@@ -92,14 +88,14 @@ class _GamesScreenState extends State<GamesScreen> {
                             children: [
                               Icon(
                                 Icons.search_off_outlined,
-                                color: colors.onSurface.withOpacity(0.4),
-                                size: 48,
+                                color: colors.onSurface.withValues(alpha: 0.4),
+                                size: AppIconSize.xxl,
                               ),
                               const SizedBox(height: AppSpacing.md),
                               Text(
                                 l10n.gamesNoResults,
                                 style: AppTypography.bodyMedium(
-                                  colors.onSurface.withOpacity(0.6),
+                                  colors.onSurface.withValues(alpha: 0.6),
                                 ),
                               ),
                             ],
@@ -119,8 +115,7 @@ class _GamesScreenState extends State<GamesScreen> {
                           (context, i) => GameCard(game: state.games[i]),
                           childCount: state.games.length,
                         ),
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 4,
                           mainAxisSpacing: AppSpacing.sm,
                           crossAxisSpacing: AppSpacing.sm,

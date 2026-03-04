@@ -6,6 +6,10 @@ import 'package:flutter_casino_platform/core/di/injection_container.dart';
 import 'package:flutter_casino_platform/features/auth/presentation/screens/login_screen.dart';
 import 'package:flutter_casino_platform/features/auth/presentation/screens/register_screen.dart';
 import 'package:flutter_casino_platform/features/games/presentation/screens/game_detail_screen.dart';
+import 'package:flutter_casino_platform/features/settings/presentation/screens/change_password_screen.dart';
+import 'package:flutter_casino_platform/features/settings/presentation/screens/language_screen.dart';
+import 'package:flutter_casino_platform/features/settings/presentation/screens/notifications_screen.dart';
+import 'package:flutter_casino_platform/features/settings/presentation/screens/theme_screen.dart';
 import 'package:flutter_casino_platform/features/shell/main_shell.dart';
 import 'package:flutter_casino_platform/features/auth/domain/repositories/auth_repository.dart';
 import 'package:flutter_casino_platform/core/types/either.dart';
@@ -27,6 +31,24 @@ GoRouter buildRouter() {
       GoRoute(
         path: AppConstants.routeRegister,
         builder: (context, state) => const RegisterScreen(),
+      ),
+
+      // ── Settings (outside shell — no bottom nav) ────────────────────────
+      GoRoute(
+        path: AppConstants.routeNotifications,
+        builder: (context, state) => const NotificationsScreen(),
+      ),
+      GoRoute(
+        path: AppConstants.routeLanguage,
+        builder: (context, state) => const LanguageScreen(),
+      ),
+      GoRoute(
+        path: AppConstants.routeTheme,
+        builder: (context, state) => const ThemeScreen(),
+      ),
+      GoRoute(
+        path: AppConstants.routeChangePassword,
+        builder: (context, state) => const ChangePasswordScreen(),
       ),
 
       // ── Authenticated shell (bottom nav) ─────────────────────────────────

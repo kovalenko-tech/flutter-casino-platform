@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'app_localizations_de.dart';
 import 'app_localizations_en.dart';
 import 'app_localizations_uk.dart';
 
@@ -94,8 +95,9 @@ abstract class AppLocalizations {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
+    Locale('de'),
     Locale('en'),
-    Locale('uk'),
+    Locale('uk')
   ];
 
   /// Application name
@@ -265,6 +267,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Passwords do not match'**
   String get validationPasswordsDoNotMatch;
+
+  /// Validation: password needs uppercase
+  ///
+  /// In en, this message translates to:
+  /// **'Password must contain an uppercase letter'**
+  String get validationPasswordUppercase;
+
+  /// Validation: password needs lowercase
+  ///
+  /// In en, this message translates to:
+  /// **'Password must contain a lowercase letter'**
+  String get validationPasswordLowercase;
+
+  /// Validation: password needs digit
+  ///
+  /// In en, this message translates to:
+  /// **'Password must contain a digit'**
+  String get validationPasswordDigit;
+
+  /// Hint text showing password requirements
+  ///
+  /// In en, this message translates to:
+  /// **'Min 8 characters: uppercase, lowercase, and digit'**
+  String get passwordRequirementsHint;
 
   /// Error: duplicate email on registration
   ///
@@ -469,6 +495,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'HOT'**
   String get badgeHot;
+
+  /// Settings item: theme selection
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get settingsTheme;
+
+  /// Theme option: follow system setting
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get themeSystem;
+
+  /// Theme option: light mode
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get themeLight;
+
+  /// Theme option: dark mode
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get themeDark;
+
+  /// Language screen title
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get settingsLanguage;
+
+  /// Language option: English
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get languageEnglish;
+
+  /// Language option: Ukrainian
+  ///
+  /// In en, this message translates to:
+  /// **'Українська'**
+  String get languageUkrainian;
+
+  /// Language option: German
+  ///
+  /// In en, this message translates to:
+  /// **'Deutsch'**
+  String get languageGerman;
+
+  /// Notifications screen title
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notificationsTitle;
+
+  /// Empty state text on notifications screen
+  ///
+  /// In en, this message translates to:
+  /// **'No notifications yet'**
+  String get notificationsEmpty;
+
+  /// Security screen title
+  ///
+  /// In en, this message translates to:
+  /// **'Security'**
+  String get securityTitle;
+
+  /// Change password screen title and button
+  ///
+  /// In en, this message translates to:
+  /// **'Change Password'**
+  String get changePassword;
+
+  /// Current password field label
+  ///
+  /// In en, this message translates to:
+  /// **'Current Password'**
+  String get fieldCurrentPassword;
+
+  /// New password field label
+  ///
+  /// In en, this message translates to:
+  /// **'New Password'**
+  String get fieldNewPassword;
+
+  /// Confirm new password field label
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm New Password'**
+  String get fieldConfirmNewPassword;
+
+  /// Validation: current password is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Current password is required'**
+  String get validationCurrentPasswordRequired;
+
+  /// Error: wrong current password
+  ///
+  /// In en, this message translates to:
+  /// **'Current password is incorrect'**
+  String get errorWrongCurrentPassword;
+
+  /// Success message after password change
+  ///
+  /// In en, this message translates to:
+  /// **'Password changed successfully'**
+  String get passwordChangeSuccess;
 }
 
 class _AppLocalizationsDelegate
@@ -482,7 +616,7 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) =>
-      <String>['en', 'uk'].contains(locale.languageCode);
+      <String>['de', 'en', 'uk'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -491,6 +625,8 @@ class _AppLocalizationsDelegate
 AppLocalizations lookupAppLocalizations(Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'de':
+      return AppLocalizationsDe();
     case 'en':
       return AppLocalizationsEn();
     case 'uk':
@@ -498,9 +634,8 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
   }
 
   throw FlutterError(
-    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-    'an issue with the localizations generation tool. Please file an issue '
-    'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.',
-  );
+      'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+      'an issue with the localizations generation tool. Please file an issue '
+      'on GitHub with a reproducible sample app and the gen-l10n configuration '
+      'that was used.');
 }

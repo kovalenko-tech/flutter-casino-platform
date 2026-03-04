@@ -7,8 +7,10 @@ import 'package:flutter_casino_platform/core/constants/app_constants.dart';
 import 'package:flutter_casino_platform/features/auth/data/datasources/auth_local_datasource.dart';
 import 'package:flutter_casino_platform/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:flutter_casino_platform/features/auth/domain/repositories/auth_repository.dart';
+import 'package:flutter_casino_platform/features/auth/domain/usecases/change_password_usecase.dart';
 import 'package:flutter_casino_platform/features/auth/domain/usecases/login_usecase.dart';
 import 'package:flutter_casino_platform/features/auth/domain/usecases/register_usecase.dart';
+import 'package:flutter_casino_platform/core/settings/app_settings_cubit.dart';
 import 'package:flutter_casino_platform/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:flutter_casino_platform/features/games/data/repositories/mock_games_repository.dart';
 import 'package:flutter_casino_platform/features/games/domain/repositories/games_repository.dart';
@@ -36,8 +38,15 @@ Future<void> initDependencies() async {
 
   final db = await openDatabase(
     dbPath,
-    version: 1,
+    version: 2,
     onCreate: AuthLocalDatasourceImpl.onCreate,
+    onUpgrade: (db, oldVersion, newVersion) async {
+      if (oldVersion < 2) {
+        await db.execute(
+          'ALTER TABLE users ADD COLUMN logged_in INTEGER NOT NULL DEFAULT 1',
+        );
+      }
+    },
   );
   sl.registerSingleton<Database>(db);
 
@@ -54,6 +63,7 @@ Future<void> initDependencies() async {
   // ── Auth: use cases ────────────────────────────────────────────────────────
   sl.registerLazySingleton(() => LoginUseCase(sl<AuthRepository>()));
   sl.registerLazySingleton(() => RegisterUseCase(sl<AuthRepository>()));
+  sl.registerLazySingleton(() => ChangePasswordUseCase(sl<AuthRepository>()));
 
   // ── Home: repository (mock → swap to RealHomeRepository when ready) ────────
   sl.registerLazySingleton<HomeRepository>(() => const MockHomeRepository());
@@ -67,6 +77,9 @@ Future<void> initDependencies() async {
 
   // ── Games: use cases ───────────────────────────────────────────────────────
   sl.registerLazySingleton(() => GetGameDetailUseCase(sl<GamesRepository>()));
+
+  // ── Settings (singleton — shared across app) ─────────────────────────────
+  sl.registerSingleton(AppSettingsCubit()..load());
 
   // ── BLoCs (factories — fresh instance per page push) ──────────────────────
   sl.registerFactory(

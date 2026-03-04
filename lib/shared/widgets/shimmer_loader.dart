@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-import 'package:flutter_casino_platform/core/theme/app_colors.dart';
 import 'package:flutter_casino_platform/core/theme/app_radius.dart';
 import 'package:flutter_casino_platform/core/theme/app_spacing.dart';
+import 'package:flutter_casino_platform/core/theme/theme_context_extension.dart';
 
 /// Shimmer-based loading placeholders for common UI patterns.
 ///
@@ -46,11 +46,11 @@ class ShimmerLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final appColors = context.appColors;
 
     return Shimmer.fromColors(
-      baseColor: isDark ? AppColors.darkCard : const Color(0xFFE5E5E5),
-      highlightColor: isDark ? AppColors.darkSurface : const Color(0xFFF5F5F5),
+      baseColor: appColors.card,
+      highlightColor: appColors.background,
       child: child,
     );
   }

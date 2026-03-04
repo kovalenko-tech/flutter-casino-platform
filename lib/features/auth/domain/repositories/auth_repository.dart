@@ -29,6 +29,17 @@ abstract interface class AuthRepository {
   /// Removes all user records (logout / account wipe).
   Future<Either<Failure, void>> deleteAll();
 
-  /// Logs out the current user (deletes only the active session user).
+  /// Logs out the current user (clears session flag).
   Future<Either<Failure, void>> logout();
+
+  /// Marks the user with [email] as logged in.
+  Future<Either<Failure, void>> setLoggedIn(String email);
+
+  /// Changes the password for the user with [email].
+  /// Verifies [oldPassword] before applying [newPassword].
+  Future<Either<Failure, void>> changePassword({
+    required String email,
+    required String oldPassword,
+    required String newPassword,
+  });
 }

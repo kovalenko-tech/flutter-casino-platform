@@ -1,14 +1,13 @@
 import 'dart:async';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_casino_platform/core/constants/app_constants.dart';
-import 'package:flutter_casino_platform/core/theme/app_colors.dart';
 import 'package:flutter_casino_platform/core/theme/app_radius.dart';
 import 'package:flutter_casino_platform/core/theme/app_spacing.dart';
 import 'package:flutter_casino_platform/core/theme/app_typography.dart';
 import 'package:flutter_casino_platform/shared/widgets/app_button.dart';
+import 'package:flutter_casino_platform/shared/widgets/shimmer_image.dart';
 import 'package:flutter_casino_platform/features/home/domain/entities/promo_banner.dart';
 
 /// Auto-scrolling promotional banner carousel.
@@ -37,8 +36,9 @@ class _HeroCarouselState extends State<HeroCarousel> {
   }
 
   void _startAutoScroll() {
+    _timer?.cancel();
     _timer = Timer.periodic(
-      Duration(seconds: AppConstants.autoScrollIntervalSeconds),
+      const Duration(seconds: AppConstants.autoScrollIntervalSeconds),
       (_) {
         if (!mounted) return;
         final next = (_currentPage + 1) % widget.banners.length;
@@ -49,6 +49,11 @@ class _HeroCarouselState extends State<HeroCarousel> {
         );
       },
     );
+  }
+
+  void _stopAutoScroll() {
+    _timer?.cancel();
+    _timer = null;
   }
 
   @override
@@ -62,13 +67,18 @@ class _HeroCarouselState extends State<HeroCarousel> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
-          height: 200,
-          child: PageView.builder(
-            controller: _controller,
-            onPageChanged: (p) => setState(() => _currentPage = p),
-            itemCount: widget.banners.length,
-            itemBuilder: (_, i) => _BannerSlide(banner: widget.banners[i]),
+        GestureDetector(
+          onPanDown: (_) => _stopAutoScroll(),
+          onPanEnd: (_) => _startAutoScroll(),
+          onPanCancel: _startAutoScroll,
+          child: SizedBox(
+            height: 200,
+            child: PageView.builder(
+              controller: _controller,
+              onPageChanged: (p) => setState(() => _currentPage = p),
+              itemCount: widget.banners.length,
+              itemBuilder: (_, i) => _BannerSlide(banner: widget.banners[i]),
+            ),
           ),
         ),
         const SizedBox(height: AppSpacing.sm),
@@ -95,15 +105,7 @@ class _BannerSlide extends StatelessWidget {
           fit: StackFit.expand,
           children: [
             // Background image
-            CachedNetworkImage(
-              imageUrl: banner.imageUrl,
-              fit: BoxFit.cover,
-              placeholder: (_, __) => Container(color: AppColors.darkCard),
-              errorWidget: (_, __, ___) => Container(
-                color: AppColors.darkCard,
-                child: const Icon(Icons.image_not_supported_outlined),
-              ),
-            ),
+            ShimmerImage(imageUrl: banner.imageUrl, fit: BoxFit.cover),
 
             // Gradient overlay
             DecoratedBox(
@@ -111,7 +113,7 @@ class _BannerSlide extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.centerRight,
                   end: Alignment.centerLeft,
-                  colors: [Colors.transparent, Colors.black.withOpacity(0.85)],
+                  colors: [Colors.transparent, Colors.black.withValues(alpha: 0.85)],
                 ),
               ),
             ),
@@ -188,7 +190,7 @@ class _DotsIndicator extends StatelessWidget {
           height: 6,
           decoration: BoxDecoration(
             color:
-                isActive ? colors.primary : colors.onSurface.withOpacity(0.25),
+                isActive ? colors.primary : colors.onSurface.withValues(alpha: 0.25),
             borderRadius: AppRadius.fullAll,
           ),
         );

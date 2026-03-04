@@ -94,6 +94,18 @@
   "validationPasswordsDoNotMatch": "Passwords do not match",
   "@validationPasswordsDoNotMatch": { "description": "Validation: password and confirm password differ" },
 
+  "validationPasswordUppercase": "Password must contain an uppercase letter",
+  "@validationPasswordUppercase": { "description": "Validation: password needs uppercase" },
+
+  "validationPasswordLowercase": "Password must contain a lowercase letter",
+  "@validationPasswordLowercase": { "description": "Validation: password needs lowercase" },
+
+  "validationPasswordDigit": "Password must contain a digit",
+  "@validationPasswordDigit": { "description": "Validation: password needs digit" },
+
+  "passwordRequirementsHint": "Min 8 characters: uppercase, lowercase, and digit",
+  "@passwordRequirementsHint": { "description": "Hint text showing password requirements" },
+
 
   "errorEmailAlreadyExists": "An account with that email already exists.",
   "@errorEmailAlreadyExists": { "description": "Error: duplicate email on registration" },
@@ -201,5 +213,60 @@
   "@badgeNew": { "description": "Badge overlay on new game cards" },
 
   "badgeHot": "HOT",
-  "@badgeHot": { "description": "Badge overlay on hot/popular game cards" }
+  "@badgeHot": { "description": "Badge overlay on hot/popular game cards" },
+
+
+  "settingsTheme": "Theme",
+  "@settingsTheme": { "description": "Settings item: theme selection" },
+
+  "themeSystem": "System",
+  "@themeSystem": { "description": "Theme option: follow system setting" },
+
+  "themeLight": "Light",
+  "@themeLight": { "description": "Theme option: light mode" },
+
+  "themeDark": "Dark",
+  "@themeDark": { "description": "Theme option: dark mode" },
+
+  "settingsLanguage": "Language",
+  "@settingsLanguage": { "description": "Language screen title" },
+
+  "languageEnglish": "English",
+  "@languageEnglish": { "description": "Language option: English" },
+
+  "languageUkrainian": "Українська",
+  "@languageUkrainian": { "description": "Language option: Ukrainian" },
+
+  "languageGerman": "Deutsch",
+  "@languageGerman": { "description": "Language option: German" },
+
+  "notificationsTitle": "Notifications",
+  "@notificationsTitle": { "description": "Notifications screen title" },
+
+  "notificationsEmpty": "No notifications yet",
+  "@notificationsEmpty": { "description": "Empty state text on notifications screen" },
+
+  "securityTitle": "Security",
+  "@securityTitle": { "description": "Security screen title" },
+
+  "changePassword": "Change Password",
+  "@changePassword": { "description": "Change password screen title and button" },
+
+  "fieldCurrentPassword": "Current Password",
+  "@fieldCurrentPassword": { "description": "Current password field label" },
+
+  "fieldNewPassword": "New Password",
+  "@fieldNewPassword": { "description": "New password field label" },
+
+  "fieldConfirmNewPassword": "Confirm New Password",
+  "@fieldConfirmNewPassword": { "description": "Confirm new password field label" },
+
+  "validationCurrentPasswordRequired": "Current password is required",
+  "@validationCurrentPasswordRequired": { "description": "Validation: current password is empty" },
+
+  "errorWrongCurrentPassword": "Current password is incorrect",
+  "@errorWrongCurrentPassword": { "description": "Error: wrong current password" },
+
+  "passwordChangeSuccess": "Password changed successfully",
+  "@passwordChangeSuccess": { "description": "Success message after password change" }
 }

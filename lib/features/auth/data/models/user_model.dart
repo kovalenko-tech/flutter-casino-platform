@@ -21,6 +21,8 @@ class UserModel {
   /// Human-readable account reference, e.g. "ACC-7A3F9".
   final String accountId;
 
+  final bool loggedIn;
+
   const UserModel({
     this.id,
     required this.uid,
@@ -30,6 +32,7 @@ class UserModel {
     required this.salt,
     required this.memberSince,
     required this.accountId,
+    this.loggedIn = true,
   });
 
   // ── SQLite serialization ──────────────────────────────────────────────────
@@ -43,6 +46,7 @@ class UserModel {
         'salt': salt,
         'member_since': memberSince.millisecondsSinceEpoch,
         'account_id': accountId,
+        'logged_in': loggedIn ? 1 : 0,
       };
 
   factory UserModel.fromMap(Map<String, Object?> map) => UserModel(
@@ -56,6 +60,7 @@ class UserModel {
           map['member_since'] as int,
         ),
         accountId: map['account_id'] as String,
+        loggedIn: (map['logged_in'] as int?) == 1,
       );
 
   // ── Domain mappers ────────────────────────────────────────────────────────
@@ -68,8 +73,19 @@ class UserModel {
         accountId: accountId,
       );
 
-  static UserModel fromDomain(User user, String passwordHash, String salt) =>
-      UserModel(
+  UserModel copyWith({bool? loggedIn}) => UserModel(
+        id: id,
+        uid: uid,
+        name: name,
+        email: email,
+        passwordHash: passwordHash,
+        salt: salt,
+        memberSince: memberSince,
+        accountId: accountId,
+        loggedIn: loggedIn ?? this.loggedIn,
+      );
+
+  static UserModel fromDomain(User user, String passwordHash, String salt) => UserModel(
         uid: user.uid,
         name: user.name,
         email: user.email,

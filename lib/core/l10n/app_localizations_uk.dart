@@ -95,6 +95,19 @@ class AppLocalizationsUk extends AppLocalizations {
   String get validationPasswordsDoNotMatch => 'Паролі не збігаються';
 
   @override
+  String get validationPasswordUppercase => 'Пароль має містити велику літеру';
+
+  @override
+  String get validationPasswordLowercase => 'Пароль має містити малу літеру';
+
+  @override
+  String get validationPasswordDigit => 'Пароль має містити цифру';
+
+  @override
+  String get passwordRequirementsHint =>
+      'Мін. 8 символів: велика, мала літера та цифра';
+
+  @override
   String get errorEmailAlreadyExists => 'Акаунт з такою поштою вже існує.';
 
   @override
@@ -195,4 +208,58 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get badgeHot => 'HOT';
+
+  @override
+  String get settingsTheme => 'Тема';
+
+  @override
+  String get themeSystem => 'Системна';
+
+  @override
+  String get themeLight => 'Світла';
+
+  @override
+  String get themeDark => 'Темна';
+
+  @override
+  String get settingsLanguage => 'Мова';
+
+  @override
+  String get languageEnglish => 'English';
+
+  @override
+  String get languageUkrainian => 'Українська';
+
+  @override
+  String get languageGerman => 'Deutsch';
+
+  @override
+  String get notificationsTitle => 'Сповіщення';
+
+  @override
+  String get notificationsEmpty => 'Сповіщень поки немає';
+
+  @override
+  String get securityTitle => 'Безпека';
+
+  @override
+  String get changePassword => 'Змінити пароль';
+
+  @override
+  String get fieldCurrentPassword => 'Поточний пароль';
+
+  @override
+  String get fieldNewPassword => 'Новий пароль';
+
+  @override
+  String get fieldConfirmNewPassword => 'Підтвердіть новий пароль';
+
+  @override
+  String get validationCurrentPasswordRequired => 'Введіть поточний пароль';
+
+  @override
+  String get errorWrongCurrentPassword => 'Поточний пароль невірний';
+
+  @override
+  String get passwordChangeSuccess => 'Пароль успішно змінено';
 }

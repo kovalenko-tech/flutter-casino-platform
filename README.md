@@ -6,8 +6,15 @@ A local-first Flutter casino platform showcasing clean architecture, a custom de
 
 ---
 
+## Demo
+
+https://github.com/user-attachments/assets/demo_video.mp4
+
+---
+
 ## Table of Contents
 
+- [Demo](#demo)
 - [Overview](#overview)
 - [Architecture](#architecture)
 - [Folder Structure](#folder-structure)
@@ -25,12 +32,13 @@ A local-first Flutter casino platform showcasing clean architecture, a custom de
 
 | Feature | Description |
 |---------|-------------|
-| **Auth** | Local registration + login, SHA-256 password hashing with random salt, stored in Isar |
-| **Home** | Hero banner carousel (auto-scroll), category filter chips, 4-column game grid |
+| **Auth** | Local registration + login + change password, SHA-256 hashing with random salt, stored in SQLite |
+| **Home** | Hero banner carousel (auto-scroll), category filter chips, 4-column game grid, notification bell |
 | **Games** | Full game catalogue with search, detail screen with RTP / volatility indicators |
-| **Profile** | User avatar (initials), stats, settings list, logout |
-| **Theming** | Dual dark/light theme; all tokens in `core/theme/` — no hardcoded colours or sizes |
-| **L10n** | Full English + Ukrainian localization via ARB files and generated `AppLocalizations` |
+| **Profile** | User avatar (initials), stats, settings list with ink splash, logout |
+| **Settings** | Notifications (placeholder), language switch (live), theme switch (system/light/dark), change password |
+| **Theming** | Dual dark/light theme with runtime switching via `AppSettingsCubit`; persisted in SharedPreferences |
+| **L10n** | English, Ukrainian, and German localization via ARB files; live locale switching |
 
 ---
 
@@ -46,8 +54,8 @@ Clean Architecture with three layers per feature:
 │           Domain                │  ← Entities, Use Cases, Repository contracts
 │  (pure Dart, zero dependencies) │
 ├─────────────────────────────────┤
-│            Data                 │  ← Isar models, datasources, repo implementations
-│  (Isar, crypto, mock data)      │
+│            Data                 │  ← SQLite models, datasources, repo implementations
+│  (sqflite, crypto, mock data)   │
 └─────────────────────────────────┘
 ```
 
@@ -68,14 +76,16 @@ Screen → BLoC Event → BLoC → UseCase → Repository (interface)
 
 ```
 lib/
-├── app.dart                          # Root CasinoApp widget (theme + l10n + router)
-├── main.dart                         # Entry point — init DI, open Isar, runApp
+├── app.dart                          # Root CasinoApp widget (theme + l10n + router + AppSettingsCubit)
+├── main.dart                         # Entry point — init DI, open SQLite, runApp
 │
 ├── core/
 │   ├── constants/app_constants.dart  # Route paths, DB name, app name
 │   ├── di/injection_container.dart   # get_it — all registrations in one place
 │   ├── errors/failures.dart          # Failure hierarchy (Auth, Storage, NotFound, Validation)
 │   ├── types/either.dart             # Lightweight Either<L,R> (no dartz dependency)
+│   ├── settings/
+│   │   └── app_settings_cubit.dart   # Theme mode + locale state, persisted via SharedPreferences
 │   ├── l10n/
 │   │   ├── app_localizations.dart    # Generated — do not edit manually
 │   │   └── l10n_extension.dart       # context.l10n shortcut
@@ -86,6 +96,7 @@ lib/
 │   └── theme/
 │       ├── theme.dart                # Barrel — single import for all tokens
 │       ├── app_colors.dart           # Color tokens (dark + light ColorScheme)
+│       ├── app_colors_extension.dart  # ThemeExtension for custom colors (textSecondary, background)
 │       ├── app_typography.dart       # Poppins + Inter text styles + numeric styles
 │       ├── app_spacing.dart          # Spacing scale (xs=4 → xxl=48)
 │       ├── app_sizes.dart            # Component sizes (buttons, avatars, cards, images)
@@ -98,12 +109,12 @@ lib/
 │   ├── auth/
 │   │   ├── data/
 │   │   │   ├── datasources/auth_local_datasource.dart
-│   │   │   ├── models/user_model.dart          # @collection — Isar schema
+│   │   │   ├── models/user_model.dart
 │   │   │   └── repositories/auth_repository_impl.dart
 │   │   ├── domain/
 │   │   │   ├── entities/user.dart
 │   │   │   ├── repositories/auth_repository.dart   # abstract interface
-│   │   │   └── usecases/{login,register}_usecase.dart
+│   │   │   └── usecases/{login,register,change_password}_usecase.dart
 │   │   └── presentation/
 │   │       ├── bloc/auth_{bloc,event,state}.dart
 │   │       └── screens/{login,register}_screen.dart
@@ -133,13 +144,21 @@ lib/
 │   │   ├── domain/entities/profile.dart
 │   │   └── presentation/
 │   │       ├── bloc/profile_{bloc,event,state}.dart
-│   │       └── screens/profile_screen.dart
+│   │       └── screens/profile_screen.dart          # includes settings list widget
+│   │
+│   ├── settings/
+│   │   └── presentation/screens/
+│   │       ├── notifications_screen.dart            # Empty-state placeholder
+│   │       ├── language_screen.dart                  # EN / UK / DE live switching
+│   │       ├── theme_screen.dart                     # System / Light / Dark live switching
+│   │       └── change_password_screen.dart           # Form with validation + success feedback
 │   │
 │   └── shell/main_shell.dart         # StatefulShellRoute + bottom nav bar
 │
 ├── l10n/
-│   ├── app_en.arb                    # English strings (60+ keys)
-│   └── app_uk.arb                    # Ukrainian strings
+│   ├── app_en.arb                    # English strings (80+ keys)
+│   ├── app_uk.arb                    # Ukrainian strings
+│   └── app_de.arb                    # German strings
 │
 └── shared/
     ├── extensions/
@@ -151,11 +170,13 @@ lib/
         └── category_badge.dart        # Coloured category chip
 
 test/
+├── core/
+│   └── settings/                     # AppSettingsCubit tests (load, setTheme, setLocale)
 ├── helpers/
 │   ├── test_helpers.dart             # buildTestWidget(), shared fixtures
 │   └── mock_classes.dart             # Central mock hub (mocktail)
 └── features/
-    ├── auth/                         # Entity, use case, BLoC, screen tests
+    ├── auth/                         # Entity, use case (login, register, change_password), BLoC, screen tests
     ├── home/                         # Entity, repository, use case, BLoC, widget tests
     ├── games/                        # Repository, use case, BLoC, screen tests
     └── profile/                      # BLoC tests
@@ -174,14 +195,14 @@ import 'package:flutter_casino_platform/core/theme/theme.dart';
 **Never hardcode** colours, sizes, or spacing — always use tokens:
 
 ```dart
-// ✅ Correct
+// Correct
 padding: EdgeInsets.all(AppSpacing.md)
 color: AppColors.darkPrimary
 style: AppTypography.titleLarge(colors.onSurface)
 borderRadius: BorderRadius.circular(AppRadius.card)
 height: AppSizes.gameCardHeight
 
-// ❌ Wrong
+// Wrong
 padding: EdgeInsets.all(16)
 color: Color(0xFFF0B429)
 ```
@@ -200,8 +221,8 @@ color: Color(0xFFF0B429)
 
 ### Typography
 
-- **Headings** — Poppins (weight 600–700): `displayLarge` → `titleSmall`
-- **Body / Labels** — Inter (weight 400–600): `bodyLarge` → `labelSmall`
+- **Headings** — Poppins (weight 600-700): `displayLarge` -> `titleSmall`
+- **Body / Labels** — Inter (weight 400-600): `bodyLarge` -> `labelSmall`
 - **Numeric** — Inter tabular figures: `numericLarge/Medium/Small` — for RTP, balances, stats (digits stay fixed-width as values update)
 - **Mono** — Roboto Mono: `monoSmall` — for account IDs, codes
 
@@ -217,14 +238,15 @@ Icons:    xs=12  sm=16  md=20  lg=24  xl=32  xxl=48
 
 ## Localization
 
-The app uses Flutter's built-in `flutter_localizations` with ARB files.
+The app uses Flutter's built-in `flutter_localizations` with ARB files. Language can be switched at runtime from **Profile > Language** — the change is applied live and persisted across sessions.
 
-**Supported locales:** English (`en`), Ukrainian (`uk`)
+**Supported locales:** English (`en`), Ukrainian (`uk`), German (`de`)
 
 ```
 lib/l10n/
-├── app_en.arb    # 60+ string keys — English
-└── app_uk.arb    # Full Ukrainian translation
+├── app_en.arb    # 80+ string keys — English
+├── app_uk.arb    # Full Ukrainian translation
+└── app_de.arb    # Full German translation
 ```
 
 ### Usage in widgets
@@ -257,12 +279,12 @@ There is no back-end. All game and banner data is served by in-memory mock imple
 
 ```
 HomeRepository (abstract interface)
-  └── MockHomeRepository   ← registered in DI today
-  └── RealHomeRepository   ← replace in DI when API is ready
+  └── MockHomeRepository   <- registered in DI today
+  └── RealHomeRepository   <- replace in DI when API is ready
 
 GamesRepository (abstract interface)
-  └── MockGamesRepository  ← registered in DI today
-  └── RealGamesRepository  ← replace in DI when API is ready
+  └── MockGamesRepository  <- registered in DI today
+  └── RealGamesRepository  <- replace in DI when API is ready
 ```
 
 To switch to a real implementation, change **one line** in `injection_container.dart`:
@@ -294,7 +316,7 @@ flutter test test/features/auth/    # specific feature only
 | Domain entities | `flutter_test` | `*_test.dart` in `test/features/*/domain/` |
 | Mock repositories | `flutter_test` | `test/features/*/data/repositories/` |
 | Use cases | `flutter_test` + `mocktail` | `test/features/*/domain/usecases/` |
-| BLoCs | `bloc_test` + `mocktail` | `test/features/*/presentation/bloc/` |
+| BLoCs / Cubits | `bloc_test` + `mocktail` | `test/features/*/presentation/bloc/` + `test/core/settings/` |
 | Widgets & screens | `flutter_test` + `mocktail` | `test/features/*/presentation/` + `test/shared/` |
 
 ### Helpers
@@ -324,22 +346,22 @@ final testBanner  = PromoBanner(...);
 
 | Package | Version | Why |
 |---------|---------|-----|
-| `flutter_bloc` | ^8.1.5 | Predictable, testable state management |
-| `equatable` | ^2.0.5 | Value equality for BLoC events/states |
-| `get_it` | ^7.7.0 | Lightweight service locator for DI |
-| `go_router` | ^14.2.0 | Declarative routing with auth redirect guard |
-| `isar` | ^3.1.0 | Fast, Dart-native local DB |
-| `isar_flutter_libs` | ^3.1.0 | Isar native binaries (iOS + Android) |
-| `path_provider` | ^2.1.3 | DB path resolution per platform |
+| `flutter_bloc` | ^9.1.1 | Predictable, testable state management |
+| `equatable` | ^2.0.8 | Value equality for BLoC events/states |
+| `get_it` | ^9.2.1 | Lightweight service locator for DI |
+| `go_router` | ^17.1.0 | Declarative routing with auth redirect guard |
+| `sqflite` | ^2.4.2 | SQLite local database |
+| `shared_preferences` | ^2.3.5 | Key-value persistence for settings (theme, locale) |
+| `path_provider` | ^2.1.5 | DB path resolution per platform |
 | `flutter_localizations` | SDK | Localization delegates |
-| `intl` | ^0.19.0 | ARB-based string generation |
-| `crypto` | ^3.0.3 | SHA-256 password hashing |
-| `uuid` | ^4.4.0 | UUID v4 for user IDs |
-| `cached_network_image` | ^3.3.1 | Image caching with error placeholders |
-| `google_fonts` | ^6.2.1 | Poppins + Inter fonts |
+| `intl` | ^0.20.2 | ARB-based string generation |
+| `crypto` | ^3.0.7 | SHA-256 password hashing |
+| `uuid` | ^4.5.3 | UUID v4 for user IDs |
+| `cached_network_image` | ^3.4.1 | Image caching with error placeholders |
+| `google_fonts` | ^8.0.2 | Poppins + Inter fonts |
 | `shimmer` | ^3.0.0 | Loading skeleton animations |
-| `flutter_svg` | ^2.0.10+1 | SVG asset rendering |
-| **dev** `bloc_test` | ^9.1.7 | BLoC unit testing DSL |
+| `flutter_svg` | ^2.2.3 | SVG asset rendering |
+| **dev** `bloc_test` | ^10.0.0 | BLoC unit testing DSL |
 | **dev** `mocktail` | ^1.0.4 | Type-safe mocking without code generation |
 
 ---
@@ -348,8 +370,8 @@ final testBanner  = PromoBanner(...);
 
 ### Prerequisites
 
-- Flutter ≥ 3.19.0
-- Dart ≥ 3.3.0
+- Flutter >= 3.29.0
+- Dart >= 3.3.0
 
 ### 1. Clone & install
 
@@ -359,11 +381,9 @@ cd flutter-casino-platform
 flutter pub get
 ```
 
-### 2. Generate code
+### 2. Generate localization files
 
 ```bash
-# Isar schemas + localization files
-dart run build_runner build --delete-conflicting-outputs
 flutter gen-l10n
 ```
 
@@ -383,14 +403,17 @@ flutter test --coverage
 
 ## Key Decisions
 
-### Local-first with Isar
-All player data lives in an Isar database on-device. Isar was chosen over Hive for its type-safe query API and better performance on large collections. In production, Isar would act as the cache layer and sync with a remote API on connectivity changes.
+### Local-first with SQLite
+All player data lives in a SQLite database on-device via the `sqflite` package. In production, SQLite would act as the cache layer and sync with a remote API on connectivity changes.
+
+### AppSettingsCubit for runtime preferences
+Theme mode and locale are managed by a single `AppSettingsCubit` backed by `SharedPreferences`. The cubit is a singleton registered in DI and provided at the root of the widget tree via `BlocProvider.value`. Changes to theme or locale are applied immediately without restarting the app.
 
 ### Repository interfaces at the DI boundary
-Every data source is hidden behind an `abstract interface class`. The DI container (`injection_container.dart`) is the only place that knows about concrete implementations. This makes swapping mock ↔ real implementations a one-line change with zero impact on the domain or presentation layers.
+Every data source is hidden behind an `abstract interface class`. The DI container (`injection_container.dart`) is the only place that knows about concrete implementations. This makes swapping mock <-> real implementations a one-line change with zero impact on the domain or presentation layers.
 
 ### Lightweight Either without dartz
-`Either<L, R>` is implemented as a Dart record in `core/types/either.dart`. This avoids pulling in the full `dartz` package (and its learning curve) while still making error paths explicit and type-safe at every layer boundary.
+`Either<L, R>` is implemented in `core/types/either.dart`. This avoids pulling in the full `dartz` package (and its learning curve) while still making error paths explicit and type-safe at every layer boundary.
 
 ### BLoC over Riverpod/Provider
 BLoC gives explicit, auditable state transitions — particularly valuable in a gambling context where every state change has clear meaning. Events are named commands (`LoginRequested`) and states are named outcomes (`Authenticated`), making flows easy to trace and test.

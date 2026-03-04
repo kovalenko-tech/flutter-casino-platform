@@ -6,6 +6,7 @@ import 'package:mocktail/mocktail.dart';
 
 import 'package:flutter_casino_platform/core/l10n/app_localizations.dart';
 import 'package:flutter_casino_platform/core/di/injection_container.dart';
+import 'package:flutter_casino_platform/core/theme/app_theme.dart';
 import 'package:flutter_casino_platform/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:flutter_casino_platform/features/auth/presentation/screens/login_screen.dart';
 
@@ -13,6 +14,7 @@ class MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 Widget _buildTestApp({required Widget home}) {
   return MaterialApp(
+    theme: AppTheme.dark,
     localizationsDelegates: const [
       AppLocalizations.delegate,
       GlobalMaterialLocalizations.delegate,

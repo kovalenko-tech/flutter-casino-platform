@@ -45,7 +45,9 @@ abstract final class AppColors {
         onSurface: darkTextPrimary,
         surfaceContainerHighest: darkCard,
         outline: darkBorder,
+        // ignore: deprecated_member_use
         background: darkBackground,
+        // ignore: deprecated_member_use
         onBackground: darkTextPrimary,
         tertiary: darkSuccess,
         onTertiary: darkOnPrimary,
@@ -63,7 +65,9 @@ abstract final class AppColors {
         onSurface: lightTextPrimary,
         surfaceContainerHighest: lightCard,
         outline: lightBorder,
+        // ignore: deprecated_member_use
         background: lightBackground,
+        // ignore: deprecated_member_use
         onBackground: lightTextPrimary,
         tertiary: lightSuccess,
         onTertiary: lightOnPrimary,

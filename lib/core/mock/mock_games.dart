@@ -10,7 +10,7 @@ import 'package:flutter_casino_platform/features/home/domain/entities/game_categ
 abstract final class MockGames {
   static final List<GameDetail> all = [
     // ── Slots ────────────────────────────────────────────────────────────────
-    GameDetail(
+    const GameDetail(
       id: 'book-of-dead',
       name: 'Book of Dead',
       category: GameCategory.slots,
@@ -24,7 +24,7 @@ abstract final class MockGames {
       isNew: false,
       isHot: true,
     ),
-    GameDetail(
+    const GameDetail(
       id: 'gates-of-olympus',
       name: 'Gates of Olympus',
       category: GameCategory.slots,
@@ -38,7 +38,7 @@ abstract final class MockGames {
       isNew: false,
       isHot: true,
     ),
-    GameDetail(
+    const GameDetail(
       id: 'sweet-bonanza',
       name: 'Sweet Bonanza',
       category: GameCategory.slots,
@@ -52,7 +52,7 @@ abstract final class MockGames {
       isNew: false,
       isHot: false,
     ),
-    GameDetail(
+    const GameDetail(
       id: 'starburst',
       name: 'Starburst',
       category: GameCategory.slots,
@@ -66,7 +66,7 @@ abstract final class MockGames {
       isNew: false,
       isHot: false,
     ),
-    GameDetail(
+    const GameDetail(
       id: 'wolf-gold',
       name: 'Wolf Gold',
       category: GameCategory.slots,
@@ -80,7 +80,7 @@ abstract final class MockGames {
       isNew: false,
       isHot: false,
     ),
-    GameDetail(
+    const GameDetail(
       id: 'fire-joker',
       name: 'Fire Joker',
       category: GameCategory.slots,
@@ -96,7 +96,7 @@ abstract final class MockGames {
     ),
 
     // ── Live Casino ──────────────────────────────────────────────────────────
-    GameDetail(
+    const GameDetail(
       id: 'lightning-roulette',
       name: 'Lightning Roulette',
       category: GameCategory.live,
@@ -110,7 +110,7 @@ abstract final class MockGames {
       isNew: false,
       isHot: true,
     ),
-    GameDetail(
+    const GameDetail(
       id: 'crazy-time',
       name: 'Crazy Time',
       category: GameCategory.live,
@@ -124,7 +124,7 @@ abstract final class MockGames {
       isNew: false,
       isHot: true,
     ),
-    GameDetail(
+    const GameDetail(
       id: 'mega-ball',
       name: 'Mega Ball',
       category: GameCategory.live,
@@ -138,7 +138,7 @@ abstract final class MockGames {
       isNew: true,
       isHot: false,
     ),
-    GameDetail(
+    const GameDetail(
       id: 'deal-or-no-deal',
       name: 'Deal or No Deal',
       category: GameCategory.live,
@@ -154,7 +154,7 @@ abstract final class MockGames {
     ),
 
     // ── Table Games ──────────────────────────────────────────────────────────
-    GameDetail(
+    const GameDetail(
       id: 'blackjack-classic',
       name: 'Blackjack Classic',
       category: GameCategory.table,
@@ -168,7 +168,7 @@ abstract final class MockGames {
       isNew: false,
       isHot: false,
     ),
-    GameDetail(
+    const GameDetail(
       id: 'baccarat-pro',
       name: 'Baccarat Pro',
       category: GameCategory.table,
@@ -182,7 +182,7 @@ abstract final class MockGames {
       isNew: false,
       isHot: false,
     ),
-    GameDetail(
+    const GameDetail(
       id: 'texas-holdem',
       name: "Texas Hold'em",
       category: GameCategory.table,
@@ -196,7 +196,7 @@ abstract final class MockGames {
       isNew: false,
       isHot: false,
     ),
-    GameDetail(
+    const GameDetail(
       id: 'casino-holdem',
       name: "Casino Hold'em",
       category: GameCategory.table,
@@ -212,7 +212,7 @@ abstract final class MockGames {
     ),
 
     // ── Jackpot ──────────────────────────────────────────────────────────────
-    GameDetail(
+    const GameDetail(
       id: 'mega-moolah',
       name: 'Mega Moolah',
       category: GameCategory.jackpot,
@@ -226,7 +226,7 @@ abstract final class MockGames {
       isNew: false,
       isHot: true,
     ),
-    GameDetail(
+    const GameDetail(
       id: 'divine-fortune',
       name: 'Divine Fortune',
       category: GameCategory.jackpot,

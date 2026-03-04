@@ -96,6 +96,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get validationPasswordsDoNotMatch => 'Passwords do not match';
 
   @override
+  String get validationPasswordUppercase =>
+      'Password must contain an uppercase letter';
+
+  @override
+  String get validationPasswordLowercase =>
+      'Password must contain a lowercase letter';
+
+  @override
+  String get validationPasswordDigit => 'Password must contain a digit';
+
+  @override
+  String get passwordRequirementsHint =>
+      'Min 8 characters: uppercase, lowercase, and digit';
+
+  @override
   String get errorEmailAlreadyExists =>
       'An account with that email already exists.';
 
@@ -197,4 +212,59 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get badgeHot => 'HOT';
+
+  @override
+  String get settingsTheme => 'Theme';
+
+  @override
+  String get themeSystem => 'System';
+
+  @override
+  String get themeLight => 'Light';
+
+  @override
+  String get themeDark => 'Dark';
+
+  @override
+  String get settingsLanguage => 'Language';
+
+  @override
+  String get languageEnglish => 'English';
+
+  @override
+  String get languageUkrainian => 'Українська';
+
+  @override
+  String get languageGerman => 'Deutsch';
+
+  @override
+  String get notificationsTitle => 'Notifications';
+
+  @override
+  String get notificationsEmpty => 'No notifications yet';
+
+  @override
+  String get securityTitle => 'Security';
+
+  @override
+  String get changePassword => 'Change Password';
+
+  @override
+  String get fieldCurrentPassword => 'Current Password';
+
+  @override
+  String get fieldNewPassword => 'New Password';
+
+  @override
+  String get fieldConfirmNewPassword => 'Confirm New Password';
+
+  @override
+  String get validationCurrentPasswordRequired =>
+      'Current password is required';
+
+  @override
+  String get errorWrongCurrentPassword => 'Current password is incorrect';
+
+  @override
+  String get passwordChangeSuccess => 'Password changed successfully';
 }

@@ -21,7 +21,7 @@ class _Either<L, R> {
 /// Public alias — use `Either<Failure, T>` throughout the codebase.
 typedef Either<L, R> = _Either<L, R>;
 
-extension EitherX<L, R> on _Either<L, R> {
+extension EitherX<L, R> on Either<L, R> {
   bool get isLeft => !_isRight;
   bool get isRight => _isRight;
   L get leftValue => _l as L;

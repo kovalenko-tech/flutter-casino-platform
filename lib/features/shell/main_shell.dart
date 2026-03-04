@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:flutter_casino_platform/core/theme/app_colors.dart';
+import 'package:flutter_casino_platform/core/theme/app_icon_size.dart';
 import 'package:flutter_casino_platform/core/theme/app_radius.dart';
 import 'package:flutter_casino_platform/core/theme/app_spacing.dart';
 import 'package:flutter_casino_platform/core/theme/app_typography.dart';
+import 'package:flutter_casino_platform/core/theme/theme_context_extension.dart';
 import 'package:flutter_casino_platform/features/home/presentation/screens/home_screen.dart';
 import 'package:flutter_casino_platform/features/games/presentation/screens/games_screen.dart';
 import 'package:flutter_casino_platform/features/profile/presentation/screens/profile_screen.dart';
 import 'package:flutter_casino_platform/core/l10n/l10n_extension.dart';
+
+part 'widgets/nav_item.dart';
+part 'widgets/tab_item.dart';
 
 // Re-export tab widgets so go_router can import them from this file.
 class HomeTab extends StatelessWidget {
@@ -64,10 +68,9 @@ class MainShell extends StatelessWidget {
         label: l10n.navProfile,
       ),
     ];
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bgColor =
-        isDark ? AppColors.darkBackground : AppColors.lightBackground;
-    final borderColor = isDark ? AppColors.darkBorder : AppColors.lightBorder;
+    final appColors = context.appColors;
+    final bgColor = appColors.background;
+    final borderColor = appColors.border;
 
     return Scaffold(
       body: shell,
@@ -92,7 +95,7 @@ class MainShell extends StatelessWidget {
                       tab: tab,
                       isActive: isActive,
                       colors: colors,
-                      isDark: isDark,
+                      textSecondary: appColors.textSecondary,
                     ),
                   ),
                 );
@@ -103,59 +106,4 @@ class MainShell extends StatelessWidget {
       ),
     );
   }
-}
-
-class _NavItem extends StatelessWidget {
-  final _TabItem tab;
-  final bool isActive;
-  final ColorScheme colors;
-  final bool isDark;
-
-  const _NavItem({
-    required this.tab,
-    required this.isActive,
-    required this.colors,
-    required this.isDark,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final color = isActive
-        ? colors.primary
-        : (isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary);
-
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        // Gold top-border indicator for active tab
-        if (isActive)
-          Container(
-            height: 2,
-            width: 32,
-            margin: const EdgeInsets.only(bottom: AppSpacing.xs),
-            decoration: BoxDecoration(
-              color: colors.primary,
-              borderRadius: AppRadius.fullAll,
-            ),
-          )
-        else
-          const SizedBox(height: 2 + AppSpacing.xs),
-        Icon(isActive ? tab.activeIcon : tab.icon, color: color, size: 24),
-        const SizedBox(height: 2),
-        Text(tab.label, style: AppTypography.labelSmall(color)),
-      ],
-    );
-  }
-}
-
-class _TabItem {
-  final IconData icon;
-  final IconData activeIcon;
-  final String label;
-
-  const _TabItem({
-    required this.icon,
-    required this.activeIcon,
-    required this.label,
-  });
 }
