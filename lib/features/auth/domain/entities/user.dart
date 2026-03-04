@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 /// Core domain entity for a registered player.
 ///
-/// Pure Dart — no Isar annotations, no JSON serialisation.
+/// Pure Dart — no framework annotations, no JSON serialisation.
 /// All persistence concerns live in the data layer.
 class User extends Equatable {
   final String uid;

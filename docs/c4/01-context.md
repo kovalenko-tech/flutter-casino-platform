@@ -10,14 +10,14 @@ C4Context
 
     System(app, "Flutter Casino App", "Cross-platform mobile application (iOS / Android). Runs entirely on-device — no backend required.")
 
-    SystemDb(isar, "Local Storage (SQLite)", "Embedded relational database stored on the device via sqflite. Persists user accounts and session data.")
+    SystemDb(sqlite, "Local Storage (SQLite)", "Embedded relational database stored on the device via sqflite. Persists user accounts and session data.")
 
     Rel(player, app, "Opens app, logs in, browses games, plays, views profile")
-    Rel(app, isar, "Reads & writes", "sqflite")
+    Rel(app, sqlite, "Reads & writes", "sqflite")
 
     UpdateElementStyle(player, $bgColor="#1168BD", $fontColor="#ffffff")
     UpdateElementStyle(app, $bgColor="#1168BD", $fontColor="#ffffff")
-    UpdateElementStyle(isar, $bgColor="#999999", $fontColor="#ffffff")
+    UpdateElementStyle(sqlite, $bgColor="#999999", $fontColor="#ffffff")
 ```
 
 ## Notes

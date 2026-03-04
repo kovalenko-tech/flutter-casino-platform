@@ -16,7 +16,7 @@ class AuthFailure extends Failure {
   const AuthFailure(super.message);
 }
 
-/// Covers Isar read/write/delete failures.
+/// Covers SQLite read/write/delete failures.
 class StorageFailure extends Failure {
   const StorageFailure(super.message);
 }

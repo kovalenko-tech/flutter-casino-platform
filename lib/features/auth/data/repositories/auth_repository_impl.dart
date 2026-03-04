@@ -5,7 +5,7 @@ import 'package:flutter_casino_platform/features/auth/data/models/user_model.dar
 import 'package:flutter_casino_platform/features/auth/domain/entities/user.dart';
 import 'package:flutter_casino_platform/features/auth/domain/repositories/auth_repository.dart';
 
-/// Concrete [AuthRepository] backed by Isar through [AuthLocalDatasource].
+/// Concrete [AuthRepository] backed by SQLite through [AuthLocalDatasource].
 ///
 /// All exceptions from the data source are caught and wrapped in [Failure]
 /// subtypes so the domain and presentation layers never see raw exceptions.

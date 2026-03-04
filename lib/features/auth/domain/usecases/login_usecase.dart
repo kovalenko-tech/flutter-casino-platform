@@ -3,7 +3,7 @@ import 'package:flutter_casino_platform/core/types/either.dart';
 import 'package:flutter_casino_platform/features/auth/domain/entities/user.dart';
 import 'package:flutter_casino_platform/features/auth/domain/repositories/auth_repository.dart';
 
-/// Validates email/password credentials against the local Isar store.
+/// Validates email/password credentials against the local SQLite store.
 ///
 /// Returns the authenticated [User] on success, or an [AuthFailure]
 /// if credentials are incorrect or the account does not exist.

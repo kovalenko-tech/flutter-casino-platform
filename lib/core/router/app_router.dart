@@ -16,7 +16,7 @@ import 'package:flutter_casino_platform/core/types/either.dart';
 
 /// Builds the app's [GoRouter] with an auth-guard redirect.
 ///
-/// The guard checks whether a user row exists in Isar.
+/// The guard checks whether a user row exists in SQLite.
 /// If no session is found, any route redirects to `/login`.
 GoRouter buildRouter() {
   return GoRouter(
