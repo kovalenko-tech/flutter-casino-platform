@@ -115,7 +115,8 @@ class _GamesScreenState extends State<GamesScreen> {
                           (context, i) => GameCard(game: state.games[i]),
                           childCount: state.games.length,
                         ),
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 4,
                           mainAxisSpacing: AppSpacing.sm,
                           crossAxisSpacing: AppSpacing.sm,

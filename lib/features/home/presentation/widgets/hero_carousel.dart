@@ -113,7 +113,10 @@ class _BannerSlide extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.centerRight,
                   end: Alignment.centerLeft,
-                  colors: [Colors.transparent, Colors.black.withValues(alpha: 0.85)],
+                  colors: [
+                    Colors.transparent,
+                    Colors.black.withValues(alpha: 0.85)
+                  ],
                 ),
               ),
             ),
@@ -189,8 +192,9 @@ class _DotsIndicator extends StatelessWidget {
           width: isActive ? 20 : 6,
           height: 6,
           decoration: BoxDecoration(
-            color:
-                isActive ? colors.primary : colors.onSurface.withValues(alpha: 0.25),
+            color: isActive
+                ? colors.primary
+                : colors.onSurface.withValues(alpha: 0.25),
             borderRadius: AppRadius.fullAll,
           ),
         );

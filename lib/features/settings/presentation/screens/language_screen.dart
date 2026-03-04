@@ -37,7 +37,8 @@ class LanguageScreen extends StatelessWidget {
                 color: colors.surfaceContainerHighest,
                 borderRadius: AppRadius.mdAll,
                 child: ListTile(
-                  shape: const RoundedRectangleBorder(borderRadius: AppRadius.mdAll),
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: AppRadius.mdAll),
                   title: Text(
                     label,
                     style: AppTypography.bodyMedium(colors.onSurface),

@@ -85,7 +85,8 @@ class UserModel {
         loggedIn: loggedIn ?? this.loggedIn,
       );
 
-  static UserModel fromDomain(User user, String passwordHash, String salt) => UserModel(
+  static UserModel fromDomain(User user, String passwordHash, String salt) =>
+      UserModel(
         uid: user.uid,
         name: user.name,
         email: user.email,

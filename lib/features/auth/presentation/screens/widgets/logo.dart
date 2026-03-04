@@ -16,7 +16,8 @@ class _Logo extends StatelessWidget {
             color: colors.primary,
             borderRadius: AppRadius.mdAll,
           ),
-          child: Icon(Icons.casino_rounded, color: colors.onPrimary, size: AppIconSize.lg),
+          child: Icon(Icons.casino_rounded,
+              color: colors.onPrimary, size: AppIconSize.lg),
         ),
         const SizedBox(width: AppSpacing.sm),
         Text(

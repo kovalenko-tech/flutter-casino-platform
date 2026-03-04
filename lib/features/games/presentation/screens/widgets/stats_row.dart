@@ -32,14 +32,18 @@ class _StatsRow extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
               decoration: BoxDecoration(
-                color: game.isHot ? colors.primary.withValues(alpha: 0.15) : colors.secondary.withValues(alpha: 0.15),
+                color: game.isHot
+                    ? colors.primary.withValues(alpha: 0.15)
+                    : colors.secondary.withValues(alpha: 0.15),
                 borderRadius: AppRadius.mdAll,
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(
-                    game.isHot ? Icons.local_fire_department : Icons.new_releases,
+                    game.isHot
+                        ? Icons.local_fire_department
+                        : Icons.new_releases,
                     size: AppIconSize.sm,
                     color: game.isHot ? colors.primary : colors.secondary,
                   ),

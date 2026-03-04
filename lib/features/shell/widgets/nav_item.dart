@@ -33,7 +33,8 @@ class _NavItem extends StatelessWidget {
           )
         else
           const SizedBox(height: 2 + AppSpacing.xs),
-        Icon(isActive ? tab.activeIcon : tab.icon, color: color, size: AppIconSize.lg),
+        Icon(isActive ? tab.activeIcon : tab.icon,
+            color: color, size: AppIconSize.lg),
         const SizedBox(height: 2),
         Text(tab.label, style: AppTypography.labelSmall(color)),
       ],

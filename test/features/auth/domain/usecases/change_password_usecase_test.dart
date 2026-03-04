@@ -44,8 +44,7 @@ void main() {
           newPassword: any(named: 'newPassword'),
         ),
       ).thenAnswer(
-        (_) async =>
-            left(const AuthFailure('Current password is incorrect.')),
+        (_) async => left(const AuthFailure('Current password is incorrect.')),
       );
 
       final result = await useCase(

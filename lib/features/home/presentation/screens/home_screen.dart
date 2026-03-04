@@ -56,96 +56,96 @@ class _HomeView extends StatelessWidget {
               CustomScrollView(
                 slivers: [
                   _HomeAppBar(backgroundColor: bg),
-              if (state is HomeLoading) ...[
-                const SliverToBoxAdapter(child: _ShimmerCarousel()),
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.all(AppSpacing.md),
-                    child: ShimmerLoader.grid(),
-                  ),
-                ),
-              ] else if (state is HomeLoaded) ...[
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: AppSpacing.md),
-                    child: HeroCarousel(banners: state.banners),
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(
-                      AppSpacing.md,
-                      AppSpacing.lg,
-                      AppSpacing.md,
-                      AppSpacing.sm,
+                  if (state is HomeLoading) ...[
+                    const SliverToBoxAdapter(child: _ShimmerCarousel()),
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: const EdgeInsets.all(AppSpacing.md),
+                        child: ShimmerLoader.grid(),
+                      ),
                     ),
-                    child: Text(
-                      l10n.gamesAllGames,
-                      style: AppTypography.headlineSmall(colors.onSurface),
+                  ] else if (state is HomeLoaded) ...[
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: AppSpacing.md),
+                        child: HeroCarousel(banners: state.banners),
+                      ),
                     ),
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: CategoryFilterChips(
-                    selectedCategory: state.selectedCategory,
-                  ),
-                ),
-                const SliverToBoxAdapter(
-                  child: SizedBox(height: AppSpacing.md),
-                ),
-                GameGrid(games: state.games),
-                const SliverToBoxAdapter(
-                  child: SizedBox(height: AppSpacing.xxl),
-                ),
-              ] else if (state is HomeError) ...[
-                SliverFillRemaining(
-                  child: Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.error_outline,
-                          color: colors.error,
-                          size: AppIconSize.xxl,
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(
+                          AppSpacing.md,
+                          AppSpacing.lg,
+                          AppSpacing.md,
+                          AppSpacing.sm,
                         ),
-                        const SizedBox(height: AppSpacing.md),
-                        Text(
-                          state.message,
-                          style: AppTypography.bodyMedium(colors.onSurface),
+                        child: Text(
+                          l10n.gamesAllGames,
+                          style: AppTypography.headlineSmall(colors.onSurface),
                         ),
-                        const SizedBox(height: AppSpacing.lg),
-                        TextButton(
-                          onPressed: () => context.read<HomeBloc>().add(
-                                const LoadHomeData(),
-                              ),
-                          child: Text(l10n.retry),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-              ],
-            ],
-          ),
-          // Gradient overlay so status bar doesn't clash with content
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: IgnorePointer(
-              child: Container(
-                height: MediaQuery.of(context).padding.top + AppSpacing.md,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [bg, bg.withValues(alpha: 0)],
+                    SliverToBoxAdapter(
+                      child: CategoryFilterChips(
+                        selectedCategory: state.selectedCategory,
+                      ),
+                    ),
+                    const SliverToBoxAdapter(
+                      child: SizedBox(height: AppSpacing.md),
+                    ),
+                    GameGrid(games: state.games),
+                    const SliverToBoxAdapter(
+                      child: SizedBox(height: AppSpacing.xxl),
+                    ),
+                  ] else if (state is HomeError) ...[
+                    SliverFillRemaining(
+                      child: Center(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.error_outline,
+                              color: colors.error,
+                              size: AppIconSize.xxl,
+                            ),
+                            const SizedBox(height: AppSpacing.md),
+                            Text(
+                              state.message,
+                              style: AppTypography.bodyMedium(colors.onSurface),
+                            ),
+                            const SizedBox(height: AppSpacing.lg),
+                            TextButton(
+                              onPressed: () => context.read<HomeBloc>().add(
+                                    const LoadHomeData(),
+                                  ),
+                              child: Text(l10n.retry),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+              // Gradient overlay so status bar doesn't clash with content
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child: IgnorePointer(
+                  child: Container(
+                    height: MediaQuery.of(context).padding.top + AppSpacing.md,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [bg, bg.withValues(alpha: 0)],
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
-        ],
+            ],
           );
         },
       ),

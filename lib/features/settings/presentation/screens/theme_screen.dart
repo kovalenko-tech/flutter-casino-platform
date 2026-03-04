@@ -37,7 +37,8 @@ class ThemeScreen extends StatelessWidget {
                 color: colors.surfaceContainerHighest,
                 borderRadius: AppRadius.mdAll,
                 child: ListTile(
-                  shape: const RoundedRectangleBorder(borderRadius: AppRadius.mdAll),
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: AppRadius.mdAll),
                   leading: Icon(icon, color: colors.onSurface),
                   title: Text(
                     label,

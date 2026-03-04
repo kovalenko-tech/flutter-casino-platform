@@ -13,10 +13,22 @@ class _SettingsList extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final items = [
-      (Icons.notifications_outlined, l10n.profileNotifications, AppConstants.routeNotifications),
-      (Icons.language_outlined, l10n.profileLanguage, AppConstants.routeLanguage),
+      (
+        Icons.notifications_outlined,
+        l10n.profileNotifications,
+        AppConstants.routeNotifications
+      ),
+      (
+        Icons.language_outlined,
+        l10n.profileLanguage,
+        AppConstants.routeLanguage
+      ),
       (Icons.palette_outlined, l10n.settingsTheme, AppConstants.routeTheme),
-      (Icons.security_outlined, l10n.profileSecurity, AppConstants.routeChangePassword),
+      (
+        Icons.security_outlined,
+        l10n.profileSecurity,
+        AppConstants.routeChangePassword
+      ),
     ];
 
     return Material(
@@ -30,7 +42,8 @@ class _SettingsList extends StatelessWidget {
           return Column(
             children: [
               ListTile(
-                leading: Icon(icon, color: colors.onSurface, size: AppIconSize.lg),
+                leading:
+                    Icon(icon, color: colors.onSurface, size: AppIconSize.lg),
                 title: Text(
                   label,
                   style: AppTypography.bodyMedium(colors.onSurface),
